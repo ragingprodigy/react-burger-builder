@@ -14,10 +14,14 @@ type BCProps = {
   ingredientAdded: (type: Ingredient) => void;
   ingredientRemoved: (type: Ingredient) => void;
   disabled: { [string: string]: boolean };
+  price: number;
 };
 
 const buildControls = (props: BCProps) => (
   <div className={classes.BuildControls}>
+    <p>
+      Current Price: <strong>{props.price.toFixed(2)}</strong>
+    </p>
     {controls.map((ctrl) => (
       <BuildControl
         key={ctrl.label}
