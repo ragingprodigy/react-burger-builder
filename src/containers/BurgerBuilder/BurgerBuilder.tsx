@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import Burger from '../../components/Burger/Burger';
-import Aux from '../../hoc/Aux';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Burger from '../../components/Burger/Burger';
 import { Ingredient } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
+import Aux from '../../hoc/Aux';
 
 type Ingredients = {
   [Ingredient: string]: number,
 };
+
+type StateType = { ingredients: Ingredients; totalPrice: number; purchaseable: boolean; };
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -15,7 +17,7 @@ const INGREDIENT_PRICES = {
   bacon: 0.7,
 };
 
-class BurgerBuilder extends Component<any, { ingredients: Ingredients; totalPrice: number;}> {
+class BurgerBuilder extends Component<any, StateType> {
   state = {
     ingredients: {
       salad: 0,
@@ -23,8 +25,20 @@ class BurgerBuilder extends Component<any, { ingredients: Ingredients; totalPric
       cheese: 0,
       meat: 0,
     },
-    totalPrice: 4
+    totalPrice: 4,
+    purchaseable: false,
   };
+
+  updatePurchaseState() {
+    const ingredients = { ...this.state.ingredients };
+    const sum = Object.keys(ingredients)
+      .map((igKey) => {
+        return ingredients[igKey as Ingredient];
+      })
+      .reduce((sum, el) => sum + el, 0);
+    
+    this.setState({ purchaseable: sum > 0 });
+  }
 
   addIngredientHandler = (type: Ingredient) => {
     this.setState((prevState) => {
@@ -39,6 +53,8 @@ class BurgerBuilder extends Component<any, { ingredients: Ingredients; totalPric
         totalPrice: oldPrice + priceAddition,
         ingredients: updatedIngredients,
       };
+    }, () => {
+      this.updatePurchaseState();
     });
    };
   
@@ -55,10 +71,13 @@ class BurgerBuilder extends Component<any, { ingredients: Ingredients; totalPric
         return {
           totalPrice: oldPrice - price,
           ingredients: updatedIngredients,
+          purchaseable: prevState.purchaseable,
         };
       }
 
       return prevState;
+    }, () => {
+      this.updatePurchaseState();
     });
   };
 
@@ -75,6 +94,7 @@ class BurgerBuilder extends Component<any, { ingredients: Ingredients; totalPric
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
           price={this.state.totalPrice}
+          purchaseable={this.state.purchaseable}
           disabled={disabledInfo} />
       </Aux>
     );
