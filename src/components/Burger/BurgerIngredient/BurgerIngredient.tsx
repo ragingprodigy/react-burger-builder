@@ -2,18 +2,24 @@ import React, { Component } from 'react';
 import classes from './BurgerIngredient.module.css';
 import PropTypes from 'prop-types';
 
+export enum PassiveIngredient {
+  breadBottom = "bread-bottom",
+  breadTop = "bread-top",
+}
+
 export enum Ingredient {
-  breadBottom = 'bread-bottom',
-  breadTop = 'bread-top',
   meat = 'meat',
   cheese = 'cheese',
   salad = 'salad',
   bacon = 'bacon',
 }
 
+type AllIngredients = Ingredient | PassiveIngredient;
+
 type Props = {
-  type: Ingredient;
+  type: AllIngredients;
 };
+
 
 export default class BurgerIngredient extends Component<Props> {
 
@@ -25,10 +31,10 @@ export default class BurgerIngredient extends Component<Props> {
     let ingredient = null;
 
     switch (this.props.type) {
-      case Ingredient.breadBottom:
+      case PassiveIngredient.breadBottom:
         ingredient = <div className={classes.BreadBottom}></div>;
         break;
-      case Ingredient.breadTop:
+      case PassiveIngredient.breadTop:
         ingredient = (
           <div className={classes.BreadTop}>
             <div className={classes.Seeds1}></div>
