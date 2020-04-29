@@ -16,6 +16,7 @@ type BCProps = {
   disabled: { [string: string]: boolean };
   price: number;
   purchaseable: boolean;
+  ordered: () => void;
 };
 
 const buildControls = (props: BCProps) => (
@@ -32,7 +33,7 @@ const buildControls = (props: BCProps) => (
         disabled={props.disabled[ctrl.type]}
       />
     ))}
-    <button disabled={!props.purchaseable} className={classes.OrderButton}>ORDER NOW</button>
+    <button onClick={props.ordered} disabled={!props.purchaseable} className={classes.OrderButton}>ORDER NOW</button>
   </div>
 );
 
