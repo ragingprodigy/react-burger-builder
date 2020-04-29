@@ -3,6 +3,8 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Burger from '../../components/Burger/Burger';
 import { Ingredient } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 import Aux from '../../hoc/Aux';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 type Ingredients = {
   [Ingredient: string]: number,
@@ -89,6 +91,9 @@ class BurgerBuilder extends Component<any, StateType> {
 
     return (
       <Aux>
+        <Modal>
+          <OrderSummary ingredients={this.state.ingredients} />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           ingredientAdded={this.addIngredientHandler}
