@@ -2,13 +2,23 @@ import React from 'react';
 import classes from './Burger.module.css';
 import BurgerIngredient, {Ingredient} from './BurgerIngredient/BurgerIngredient';
 
-const burger = (props: any) => {
+type BurgerProps = {
+  ingredients: {
+    [Ingredient: string]: number,
+  },
+};
+
+const burger = ({ingredients}: BurgerProps) => {
+  const transformedIngredients = Object.keys(ingredients)
+    .map(ingredient => {
+      return [...Array(ingredients[ingredient])]
+        .map((_, i) => <BurgerIngredient key={ingredient + i} type={ingredient as Ingredient} />)
+    });
+
   return (
     <div className={classes.Burger}>
       <BurgerIngredient type={Ingredient.breadTop} />
-      <BurgerIngredient type={Ingredient.cheese} />
-      <BurgerIngredient type={Ingredient.meat} />
-      <BurgerIngredient type={Ingredient.salad} />
+      { transformedIngredients }
       <BurgerIngredient type={Ingredient.breadBottom} />
     </div>
   );
