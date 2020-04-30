@@ -12,7 +12,7 @@ class Layout extends Component<any, { showSideDrawer: boolean }> {
   sideDrawerClosedHandler = () => this.setState({ showSideDrawer: false });
 
   sideDrawerToggleHandler = () =>
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       showSideDrawer: !prevState.showSideDrawer,
     }));
 
