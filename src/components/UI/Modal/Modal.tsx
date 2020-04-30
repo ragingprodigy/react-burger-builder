@@ -7,7 +7,7 @@ type ModalProps = { children?: React.ReactNode; show: boolean; modalClosed: () =
 
 class Modal extends Component<ModalProps> {
   shouldComponentUpdate(nextProps: ModalProps, nextState: any) {
-    return nextProps.show !== this.props.show;
+    return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
   }
 
   render() {
