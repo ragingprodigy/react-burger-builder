@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './BuildControls.module.css';
 import { Ingredient } from '../BurgerIngredient/BurgerIngredient';
 import BuildControl from './BuildControl/BuildControl';
+import { GenericHandler } from '../../../types/callbacks';
 
 const controls = [
   { label: 'Salad', type: Ingredient.salad },
@@ -16,7 +17,7 @@ type BCProps = {
   disabled: { [string: string]: boolean };
   price: number;
   purchaseable: boolean;
-  ordered: () => void;
+  ordered: GenericHandler;
 };
 
 const buildControls = (props: BCProps) => (

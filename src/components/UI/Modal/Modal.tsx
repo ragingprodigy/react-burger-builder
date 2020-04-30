@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import classes from './Modal.module.css';
 import Aux from '../../../hoc/Aux/Aux';
 import Backdrop from '../Backdrop/Backdrop';
+import { GenericHandler } from '../../../types/callbacks';
+import { Children } from '../../../types/overrides';
 
-type ModalProps = { children?: React.ReactNode; show: boolean; modalClosed: () => void; };
+type ModalProps = { children?: Children; show: boolean; modalClosed: GenericHandler; };
 
 class Modal extends Component<ModalProps> {
   shouldComponentUpdate(nextProps: ModalProps, nextState: any) {

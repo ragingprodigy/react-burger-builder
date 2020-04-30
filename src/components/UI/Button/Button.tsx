@@ -1,9 +1,11 @@
 import React from 'react';
 import classes from './Button.module.css';
+import { GenericHandler } from '../../../types/callbacks';
+import { Children } from '../../../types/overrides';
 
 type BtnProps = {
-  clicked: () => void | undefined;
-  children: React.ReactNode;
+  clicked: GenericHandler;
+  children: Children;
   buttonType: 'Success' | 'Danger';
 };
 

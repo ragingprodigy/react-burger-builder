@@ -1,10 +1,11 @@
 import React from 'react';
 import classes from './NavigationItem.module.css';
+import { Children } from '../../../../types/overrides';
 
 type NIProps = {
   link: string;
   active: boolean;
-  children: any;
+  children: Children;
 };
 
 const navigationItem = (props: NIProps) => (

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
+import { GenericHandler } from '../../../types/callbacks';
 
 type OrderSummaryProps = {
   ingredients: any;
-  purchaseCancelled: () => void;
-  purchaseContinued: () => void;
+  purchaseCancelled: GenericHandler;
+  purchaseContinued: GenericHandler;
   price: number;
 };
 

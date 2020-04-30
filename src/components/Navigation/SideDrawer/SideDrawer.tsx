@@ -4,8 +4,9 @@ import NavigationItems from "../NavigationItems/NavigationItems";
 import classes from './SideDrawer.module.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import Aux from '../../../hoc/Aux/Aux';
+import { GenericHandler } from '../../../types/callbacks';
 
-const sideDrawer = (props: { closed: () => void, open: boolean; }) => {
+const sideDrawer = (props: { closed: GenericHandler, open: boolean; }) => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
   if (props.open) {
     attachedClasses = [classes.SideDrawer, classes.Open];

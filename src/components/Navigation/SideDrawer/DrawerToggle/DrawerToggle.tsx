@@ -1,7 +1,8 @@
 import React from 'react';
 import classes from './DrawerToggle.module.css';
+import { GenericHandler } from '../../../../types/callbacks';
 
-const drawerToggle = (props: { clicked: () => void }) => (
+const drawerToggle = (props: { clicked: GenericHandler; }) => (
   <div className={classes.DrawerToggle} onClick={props.clicked}>
     <div></div>
     <div></div>
