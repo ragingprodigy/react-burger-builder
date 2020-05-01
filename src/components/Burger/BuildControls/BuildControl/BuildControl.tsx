@@ -1,10 +1,8 @@
 import React from 'react';
 import classes from './BuildControl.module.css';
-import { GenericHandler } from '../../../../types/callbacks';
+import { BuildControlProps } from '../../../../types/components/build-control';
 
-type BCType = { label: string; added: GenericHandler; removed: GenericHandler; disabled: boolean};
-
-const buildControl = (props: BCType) => (
+const buildControl = (props: BuildControlProps) => (
   <div className={classes.BuildControl}>
     <div className={classes.Label}>{props.label}</div>
     <button className={classes.Less} onClick={props.removed} disabled={props.disabled}>

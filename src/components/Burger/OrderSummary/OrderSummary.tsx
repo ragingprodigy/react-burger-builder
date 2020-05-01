@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
-import { GenericHandler } from '../../../types/callbacks';
+import { OrderSummaryProps } from '../../../types/components/order-summary';
 
-type OrderSummaryProps = {
-  ingredients: any;
-  purchaseCancelled: GenericHandler;
-  purchaseContinued: GenericHandler;
-  price: number;
-};
 
 class OrderSummary extends Component<OrderSummaryProps> {
   render() {

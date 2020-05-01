@@ -1,16 +1,11 @@
 import React from 'react';
+import { CheckoutSummaryProps } from '../../../types/components/checkout-summary';
 import Burger from '../../Burger/Burger';
 import Button from '../../UI/Button/Button';
 import s from './CheckoutSummary.module.css';
-import { GenericHandler } from "../../../types/callbacks";
 
-type CSType = {
-  ingredients: any;
-  checkoutCancelled: GenericHandler;
-  checkoutContinued: GenericHandler;
-};
 
-const checkoutSummary = (props: CSType) => {
+const checkoutSummary = (props: CheckoutSummaryProps) => {
   return (
     <div className={s.CheckoutSummary}>
       <h1>We hope it tastes well!</h1>
