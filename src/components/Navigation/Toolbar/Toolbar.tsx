@@ -1,11 +1,11 @@
-import React from "react";
-import classes from "./Toolbar.module.css";
-import Logo from "../../Logo/Logo";
-import NavigationItems from "../NavigationItems/NavigationItems";
+import React from 'react';
+import { ToolbarProps } from '../../../types/props/toolbar';
+import Logo from '../../Logo/Logo';
+import NavigationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
-import { GenericHandler } from '../../../types/callbacks';
+import classes from './Toolbar.module.css';
 
-const toolbar = (props: { openDrawer: GenericHandler; }) => (
+const toolbar = (props: ToolbarProps) => (
   <header className={classes.Toolbar}>
     <DrawerToggle clicked={props.openDrawer} />
     <div className={classes.Logo}>

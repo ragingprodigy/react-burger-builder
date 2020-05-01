@@ -1,31 +1,9 @@
 import React, { Component } from 'react';
 import classes from './BurgerIngredient.module.css';
-import PropTypes from 'prop-types';
+import { BurgerIngredientProps } from '../../../types/props/burger';
+import { PassiveIngredient, Ingredient } from '../../../types/enums/burger';
 
-export enum PassiveIngredient {
-  breadBottom = "bread-bottom",
-  breadTop = "bread-top",
-}
-
-export enum Ingredient {
-  meat = 'meat',
-  cheese = 'cheese',
-  salad = 'salad',
-  bacon = 'bacon',
-}
-
-type AllIngredients = Ingredient | PassiveIngredient;
-
-type Props = {
-  type: AllIngredients;
-};
-
-
-export default class BurgerIngredient extends Component<Props> {
-
-  static propTypes = {
-    type: PropTypes.string.isRequired,
-  };
+export default class BurgerIngredient extends Component<BurgerIngredientProps> {
 
   render() {
     let ingredient = null;

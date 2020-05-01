@@ -3,7 +3,6 @@ import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
 import { OrderSummaryProps } from '../../../types/props/order-summary';
 
-
 class OrderSummary extends Component<OrderSummaryProps> {
   render() {
     const ingredientSummary = Object.keys(this.props.ingredients).map((igKey) => {

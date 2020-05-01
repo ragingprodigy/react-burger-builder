@@ -2,24 +2,13 @@ import React, { Component } from "react";
 import axios from "../../axios-orders";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Burger from "../../components/Burger/Burger";
-import { Ingredient } from "../../components/Burger/BurgerIngredient/BurgerIngredient";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Modal from "../../components/UI/Modal/Modal";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Aux from "../../hoc/Aux/Aux";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-
-type Ingredients = {
-  [Ingredient: string]: number;
-};
-
-type StateType = {
-  ingredients: Ingredients | any;
-  totalPrice: number;
-  purchaseable: boolean;
-  purchasing: boolean;
-  loading: boolean;
-};
+import { Ingredient } from '../../types/enums/burger';
+import { BurgerBuilderState, Ingredients } from '../../types/states/burger-builder';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -28,7 +17,7 @@ const INGREDIENT_PRICES = {
   bacon: 0.7,
 };
 
-class BurgerBuilder extends Component<any, StateType> {
+class BurgerBuilder extends Component<any, BurgerBuilderState> {
   state = {
     ingredients: undefined,
     totalPrice: 4,
@@ -143,7 +132,7 @@ class BurgerBuilder extends Component<any, StateType> {
     //     console.log(err);
     //     this.setState({ loading: false, purchasing: false });
     //   });
-    this.props.history.push('/checkout');
+    this.props.history.push("/checkout");
   };
 
   render() {
@@ -190,7 +179,10 @@ class BurgerBuilder extends Component<any, StateType> {
 
     return (
       <Aux>
-        <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+        <Modal
+          show={this.state.purchasing}
+          modalClosed={this.purchaseCancelHandler}
+        >
           {orderSummary}
         </Modal>
         {burger}

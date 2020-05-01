@@ -1,12 +1,12 @@
 import React from 'react';
-import Logo from '../../Logo/Logo';
-import NavigationItems from "../NavigationItems/NavigationItems";
-import classes from './SideDrawer.module.css';
-import Backdrop from '../../UI/Backdrop/Backdrop';
 import Aux from '../../../hoc/Aux/Aux';
-import { GenericHandler } from '../../../types/callbacks';
+import { SideDrawerProps } from '../../../types/props/side-drawer';
+import Logo from '../../Logo/Logo';
+import Backdrop from '../../UI/Backdrop/Backdrop';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import classes from './SideDrawer.module.css';
 
-const sideDrawer = (props: { closed: GenericHandler, open: boolean; }) => {
+const sideDrawer = (props: SideDrawerProps) => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
   if (props.open) {
     attachedClasses = [classes.SideDrawer, classes.Open];

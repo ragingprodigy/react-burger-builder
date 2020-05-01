@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './BuildControls.module.css';
-import { Ingredient } from '../BurgerIngredient/BurgerIngredient';
 import BuildControl from './BuildControl/BuildControl';
-import { GenericHandler } from '../../../types/callbacks';
+import { BuildControlsProps } from '../../../types/props/build-controls';
+import { Ingredient } from '../../../types/enums/burger';
 
 const controls = [
   { label: 'Salad', type: Ingredient.salad },
@@ -11,16 +11,7 @@ const controls = [
   { label: 'Meat', type: Ingredient.meat },
 ];
 
-type BCProps = {
-  ingredientAdded: (type: Ingredient) => void;
-  ingredientRemoved: (type: Ingredient) => void;
-  disabled: { [string: string]: boolean };
-  price: number;
-  purchaseable: boolean;
-  ordered: GenericHandler;
-};
-
-const buildControls = (props: BCProps) => (
+const buildControls = (props: BuildControlsProps) => (
   <div className={classes.BuildControls}>
     <p>
       Current Price: <strong>{props.price.toFixed(2)}</strong>
