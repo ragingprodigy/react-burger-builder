@@ -3,6 +3,8 @@ import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSumm
 import Spinner from "../../components/UI/Spinner/Spinner";
 import { Ingredients } from '../../types/states/burger-builder';
 import { CheckoutState } from './state';
+import { Route } from 'react-router-dom';
+import ContactData from './ContactData/ContactData';
 
 export default class Checkout extends Component<any, CheckoutState> {
   state = { ingredients: null };
@@ -31,9 +33,13 @@ export default class Checkout extends Component<any, CheckoutState> {
           checkoutContinued={this.checkoutContinuedHandler}
           ingredients={this.state.ingredients!}
         />
+
       );
     }
 
-    return <div> {summary} </div>;
+    return <div>
+      {summary}
+      <Route path={this.props.match.path + '/contact-data'} component={ContactData} />
+    </div>;
   }
 }
