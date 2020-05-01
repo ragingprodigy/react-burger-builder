@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Button from '../../../components/UI/Button/Button';
-import s from './ContactData.module.css';
-import { ContactDataProps, ContactDataState } from './props-and-state';
 import axios from '../../../axios-orders';
+import Button from '../../../components/UI/Button/Button';
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import { ContactDataProps } from '../../../types/props/contact-data';
+import { ContactDataState } from '../../../types/states/contact-data';
+import s from './ContactData.module.css';
 
 export class ContactData extends Component<ContactDataProps, ContactDataState> {
   state = {
