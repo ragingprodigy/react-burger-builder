@@ -1,1 +1,1 @@
-export type GenericHandler = () => void | undefined | null;
+export type GenericHandler = (event?: any) => void | undefined | null;

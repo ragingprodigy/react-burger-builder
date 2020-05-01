@@ -110,6 +110,7 @@ class BurgerBuilder extends Component<any, BurgerBuilderState> {
     for(let i of Object.keys(ingredients)) {
       queryParams.push(`${encodeURIComponent(i)}=${encodeURIComponent(ingredients[i])}`);
     }
+    queryParams.push(`totalPrice=${encodeURIComponent(this.state.totalPrice)}`);
 
     const queryString = queryParams.join('&');
     
