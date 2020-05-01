@@ -15,6 +15,7 @@ import s from "./ContactData.module.css";
 export class ContactData extends Component<ContactDataProps, ContactDataState> {
   state: ContactDataState = {
     loading: false,
+    formIsValid: false,
     orderForm: {
       name: {
         value: "",
@@ -84,8 +85,8 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       deliveryMethod: {
-        value: "",
-        isValid: false,
+        value: "standard",
+        isValid: true,
         elementType: "select",
         elementConfig: {
           options: [
@@ -165,9 +166,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
     );
     updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-    console.log(updatedFormElement);
+    let formIsValid = true;
+    for (const identifier in updatedOrderForm) {
+      formIsValid = updatedOrderForm[identifier].isValid && formIsValid;
+    }
 
-    this.setState({ orderForm: updatedOrderForm });
+    this.setState({ orderForm: updatedOrderForm, formIsValid });
   };
 
   render() {
@@ -189,7 +193,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
             value={formElement.config.value}
           />
         ))}
-        <Button buttonType="Success" clicked={this.orderHandler}>
+        <Button disabled={!this.state.formIsValid} buttonType="Success" clicked={this.orderHandler}>
           ORDER
         </Button>
       </form>

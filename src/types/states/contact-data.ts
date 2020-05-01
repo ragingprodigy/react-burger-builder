@@ -17,6 +17,7 @@ export type FormElement = {
 
 export type ContactDataState = {
   loading: boolean;
+  formIsValid: boolean;
   orderForm?: {
     [ElementNames: string]: FormElement;
   };
