@@ -173,6 +173,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
       <form>
         {formEls.map((formElement) => (
           <Input
+            invalid={!formElement.config.isValid}
             changed={(event) => this.inputChangedHandler(event, formElement.id)}
             key={formElement.id}
             elementType={formElement.config.elementType}

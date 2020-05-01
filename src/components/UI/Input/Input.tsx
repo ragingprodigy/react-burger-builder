@@ -1,55 +1,69 @@
-import React from 'react';
-import s from './Input.module.css';
-import { InputProps } from '@burger/types/props/input';
+import React from "react";
+import s from "./Input.module.css";
+import { InputProps } from "@burger/types/props/input";
 
 const input = (props: InputProps) => {
   let inputElement = null;
+  const inputClasses = [s.InputElement];
+
+  if (props.invalid) {
+    inputClasses.push(s.Invalid);
+  }
 
   switch (props.elementType) {
-    case 'input':
+    case "input":
       inputElement = (
-        <input onChange={props.changed}
-          className={s.InputElement}
+        <input
+          onChange={props.changed}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
         />
       );
       break;
-    case 'textarea':
+    case "textarea":
       inputElement = (
-        <textarea onChange={props.changed}
-          className={s.InputElement}
+        <textarea
+          onChange={props.changed}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
         />
       );
       break;
-    case 'select':
+    case "select":
       inputElement = (
-        <select className={s.InputElement} value={props.value} onChange={props.changed}>
+        <select
+          className={inputClasses.join(" ")}
+          value={props.value}
+          onChange={props.changed}
+        >
           {props.elementConfig!.options?.map((option) => (
-            <option key={option.value} value={option.value}>{option.displayValue}</option>
+            <option key={option.value} value={option.value}>
+              {option.displayValue}
+            </option>
           ))}
         </select>
       );
       break;
     default:
       inputElement = (
-        <input onChange={props.changed}
-          className={s.InputElement}
+        <input
+          onChange={props.changed}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
         />
       );
       break;
   }
-  
+
   return (
     <div className={s.Input}>
       <label className={s.Label}>{props.label}</label>
       {inputElement}
     </div>
-  )
+  );
 };
 
 export default input;

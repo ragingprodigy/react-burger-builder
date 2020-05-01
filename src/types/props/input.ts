@@ -9,4 +9,5 @@ export type InputProps = {
     options?: { value: any; displayValue: any; }[];
   };
   changed: (v: any) => void;
+  invalid?: boolean;
 };
