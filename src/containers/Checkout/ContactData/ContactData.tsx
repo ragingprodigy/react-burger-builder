@@ -1,9 +1,9 @@
+import axios from '@burger/axios-orders';
+import Button from "@burger/components/UI/Button/Button";
+import Spinner from '@burger/components/UI/Spinner/Spinner';
+import { ContactDataProps } from '@burger/types/props/contact-data';
+import { ContactDataState } from '@burger/types/states/contact-data';
 import React, { Component } from 'react';
-import axios from '../../../axios-orders';
-import Button from '../../../components/UI/Button/Button';
-import Spinner from "../../../components/UI/Spinner/Spinner";
-import { ContactDataProps } from '../../../types/props/contact-data';
-import { ContactDataState } from '../../../types/states/contact-data';
 import s from './ContactData.module.css';
 
 export class ContactData extends Component<ContactDataProps, ContactDataState> {
@@ -43,30 +43,30 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
       <form>
         <input
           className={s.Input}
-          type="text"
-          name="name"
-          placeholder="Your name"
+          type='text'
+          name='name'
+          placeholder='Your name'
         />
         <input
           className={s.Input}
-          type="email"
-          name="email"
-          placeholder="Your email"
+          type='email'
+          name='email'
+          placeholder='Your email'
         />
         <input
           className={s.Input}
-          type="text"
-          name="street"
-          placeholder="Street"
+          type='text'
+          name='street'
+          placeholder='Street'
         />
         <input
           className={s.Input}
-          type="text"
-          name="postal"
-          placeholder="Postal Code"
+          type='text'
+          name='postal'
+          placeholder='Postal Code'
         />
 
-        <Button buttonType="Success" clicked={this.orderHandler}>
+        <Button buttonType='Success' clicked={this.orderHandler}>
           ORDER
         </Button>
       </form>

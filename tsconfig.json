@@ -17,7 +17,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@burger": [
+        "src"
+      ],
+      "@burger/*": [
+        "src/*"
+      ],
+    }
   },
   "include": [
     "src"
