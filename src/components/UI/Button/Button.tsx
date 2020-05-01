@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Button.module.css';
-import { GenericHandler } from '../../../types/callbacks';
-import { Children } from '../../../types/overrides';
+import { GenericHandler } from '@burger/types/callbacks';
+import { Children } from '@burger/types/overrides';
 
 type BtnProps = {
   clicked: GenericHandler;

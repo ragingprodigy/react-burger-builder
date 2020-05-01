@@ -1,5 +1,5 @@
 import axios from '@burger/axios-orders';
-import Button from "@burger/components/UI/Button/Button";
+import Button from '@burger/components/UI/Button/Button';
 import Spinner from '@burger/components/UI/Spinner/Spinner';
 import { ContactDataProps } from '@burger/types/props/contact-data';
 import { ContactDataState } from '@burger/types/states/contact-data';

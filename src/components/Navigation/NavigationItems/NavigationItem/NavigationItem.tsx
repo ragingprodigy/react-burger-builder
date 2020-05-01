@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './NavigationItem.module.css';
-import { Children } from '../../../../types/overrides';
+import { Children } from '@burger/types/overrides';
 
 type NIProps = {
   link: string;

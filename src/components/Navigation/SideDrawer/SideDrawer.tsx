@@ -1,8 +1,8 @@
 import React from 'react';
-import Aux from '../../../hoc/Aux/Aux';
-import { SideDrawerProps } from '../../../types/props/side-drawer';
-import Logo from '../../Logo/Logo';
-import Backdrop from '../../UI/Backdrop/Backdrop';
+import Aux from '@burger/hoc/Aux/Aux';
+import { SideDrawerProps } from '@burger/types/props/side-drawer';
+import Logo from '@burger/components/Logo/Logo';
+import Backdrop from '@burger/components/UI/Backdrop/Backdrop';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import classes from './SideDrawer.module.css';
 

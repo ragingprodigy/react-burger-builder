@@ -1,6 +1,6 @@
 import React from 'react';
-import { ToolbarProps } from '../../../types/props/toolbar';
-import Logo from '../../Logo/Logo';
+import { ToolbarProps } from '@burger/types/props/toolbar';
+import Logo from '@burger/components/Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import classes from './Toolbar.module.css';

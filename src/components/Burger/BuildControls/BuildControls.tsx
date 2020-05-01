@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './BuildControls.module.css';
 import BuildControl from './BuildControl/BuildControl';
-import { BuildControlsProps } from '../../../types/props/build-controls';
-import { Ingredient } from '../../../types/enums/burger';
+import { BuildControlsProps } from '@burger/types/props/build-controls';
+import { Ingredient } from '@burger/types/enums/burger';
 
 const controls = [
   { label: 'Salad', type: Ingredient.salad },

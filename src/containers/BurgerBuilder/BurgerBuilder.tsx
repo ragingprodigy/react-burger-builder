@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import axios from '../../axios-orders';
-import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-import Burger from '../../components/Burger/Burger';
-import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-import Modal from '../../components/UI/Modal/Modal';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import Aux from '../../hoc/Aux/Aux';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import { Ingredient } from '../../types/enums/burger';
-import { BurgerBuilderState, Ingredients } from '../../types/states/burger-builder';
+import axios from '@burger/axios-orders';
+import BuildControls from '@burger/components/Burger/BuildControls/BuildControls';
+import Burger from '@burger/components/Burger/Burger';
+import OrderSummary from '@burger/components/Burger/OrderSummary/OrderSummary';
+import Modal from '@burger/components/UI/Modal/Modal';
+import Spinner from '@burger/components/UI/Spinner/Spinner';
+import Aux from '@burger/hoc/Aux/Aux';
+import withErrorHandler from '@burger/hoc/withErrorHandler/withErrorHandler';
+import { Ingredient } from '@burger/types/enums/burger';
+import { BurgerBuilderState, Ingredients } from '@burger/types/states/burger-builder';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,

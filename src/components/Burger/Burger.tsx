@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
-import { BurgerProps } from '../../types/props/burger';
-import { Ingredient, PassiveIngredient } from '../../types/enums/burger';
+import { BurgerProps } from '@burger/types/props/burger';
+import { Ingredient, PassiveIngredient } from '@burger/types/enums/burger';
 
 const burger = ({ingredients}: BurgerProps) => {
   let transformedIngredients: any = Object.keys(ingredients)

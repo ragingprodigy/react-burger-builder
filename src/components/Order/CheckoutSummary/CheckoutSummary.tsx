@@ -1,7 +1,7 @@
 import React from 'react';
-import { CheckoutSummaryProps } from '../../../types/props/checkout-summary';
-import Burger from '../../Burger/Burger';
-import Button from '../../UI/Button/Button';
+import { CheckoutSummaryProps } from '@burger/types/props/checkout-summary';
+import Burger from "@burger/components/Burger/Burger";
+import Button from '@burger/components/UI/Button/Button';
 import s from './CheckoutSummary.module.css';
 
 const checkoutSummary = (props: CheckoutSummaryProps) => {

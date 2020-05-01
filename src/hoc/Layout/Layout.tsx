@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Aux from "../Aux/Aux";
 import classes from "./Layout.module.css";
-import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
-import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import Toolbar from "@burger/components/Navigation/Toolbar/Toolbar";
+import SideDrawer from "@burger/components/Navigation/SideDrawer/SideDrawer";
 
 class Layout extends Component<any, { showSideDrawer: boolean }> {
   state = {
