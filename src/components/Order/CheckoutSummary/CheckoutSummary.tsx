@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckoutSummaryProps } from '../../../types/components/checkout-summary';
+import { CheckoutSummaryProps } from '../../../types/props/checkout-summary';
 import Burger from '../../Burger/Burger';
 import Button from '../../UI/Button/Button';
 import s from './CheckoutSummary.module.css';

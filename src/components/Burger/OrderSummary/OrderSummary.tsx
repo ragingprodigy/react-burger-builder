@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
-import { OrderSummaryProps } from '../../../types/components/order-summary';
+import { OrderSummaryProps } from '../../../types/props/order-summary';
 
 
 class OrderSummary extends Component<OrderSummaryProps> {
