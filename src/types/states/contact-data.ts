@@ -7,7 +7,11 @@ export type InputConfig = {
 export type FormElement = {
   elementType: string;
   elementConfig?: InputConfig;
-  value: string|number;
+  value: string | number;
+  validation?: {
+    [Validations: string]: boolean | number;
+  };
+  isValid: boolean;
 };
 
 export type ContactDataState = {
@@ -16,6 +20,12 @@ export type ContactDataState = {
     [ElementNames: string]: FormElement;
   };
 };
+
+export enum Validations {
+  isRequired = 'isRequired',
+  minLength = 'minLength',
+  maxLength = 'maxLength',
+}
 
 export enum ElementNames { 
   name = 'name',

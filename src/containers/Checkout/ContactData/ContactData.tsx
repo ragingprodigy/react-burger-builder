@@ -3,7 +3,12 @@ import Button from "@burger/components/UI/Button/Button";
 import Input from "@burger/components/UI/Input/Input";
 import Spinner from "@burger/components/UI/Spinner/Spinner";
 import { ContactDataProps } from "@burger/types/props/contact-data";
-import { ContactDataState, ElementNames } from "@burger/types/states/contact-data";
+import {
+  ContactDataState,
+  ElementNames,
+  FormElement,
+  Validations,
+} from "@burger/types/states/contact-data";
 import React, { Component } from "react";
 import s from "./ContactData.module.css";
 
@@ -13,46 +18,69 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
     orderForm: {
       name: {
         value: "",
+        isValid: false,
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "Your Name",
         },
+        validation: {
+          isRequired: true,
+        },
       },
       email: {
         value: "",
+        isValid: false,
         elementType: "input",
         elementConfig: {
           type: "email",
           placeholder: "Your Email Address",
         },
+        validation: {
+          isRequired: true,
+        },
       },
       street: {
         value: "",
+        isValid: false,
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "Street",
         },
+        validation: {
+          isRequired: true,
+        },
       },
       postCode: {
         value: "",
+        isValid: false,
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "Your Zip Code",
         },
+        validation: {
+          [Validations.isRequired]: true,
+          [Validations.minLength]: 4,
+          [Validations.maxLength]: 6,
+        },
       },
       country: {
         value: "",
+        isValid: false,
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "Country",
         },
+        validation: {
+          isRequired: true,
+        },
       },
       deliveryMethod: {
         value: "",
+        isValid: false,
         elementType: "select",
         elementConfig: {
           options: [
@@ -60,6 +88,9 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
             { value: "nextday", displayValue: "Next Day" },
             { value: "standard", displayValue: "Standard Delivery" },
           ],
+        },
+        validation: {
+          isRequired: true,
         },
       },
     },
@@ -70,16 +101,18 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
 
     this.setState({ loading: true });
     const orderData: { [ElementNames: string]: any } = {};
-    const orderForm: { [ElementNames: string]: any } = { ...this.state.orderForm };
+    const orderForm: { [ElementNames: string]: any } = {
+      ...this.state.orderForm,
+    };
 
-    for(let formElementIdentifier in orderForm) {
+    for (let formElementIdentifier in orderForm) {
       orderData[formElementIdentifier] = orderForm[formElementIdentifier].value;
     }
 
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.totalPrice,
-      orderData
+      orderData,
     };
 
     axios
@@ -94,14 +127,38 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
       });
   };
 
+  checkValidity(value: string, rules: FormElement["validation"]) {
+    let isValid = true;
+
+    if (rules![Validations.isRequired]) {
+      isValid = value.trim() !== "" && isValid;
+    }
+
+    if (rules![Validations.minLength]) {
+      isValid = value.trim().length >= rules![Validations.minLength] && isValid;
+    }
+
+    if (rules![Validations.maxLength]) {
+      isValid = value.trim().length <= rules![Validations.maxLength] && isValid;
+    }
+
+    return isValid;
+  }
+
   inputChangedHandler = (event: any, inputIdentifier: ElementNames) => {
-    const updatedOrderForm: {[ElementNames: string]: any}= {
-      ...this.state.orderForm
+    const updatedOrderForm: { [ElementNames: string]: any } = {
+      ...this.state.orderForm,
     };
 
     const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
-    updatedFormElement.value = event.target.value;
+    updatedFormElement.value = event.target.value.trim();
+    updatedFormElement.isValid = this.checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation
+    );
     updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+    console.log(updatedFormElement);
 
     this.setState({ orderForm: updatedOrderForm });
   };
