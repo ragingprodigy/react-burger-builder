@@ -5,9 +5,7 @@ import { Ingredients } from '../../types/states/burger-builder';
 import { CheckoutState } from './state';
 
 export default class Checkout extends Component<any, CheckoutState> {
-  state = {
-    ingredients: null,
-  };
+  state = { ingredients: null };
 
   componentDidMount() {
     const query = new URLSearchParams(this.props.location.search);
@@ -21,7 +19,6 @@ export default class Checkout extends Component<any, CheckoutState> {
   }
 
   checkoutCancelledHandler = () => this.props.history.goBack();
-
   checkoutContinuedHandler = () => this.props.history.replace('/checkout/contact-data');
 
   render() {
@@ -32,7 +29,7 @@ export default class Checkout extends Component<any, CheckoutState> {
         <CheckoutSummary
           checkoutCancelled={this.checkoutCancelledHandler}
           checkoutContinued={this.checkoutContinuedHandler}
-          ingredients={this.state.ingredients}
+          ingredients={this.state.ingredients!}
         />
       );
     }
