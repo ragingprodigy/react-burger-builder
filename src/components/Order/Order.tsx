@@ -6,4 +6,4 @@ const order = (props: any) => <div className={classes.Order}>
   <p>Price: <strong>USD 5.45</strong></p>
 </div>;
 
-export default order
+export default order;
