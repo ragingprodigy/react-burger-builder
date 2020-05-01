@@ -29,7 +29,7 @@ class BurgerBuilder extends Component<any, BurgerBuilderState> {
   componentDidMount() {
     axios.get('ingredients.json').then((response) => {
       this.setState({ ingredients: response.data });
-    });
+    }).catch(e => console.log(e));
   }
 
   updatePurchaseState() {
