@@ -6,5 +6,7 @@ export type InputProps = {
     name?: string;
     type?: string;
     placeholder?: string;
+    options?: { value: any; displayValue: any; }[];
   };
+  changed: (v: any) => void;
 };

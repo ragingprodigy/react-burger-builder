@@ -3,7 +3,7 @@ import Button from "@burger/components/UI/Button/Button";
 import Input from "@burger/components/UI/Input/Input";
 import Spinner from "@burger/components/UI/Spinner/Spinner";
 import { ContactDataProps } from "@burger/types/props/contact-data";
-import { ContactDataState } from "@burger/types/states/contact-data";
+import { ContactDataState, ElementNames } from "@burger/types/states/contact-data";
 import React, { Component } from "react";
 import s from "./ContactData.module.css";
 
@@ -95,16 +95,29 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
       });
   };
 
+  inputChangedHandler = (event: any, inputIdentifier: ElementNames) => {
+    const updatedOrderForm: {[ElementNames: string]: any}= {
+      ...this.state.orderForm
+    };
+
+    const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+    this.setState({ orderForm: updatedOrderForm });
+  };
+
   render() {
     const formConfig = this.state.orderForm!;
     const formEls = Object.keys(formConfig).map((key) => {
-      return { id: key, config: formConfig[key] };
+      return { id: key as ElementNames, config: formConfig[key] };
     });
 
     let form = (
       <form>
         {formEls.map((formElement) => (
           <Input
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
             key={formElement.id}
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
