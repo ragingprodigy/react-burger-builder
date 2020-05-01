@@ -9,12 +9,6 @@ import s from "./ContactData.module.css";
 
 export class ContactData extends Component<ContactDataProps, ContactDataState> {
   state: ContactDataState = {
-    name: "",
-    email: "",
-    address: {
-      street: "",
-      postCode: "",
-    },
     loading: false,
     orderForm: {
       name: {
@@ -75,12 +69,17 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
     event.preventDefault();
 
     this.setState({ loading: true });
-    const { name, email, address } = this.state;
+    const orderData: { [ElementNames: string]: any } = {};
+    const orderForm: { [ElementNames: string]: any } = { ...this.state.orderForm };
+
+    for(let formElementIdentifier in orderForm) {
+      orderData[formElementIdentifier] = orderForm[formElementIdentifier].value;
+    }
+
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.totalPrice,
-      customer: { name, email, address },
-      deliveryMethod: "sameday",
+      orderData
     };
 
     axios
