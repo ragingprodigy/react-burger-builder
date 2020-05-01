@@ -27,6 +27,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         validation: {
           isRequired: true,
         },
+        touched: false,
       },
       email: {
         value: "",
@@ -39,6 +40,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         validation: {
           isRequired: true,
         },
+        touched: false,
       },
       street: {
         value: "",
@@ -51,6 +53,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         validation: {
           isRequired: true,
         },
+        touched: false,
       },
       postCode: {
         value: "",
@@ -65,6 +68,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
           [Validations.minLength]: 4,
           [Validations.maxLength]: 6,
         },
+        touched: false,
       },
       country: {
         value: "",
@@ -77,6 +81,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         validation: {
           isRequired: true,
         },
+        touched: false,
       },
       deliveryMethod: {
         value: "",
@@ -92,6 +97,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         validation: {
           isRequired: true,
         },
+        touched: false,
       },
     },
   };
@@ -152,6 +158,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
 
     const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
     updatedFormElement.value = event.target.value.trim();
+    updatedFormElement.touched = true;
     updatedFormElement.isValid = this.checkValidity(
       updatedFormElement.value,
       updatedFormElement.validation
@@ -174,6 +181,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         {formEls.map((formElement) => (
           <Input
             invalid={!formElement.config.isValid}
+            touched={formElement.config.touched}
             changed={(event) => this.inputChangedHandler(event, formElement.id)}
             key={formElement.id}
             elementType={formElement.config.elementType}

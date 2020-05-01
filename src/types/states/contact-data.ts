@@ -12,6 +12,7 @@ export type FormElement = {
     [Validations: string]: boolean | number;
   };
   isValid: boolean;
+  touched?: boolean;
 };
 
 export type ContactDataState = {
