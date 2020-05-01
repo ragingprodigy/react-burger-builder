@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import axios from "../../axios-orders";
-import BuildControls from "../../components/Burger/BuildControls/BuildControls";
-import Burger from "../../components/Burger/Burger";
-import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
-import Modal from "../../components/UI/Modal/Modal";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import Aux from "../../hoc/Aux/Aux";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import React, { Component } from 'react';
+import axios from '../../axios-orders';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Burger from '../../components/Burger/Burger';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import Modal from '../../components/UI/Modal/Modal';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import Aux from '../../hoc/Aux/Aux';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import { Ingredient } from '../../types/enums/burger';
 import { BurgerBuilderState, Ingredients } from '../../types/states/burger-builder';
 
@@ -19,7 +19,7 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component<any, BurgerBuilderState> {
   state = {
-    ingredients: undefined,
+    ingredients: null,
     totalPrice: 4,
     purchaseable: false,
     purchasing: false,
@@ -27,7 +27,7 @@ class BurgerBuilder extends Component<any, BurgerBuilderState> {
   };
 
   componentDidMount() {
-    axios.get("ingredients.json").then((response) => {
+    axios.get('ingredients.json').then((response) => {
       this.setState({ ingredients: response.data });
     });
   }
@@ -107,32 +107,19 @@ class BurgerBuilder extends Component<any, BurgerBuilderState> {
   };
 
   purchaseContinueHandler = () => {
-    // this.setState({ loading: true });
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: "James Milken",
-    //     address: {
-    //       street: "Test street",
-    //       zipCode: "uifusdif",
-    //       country: "PH",
-    //     },
-    //     email: "test@email.com",
-    //   },
-    //   deliveryMethod: "fast",
-    // };
+    const queryParams = [];
+    const ingredients = this.state.ingredients!;
 
-    // axios
-    //   .post("/orders.json", order)
-    //   .then(() => {
-    //     this.setState({ loading: false, purchasing: false });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     this.setState({ loading: false, purchasing: false });
-    //   });
-    this.props.history.push("/checkout");
+    for(let i of Object.keys(ingredients)) {
+      queryParams.push(`${encodeURIComponent(i)}=${encodeURIComponent(ingredients[i])}`);
+    }
+
+    const queryString = queryParams.join('&');
+    
+    this.props.history.push({
+      pathname: '/checkout',
+      search: `?${queryString}`,
+    });
   };
 
   render() {

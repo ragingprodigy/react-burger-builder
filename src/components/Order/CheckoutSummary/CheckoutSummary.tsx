@@ -4,7 +4,6 @@ import Burger from '../../Burger/Burger';
 import Button from '../../UI/Button/Button';
 import s from './CheckoutSummary.module.css';
 
-
 const checkoutSummary = (props: CheckoutSummaryProps) => {
   return (
     <div className={s.CheckoutSummary}>
