@@ -1,16 +1,13 @@
-import axios from "@burger/axios-orders";
-import Button from "@burger/components/UI/Button/Button";
-import Input from "@burger/components/UI/Input/Input";
-import Spinner from "@burger/components/UI/Spinner/Spinner";
-import { ContactDataProps } from "@burger/types/props/contact-data";
-import {
-  ContactDataState,
-  ElementNames,
-  FormElement,
-  Validations,
-} from "@burger/types/states/ui/contact-data";
-import React, { Component } from "react";
-import s from "./ContactData.module.css";
+import axios from '@burger/axios-orders';
+import Button from '@burger/components/UI/Button/Button';
+import Input from '@burger/components/UI/Input/Input';
+import Spinner from '@burger/components/UI/Spinner/Spinner';
+import { ContactDataProps } from '@burger/types/props/contact-data';
+import { BurgerBuilderState } from '@burger/types/states/redux/burger-builder.state';
+import { ContactDataState, ElementNames, FormElement, Validations } from '@burger/types/states/ui/contact-data';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import s from './ContactData.module.css';
 
 export class ContactData extends Component<ContactDataProps, ContactDataState> {
   state: ContactDataState = {
@@ -18,12 +15,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
     formIsValid: false,
     orderForm: {
       name: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Your Name",
+          type: 'text',
+          placeholder: 'Your Name',
         },
         validation: {
           isRequired: true,
@@ -31,12 +28,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       email: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "email",
-          placeholder: "Your Email Address",
+          type: 'email',
+          placeholder: 'Your Email Address',
         },
         validation: {
           isRequired: true,
@@ -44,12 +41,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       street: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Street",
+          type: 'text',
+          placeholder: 'Street',
         },
         validation: {
           isRequired: true,
@@ -57,12 +54,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       postCode: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Your Zip Code",
+          type: 'text',
+          placeholder: 'Your Zip Code',
         },
         validation: {
           [Validations.isRequired]: true,
@@ -72,12 +69,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       country: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Country",
+          type: 'text',
+          placeholder: 'Country',
         },
         validation: {
           isRequired: true,
@@ -85,14 +82,14 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       deliveryMethod: {
-        value: "standard",
+        value: 'standard',
         isValid: true,
-        elementType: "select",
+        elementType: 'select',
         elementConfig: {
           options: [
-            { value: "fastest", displayValue: "Same Day" },
-            { value: "nextday", displayValue: "Next Day" },
-            { value: "standard", displayValue: "Standard Delivery" },
+            { value: 'fastest', displayValue: 'Same Day' },
+            { value: 'nextday', displayValue: 'Next Day' },
+            { value: 'standard', displayValue: 'Standard Delivery' },
           ],
         },
         validation: {
@@ -123,10 +120,10 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
     };
 
     axios
-      .post("/orders.json", order)
+      .post('/orders.json', order)
       .then((r) => {
         this.setState({ loading: false });
-        this.props.history.push("/");
+        this.props.history.push('/');
       })
       .catch((e) => {
         console.log(e);
@@ -134,11 +131,11 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
       });
   };
 
-  checkValidity(value: string, rules: FormElement["validation"]) {
+  checkValidity(value: string, rules: FormElement['validation']) {
     let isValid = true;
 
     if (rules![Validations.isRequired]) {
-      isValid = value.trim() !== "" && isValid;
+      isValid = value.trim() !== '' && isValid;
     }
 
     if (rules![Validations.minLength]) {
@@ -193,7 +190,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
             value={formElement.config.value}
           />
         ))}
-        <Button disabled={!this.state.formIsValid} buttonType="Success" clicked={this.orderHandler}>
+        <Button disabled={!this.state.formIsValid} buttonType='Success' clicked={this.orderHandler}>
           ORDER
         </Button>
       </form>
@@ -212,4 +209,6 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
   }
 }
 
-export default ContactData;
+const mapStateToProps = ({ ingredients, totalPrice }: BurgerBuilderState) => ({ingredients, totalPrice});
+
+export default connect(mapStateToProps)(ContactData);

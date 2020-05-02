@@ -1,9 +1,7 @@
-import { Ingredients } from '../states/ui/burger-builder';
+import { RouteComponentProps } from 'react-router-dom';
+import { BurgerBuilderState } from '../states/redux/burger-builder.state';
 
-export type ContactDataProps = {
-  ingredients: Ingredients;
-  totalPrice: number;
-  history: {
-    push: (path: any) => any;
-  }
-};
+export interface ContactDataProps extends RouteComponentProps {
+  ingredients: BurgerBuilderState["ingredients"];
+  totalPrice: BurgerBuilderState["totalPrice"];
+}
