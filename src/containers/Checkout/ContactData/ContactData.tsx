@@ -65,6 +65,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
           [Validations.isRequired]: true,
           [Validations.minLength]: 4,
           [Validations.maxLength]: 6,
+          [Validations.isNumeric]: true
         },
         touched: false,
       },
@@ -144,6 +145,11 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
 
     if (rules![Validations.maxLength]) {
       isValid = value.trim().length <= rules![Validations.maxLength] && isValid;
+    }
+
+    if (rules![Validations.isNumeric]) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value.trim()) && isValid;
     }
 
     return isValid;

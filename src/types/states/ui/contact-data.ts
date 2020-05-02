@@ -27,6 +27,7 @@ export enum Validations {
   isRequired = 'isRequired',
   minLength = 'minLength',
   maxLength = 'maxLength',
+  isNumeric = 'isNumeric',
 }
 
 export enum ElementNames { 
