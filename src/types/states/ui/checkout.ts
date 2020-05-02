@@ -1,4 +1,4 @@
-import { Ingredients } from "@burger/types/states/burger-builder";
+import { Ingredients } from "@burger/types/states/ui/burger-builder";
 
 export type CheckoutState = {
   ingredients: Ingredients | null;

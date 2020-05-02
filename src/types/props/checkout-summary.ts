@@ -1,5 +1,5 @@
 import { GenericHandler } from '../callbacks';
-import { Ingredients } from '../states/burger-builder';
+import { Ingredients } from '../states/ui/burger-builder';
 
 export type CheckoutSummaryProps = {
   ingredients: Ingredients;

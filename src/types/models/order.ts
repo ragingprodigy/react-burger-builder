@@ -1,4 +1,4 @@
-import { Ingredients } from '../states/burger-builder';
+import { Ingredients } from '../states/ui/burger-builder';
 
 export interface Order {
   id: string;

@@ -1,7 +1,7 @@
 import CheckoutSummary from '@burger/components/Order/CheckoutSummary/CheckoutSummary';
 import Spinner from '@burger/components/UI/Spinner/Spinner';
-import { Ingredients } from '@burger/types/states/burger-builder';
-import { CheckoutState } from '@burger/types/states/checkout';
+import { Ingredients } from '@burger/types/states/ui/burger-builder';
+import { CheckoutState } from '@burger/types/states/ui/checkout';
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import ContactData from './ContactData/ContactData';

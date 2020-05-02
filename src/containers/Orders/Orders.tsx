@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Order from '@burger/components/Order/Order';
 import axios from '@burger/axios-orders';
 import withErrorHandler from '@burger/hoc/withErrorHandler/withErrorHandler';
-import { OrdersState } from '@burger/types/states/orders';
+import { OrdersState } from '@burger/types/states/ui/orders';
 import { Order as OrderModel } from '@burger/types/models/order';
 
 export class Orders extends Component<any, OrdersState> {

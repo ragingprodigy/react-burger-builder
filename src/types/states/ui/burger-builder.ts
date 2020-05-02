@@ -3,9 +3,6 @@ export type Ingredients = {
 };
 
 export type BurgerBuilderState = {
-  ingredients: Ingredients | any;
-  totalPrice: number;
-  purchaseable: boolean;
   purchasing: boolean;
   loading: boolean;
 };

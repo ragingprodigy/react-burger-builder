@@ -8,7 +8,7 @@ import {
   ElementNames,
   FormElement,
   Validations,
-} from "@burger/types/states/contact-data";
+} from "@burger/types/states/ui/contact-data";
 import React, { Component } from "react";
 import s from "./ContactData.module.css";
 
