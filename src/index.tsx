@@ -1,14 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { applyMiddleware, compose, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import reducer from './store/reducer';
 
-const store = createStore(reducer);
+declare global {
+    interface Window {
+      __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const logger = (store: any) => {
+  return (next: any) => {
+    return (action: any) => {
+      console.log(`[Middleware] Dispatching ${action}`);
+      return next(action);
+    }
+  }
+}
+
+const store = createStore(reducer, composeEnhancers(applyMiddleware(logger, thunk)));
 
 const app = (
   <React.StrictMode>
