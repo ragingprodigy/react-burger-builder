@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '@burger/store/actions';
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '@burger/store/actions/actionTypes';
 import { BurgerBuilderState } from './burger-builder.state';
 
 export type BurgerBuilderAction =

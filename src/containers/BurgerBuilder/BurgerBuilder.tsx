@@ -6,7 +6,7 @@ import Modal from '@burger/components/UI/Modal/Modal';
 import Spinner from '@burger/components/UI/Spinner/Spinner';
 import Aux from '@burger/hoc/Aux/Aux';
 import withErrorHandler from '@burger/hoc/withErrorHandler/withErrorHandler';
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '@burger/store/actions';
+import { addIngredient, removeIngredient } from '@burger/store/actions/index';
 import { Ingredient } from '@burger/types/enums/burger';
 import { BurgerBuilderProps } from '@burger/types/props/burger-builder.props';
 import { BurgerBuilderAction } from '@burger/types/states/redux/burger-builder.action';
@@ -114,8 +114,8 @@ const mapDispatchToProps = (
   dispatch: (action: BurgerBuilderAction) => void
 ) => {
   return {
-    onAddIngredient: (ingredientName: any) => dispatch({ type: ADD_INGREDIENT, ingredientName }),
-    onRemoveIngredient: (ingredientName: any) => dispatch({ type: REMOVE_INGREDIENT, ingredientName }),
+    onAddIngredient: (ingredientName: any) => dispatch(addIngredient(ingredientName)),
+    onRemoveIngredient: (ingredientName: any) => dispatch(removeIngredient(ingredientName)),
   };
 };
 

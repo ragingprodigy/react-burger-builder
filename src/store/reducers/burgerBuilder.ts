@@ -1,4 +1,4 @@
-import {ADD_INGREDIENT, REMOVE_INGREDIENT } from './actions';
+import {ADD_INGREDIENT, REMOVE_INGREDIENT } from '../actions/actionTypes';
 import { combineReducers } from 'redux';
 import { BurgerBuilderState } from '@burger/types/states/redux/burger-builder.state';
 import { BurgerBuilderAction } from '@burger/types/states/redux/burger-builder.action';
