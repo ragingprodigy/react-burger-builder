@@ -109,7 +109,6 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
   orderHandler = (event:any) => {
     event.preventDefault();
 
-    // this.setState({ loading: true });
     const orderData: { [ElementNames: string]: any } = {};
     const orderForm: { [ElementNames: string]: any } = {
       ...this.state.orderForm,
@@ -127,7 +126,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
       });
 
     const order = { ingredients, orderData };
-    this.props.onOrderBurger(order);
+    this.props.onOrderBurger(order, this.props.token);
   };
 
   checkValidity(value: string, rules: FormElement["validation"]) {
@@ -226,12 +225,14 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
   }
 }
 
-const mapStateToProps = ({ burderBuilder, order }: TAppState) => ({
+const mapStateToProps = ({ burderBuilder, order, auth }: TAppState) => ({
   ingredients: burderBuilder.ingredients,
   loading: order.loading,
+  token: auth.token,
 });
+
 const mapDispatchToProps = (dispatch: any) => ({
-  onOrderBurger: (orderData: any) => dispatch(purchaseBurger(orderData)),
+  onOrderBurger: (orderData: any, token: string) => dispatch(purchaseBurger(orderData, token)),
 });
 
 export default connect(

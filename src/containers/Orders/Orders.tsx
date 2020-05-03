@@ -14,10 +14,14 @@ export class Orders extends Component<IOrderProps> {
     if (!this.props.ingredients.length) {
       this.props.initIngredients();
     }
-    this.props.fetchOrders();
+    this.props.fetchOrders(this.props.token);
   }
 
   render() {
+    if (this.props.error) {
+      return <p>Please Sign IN</p>;
+    }
+
     let orders = this.props.ingredients.length ? (
       <div>
         {this.props.orders.map((order: OrderModel) => (
@@ -37,10 +41,11 @@ const mapStateToProps = (state: TAppState) => ({
   ingredients: state.burderBuilder.ingredients,
   loading: state.order.loading,
   error: state.order.error,
+  token: state.auth.token,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchOrders: () => dispatch(fetchOrders()),
+  fetchOrders: (token: string) => dispatch(fetchOrders(token)),
   initIngredients: () => dispatch(initIngredients()),
 });
 

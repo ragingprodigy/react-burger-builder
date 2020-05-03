@@ -4,5 +4,6 @@ import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
 export interface ContactDataProps extends RouteComponentProps {
   ingredients: TIngredients;
   loading: boolean;
-  onOrderBurger: (orderData: any) => any;
+  token: string,
+  onOrderBurger: (orderData: any, token: string) => any;
 }

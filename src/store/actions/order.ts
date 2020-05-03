@@ -28,12 +28,12 @@ const purchaseBurgerStart = (): TOrderAction => ({
   type: PURCHASE_BURGER_START,
 });
 
-export const purchaseBurger = (orderData: any) => {
+export const purchaseBurger = (orderData: any, token: string) => {
   return (dispatch: any) => {
     dispatch(purchaseBurgerStart());
 
     axios
-      .post("orders.json", orderData)
+      .post(`orders.json?auth=${token}`, orderData)
       .then((r) => {
         dispatch(purchaseBurgerSuccess(r.data.name, orderData));
       })
@@ -53,12 +53,12 @@ const fetchOrdersFail = (error: any) => ({ type: FETCH_ORDERS_FAILED, error });
 
 const fetchOrdersStart = (): TOrderAction => ({ type: FETCH_ORDERS_START });
 
-export const fetchOrders = () => {
+export const fetchOrders = (token: string) => {
   return (dispatch: any) => {
     dispatch(fetchOrdersStart());
     
     axios
-      .get("orders.json")
+      .get(`orders.json?auth=${token}`)
       .then((r) => {
         console.log("Orders: ", r.data);
         const orders = Object.keys(r.data).map((key) => {
