@@ -1,16 +1,14 @@
-import { Ingredients } from '../states/ui/burger-builder';
+import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
 
 export interface Order {
   id: string;
-  customer: {
+  orderData: {
+    id: string;
     name: string;
     email: string;
-    address: {
-      street: string;
-      postalCode: string;
-    }
-  },
-  price: number;
-  deliveryMethod: string;
-  ingredients: Ingredients;
+    street: string;
+    postalCode: string;
+    deliveryMethod: string;
+  };
+  ingredients: TIngredients;
 }

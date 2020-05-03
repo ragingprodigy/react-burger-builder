@@ -1,35 +1,49 @@
-import React, { Component } from 'react';
-import Order from '@burger/components/Order/Order';
-import axios from '@burger/axios-orders';
-import withErrorHandler from '@burger/hoc/withErrorHandler/withErrorHandler';
-import { OrdersState } from '@burger/types/states/ui/orders';
-import { Order as OrderModel } from '@burger/types/models/order';
+import axios from "@burger/axios-orders";
+import Order from "@burger/components/Order/Order";
+import Spinner from "@burger/components/UI/Spinner/Spinner";
+import withErrorHandler from "@burger/hoc/withErrorHandler/withErrorHandler";
+import { TAppState } from "@burger/interfaces/appState";
+import { IOrderProps } from "@burger/interfaces/order/orderProps";
+import { fetchOrders, initIngredients } from "@burger/store/actions";
+import { Order as OrderModel } from "@burger/types/models/order";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export class Orders extends Component<any, OrdersState> {
-  state = {
-    orders: [],
-    loading: true,
-  };
-
+export class Orders extends Component<IOrderProps> {
   componentDidMount() {
-    axios.get('orders.json')
-      .then(res => {
-        const orders = Object.keys(res.data).map((key) => {
-          return { ...res.data[key], id: key } as OrderModel;
-        });
-        
-        this.setState({ loading: false, orders });
-      })
-      .catch(err => this.setState({ loading: false }));
+    if (!this.props.ingredients.length) {
+      this.props.initIngredients();
+    }
+    this.props.fetchOrders();
   }
 
   render() {
-    return (
+    let orders = this.props.ingredients.length ? (
       <div>
-        {this.state.orders.map((order: OrderModel) => <Order key={order.id} ingredients={order.ingredients} price={order.price} />)}
+        {this.props.orders.map((order: OrderModel) => (
+          <Order key={order.id} ingredients={order.ingredients} />
+        ))}
       </div>
+    ) : (
+      <Spinner />
     );
+
+    return orders;
   }
 }
 
-export default withErrorHandler(Orders, axios);
+const mapStateToProps = (state: TAppState) => ({
+  orders: state.order.orders,
+  ingredients: state.burderBuilder.ingredients,
+  loading: state.order.loading,
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  fetchOrders: () => dispatch(fetchOrders()),
+  initIngredients: () => dispatch(initIngredients()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(Orders, axios));

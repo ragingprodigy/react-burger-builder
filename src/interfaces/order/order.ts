@@ -1,6 +1,6 @@
 export type TOrderState = {
   orders: any[];
-  // error: boolean;
+  error: boolean;
   loading: boolean;
   purchased: boolean;
 };

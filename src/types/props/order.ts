@@ -1,6 +1,6 @@
-import { Ingredients } from '../states/ui/burger-builder';
+import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
 
 export type OrderProps = {
-  ingredients: any;
-  price: number;
+  ingredients: TIngredients;
+  coreIngs: TIngredients;
 };
