@@ -3,11 +3,11 @@ import Button from '@burger/components/UI/Button/Button';
 import Input from '@burger/components/UI/Input/Input';
 import Spinner from '@burger/components/UI/Spinner/Spinner';
 import { ContactDataProps } from '@burger/types/props/contact-data';
-import { BurgerBuilderState } from '@burger/types/states/redux/burger-builder.state';
 import { ContactDataState, ElementNames, FormElement, Validations } from '@burger/types/states/ui/contact-data';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import s from './ContactData.module.css';
+import { TBurgerBuilderState } from '@burger/interfaces/burderBuilder/burderBuilder';
 
 export class ContactData extends Component<ContactDataProps, ContactDataState> {
   state: ContactDataState = {
@@ -114,11 +114,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
       orderData[formElementIdentifier] = orderForm[formElementIdentifier].value;
     }
 
-    const order = {
-      ingredients: this.props.ingredients,
-      price: this.props.totalPrice,
-      orderData,
-    };
+    const ingredients: any = {};
+    this.props.ingredients.filter(i => i.units > 0).forEach(({ label, units }) => {
+      ingredients[label] = { label, units };
+    });
+
+    const order = {ingredients, orderData};
 
     axios
       .post('/orders.json', order)
@@ -215,6 +216,6 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
   }
 }
 
-const mapStateToProps = ({ ingredients, totalPrice }: BurgerBuilderState) => ({ingredients, totalPrice});
+const mapStateToProps = ({ ingredients }: TBurgerBuilderState) => ({ingredients});
 
 export default connect(mapStateToProps)(ContactData);
