@@ -1,19 +1,4 @@
-export type InputConfig = {
-  type?: string;
-  placeholder?: string;
-  options?: { value: any; displayValue: string|number; }[];
-};
-
-export type FormElement = {
-  elementType: string;
-  elementConfig?: InputConfig;
-  value: string | number;
-  validation?: {
-    [Validations: string]: boolean | number;
-  };
-  isValid: boolean;
-  touched?: boolean;
-};
+import { FormElement } from '@burger/interfaces/forms/forms';
 
 export type ContactDataState = {
   formIsValid: boolean;
@@ -21,13 +6,6 @@ export type ContactDataState = {
     [ElementNames: string]: FormElement;
   };
 };
-
-export enum Validations {
-  isRequired = 'isRequired',
-  minLength = 'minLength',
-  maxLength = 'maxLength',
-  isNumeric = 'isNumeric',
-}
 
 export enum ElementNames { 
   name = 'name',
@@ -37,4 +15,3 @@ export enum ElementNames {
   country = 'country',
   deliveryMethod = 'deliveryMethod',
 };
-

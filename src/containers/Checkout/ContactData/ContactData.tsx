@@ -4,13 +4,12 @@ import Input from "@burger/components/UI/Input/Input";
 import Spinner from "@burger/components/UI/Spinner/Spinner";
 import withErrorHandler from "@burger/hoc/withErrorHandler/withErrorHandler";
 import { TAppState } from "@burger/interfaces/appState";
+import { FormElement, Validations } from "@burger/interfaces/forms/forms";
 import { purchaseBurger } from "@burger/store/actions";
 import { ContactDataProps } from "@burger/types/props/contact-data";
 import {
   ContactDataState,
   ElementNames,
-  FormElement,
-  Validations,
 } from "@burger/types/states/ui/contact-data";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -107,7 +106,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
     },
   };
 
-  orderHandler = (event: MouseEvent) => {
+  orderHandler = (event:any) => {
     event.preventDefault();
 
     // this.setState({ loading: true });
@@ -129,17 +128,6 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
 
     const order = { ingredients, orderData };
     this.props.onOrderBurger(order);
-
-    // axios
-    //   .post('/orders.json', order)
-    //   .then((r) => {
-    //     this.setState({ loading: false });
-    //     this.props.history.push('/');
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     this.setState({ loading: false });
-    //   });
   };
 
   checkValidity(value: string, rules: FormElement["validation"]) {
@@ -194,7 +182,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
     });
 
     let form = (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {formEls.map((formElement) => (
           <Input
             invalid={!formElement.config.isValid}
