@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "@burger/components/UI/Input/Input";
 import Button from "@burger/components/UI/Button/Button";
+import { Redirect } from 'react-router-dom';
 import {
   IAuthUIState,
   TAuthControlKey,
@@ -154,6 +155,10 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
       errorMessage = <p className={classes.Error}>{this.props.error.message}</p>;
     }
 
+    if (this.props.isAuthenticated) {
+      return <Redirect to='orders' />;
+    }
+
     return (
       <div className={classes.Auth}>
         {errorMessage}
@@ -178,6 +183,7 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
 const mapStateToProps = (state: TAppState) => ({
   loading: state.auth.loading,
   error: state.auth.error,
+  isAuthenticated: state.auth.token !== null,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
