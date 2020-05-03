@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import classes from './BuildControls.module.css';
-import BuildControl from './BuildControl/BuildControl';
+import { TAppState } from '@burger/interfaces/appState';
 import { BuildControlsProps } from '@burger/types/props/build-controls';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TBurgerBuilderState } from '@burger/interfaces/burderBuilder/burderBuilder';
+import BuildControl from './BuildControl/BuildControl';
+import classes from './BuildControls.module.css';
 
 class BuildControls extends Component<BuildControlsProps> {
   render() {
@@ -33,6 +33,11 @@ class BuildControls extends Component<BuildControlsProps> {
   }
 }
 
-const mapStateToProps = ({ ingredients }: TBurgerBuilderState) => ({ ingredients });
+const mapStateToProps = (state: TAppState) => {
+  const { ingredients } = state.burderBuilder;
+  return {
+    ingredients,
+  };
+};
 
 export default connect(mapStateToProps)(BuildControls);

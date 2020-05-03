@@ -1,26 +1,32 @@
-import axios from '@burger/axios-orders';
-import Button from '@burger/components/UI/Button/Button';
-import Input from '@burger/components/UI/Input/Input';
-import Spinner from '@burger/components/UI/Spinner/Spinner';
-import { ContactDataProps } from '@burger/types/props/contact-data';
-import { ContactDataState, ElementNames, FormElement, Validations } from '@burger/types/states/ui/contact-data';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import s from './ContactData.module.css';
-import { TBurgerBuilderState } from '@burger/interfaces/burderBuilder/burderBuilder';
+import axios from "@burger/axios-orders";
+import Button from "@burger/components/UI/Button/Button";
+import Input from "@burger/components/UI/Input/Input";
+import Spinner from "@burger/components/UI/Spinner/Spinner";
+import withErrorHandler from "@burger/hoc/withErrorHandler/withErrorHandler";
+import { TAppState } from "@burger/interfaces/appState";
+import { purchaseBurger } from "@burger/store/actions";
+import { ContactDataProps } from "@burger/types/props/contact-data";
+import {
+  ContactDataState,
+  ElementNames,
+  FormElement,
+  Validations,
+} from "@burger/types/states/ui/contact-data";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import s from "./ContactData.module.css";
 
 export class ContactData extends Component<ContactDataProps, ContactDataState> {
   state: ContactDataState = {
-    loading: false,
     formIsValid: false,
     orderForm: {
       name: {
-        value: '',
+        value: "",
         isValid: false,
-        elementType: 'input',
+        elementType: "input",
         elementConfig: {
-          type: 'text',
-          placeholder: 'Your Name',
+          type: "text",
+          placeholder: "Your Name",
         },
         validation: {
           isRequired: true,
@@ -28,12 +34,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       email: {
-        value: '',
+        value: "",
         isValid: false,
-        elementType: 'input',
+        elementType: "input",
         elementConfig: {
-          type: 'email',
-          placeholder: 'Your Email Address',
+          type: "email",
+          placeholder: "Your Email Address",
         },
         validation: {
           isRequired: true,
@@ -41,12 +47,12 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       street: {
-        value: '',
+        value: "",
         isValid: false,
-        elementType: 'input',
+        elementType: "input",
         elementConfig: {
-          type: 'text',
-          placeholder: 'Street',
+          type: "text",
+          placeholder: "Street",
         },
         validation: {
           isRequired: true,
@@ -54,28 +60,28 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       postCode: {
-        value: '',
+        value: "",
         isValid: false,
-        elementType: 'input',
+        elementType: "input",
         elementConfig: {
-          type: 'text',
-          placeholder: 'Your Zip Code',
+          type: "text",
+          placeholder: "Your Zip Code",
         },
         validation: {
           [Validations.isRequired]: true,
           [Validations.minLength]: 4,
           [Validations.maxLength]: 6,
-          [Validations.isNumeric]: true
+          [Validations.isNumeric]: true,
         },
         touched: false,
       },
       country: {
-        value: '',
+        value: "",
         isValid: false,
-        elementType: 'input',
+        elementType: "input",
         elementConfig: {
-          type: 'text',
-          placeholder: 'Country',
+          type: "text",
+          placeholder: "Country",
         },
         validation: {
           isRequired: true,
@@ -83,14 +89,14 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         touched: false,
       },
       deliveryMethod: {
-        value: 'standard',
+        value: "standard",
         isValid: true,
-        elementType: 'select',
+        elementType: "select",
         elementConfig: {
           options: [
-            { value: 'fastest', displayValue: 'Same Day' },
-            { value: 'nextday', displayValue: 'Next Day' },
-            { value: 'standard', displayValue: 'Standard Delivery' },
+            { value: "fastest", displayValue: "Same Day" },
+            { value: "nextday", displayValue: "Next Day" },
+            { value: "standard", displayValue: "Standard Delivery" },
           ],
         },
         validation: {
@@ -104,7 +110,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
   orderHandler = (event: MouseEvent) => {
     event.preventDefault();
 
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
     const orderData: { [ElementNames: string]: any } = {};
     const orderForm: { [ElementNames: string]: any } = {
       ...this.state.orderForm,
@@ -115,29 +121,32 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
     }
 
     const ingredients: any = {};
-    this.props.ingredients.filter(i => i.units > 0).forEach(({ label, units }) => {
-      ingredients[label] = { label, units };
-    });
-
-    const order = {ingredients, orderData};
-
-    axios
-      .post('/orders.json', order)
-      .then((r) => {
-        this.setState({ loading: false });
-        this.props.history.push('/');
-      })
-      .catch((e) => {
-        console.log(e);
-        this.setState({ loading: false });
+    this.props.ingredients
+      .filter((i) => i.units > 0)
+      .forEach(({ label, units }) => {
+        ingredients[label] = { label, units };
       });
+
+    const order = { ingredients, orderData };
+    this.props.onOrderBurger(order);
+
+    // axios
+    //   .post('/orders.json', order)
+    //   .then((r) => {
+    //     this.setState({ loading: false });
+    //     this.props.history.push('/');
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //     this.setState({ loading: false });
+    //   });
   };
 
-  checkValidity(value: string, rules: FormElement['validation']) {
+  checkValidity(value: string, rules: FormElement["validation"]) {
     let isValid = true;
 
     if (rules![Validations.isRequired]) {
-      isValid = value.trim() !== '' && isValid;
+      isValid = value.trim() !== "" && isValid;
     }
 
     if (rules![Validations.minLength]) {
@@ -197,13 +206,17 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
             value={formElement.config.value}
           />
         ))}
-        <Button disabled={!this.state.formIsValid} buttonType='Success' clicked={this.orderHandler}>
+        <Button
+          disabled={!this.state.formIsValid}
+          buttonType="Success"
+          clicked={this.orderHandler}
+        >
           ORDER
         </Button>
       </form>
     );
 
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
 
@@ -216,6 +229,15 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
   }
 }
 
-const mapStateToProps = ({ ingredients }: TBurgerBuilderState) => ({ingredients});
+const mapStateToProps = ({ burderBuilder, order }: TAppState) => ({
+  ingredients: burderBuilder.ingredients,
+  loading: order.loading,
+});
+const mapDispatchToProps = (dispatch: any) => ({
+  onOrderBurger: (orderData: any) => dispatch(purchaseBurger(orderData)),
+});
 
-export default connect(mapStateToProps)(ContactData);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(ContactData, axios));

@@ -6,8 +6,8 @@ import Modal from '@burger/components/UI/Modal/Modal';
 import Spinner from '@burger/components/UI/Spinner/Spinner';
 import Aux from '@burger/hoc/Aux/Aux';
 import withErrorHandler from '@burger/hoc/withErrorHandler/withErrorHandler';
-import { TBurgerBuilderState } from '@burger/interfaces/burderBuilder/burderBuilder';
-import { addIngredient, initIngredients, removeIngredient } from "@burger/store/actions/index";
+import { TAppState } from '@burger/interfaces/appState';
+import { addIngredient, initIngredients, removeIngredient } from "@burger/store/actions";
 import { BurgerBuilderProps } from '@burger/types/props/burger-builder.props';
 import { BurgerBuilderState as UIState } from '@burger/types/states/ui/burger-builder';
 import React, { Component } from 'react';
@@ -92,9 +92,12 @@ class BurgerBuilder extends Component<BurgerBuilderProps, UIState> {
   }
 }
 
-const mapStateToProps = ({ ingredients, error }: TBurgerBuilderState) => ({
-  ingredients, error
-});
+const mapStateToProps = (state: TAppState) => {
+  const { ingredients, error } = state.burderBuilder;
+  return ({
+    ingredients, error
+  })
+};
 
 const mapDispatchToProps = (
   dispatch: (...args:any) => void

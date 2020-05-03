@@ -1,7 +1,6 @@
 import { RouteComponentProps } from 'react-router-dom';
-import { BurgerBuilderState } from '../states/redux/burger-builder.state';
+import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
 
 export interface CheckoutProps extends RouteComponentProps {
-  ingredients: BurgerBuilderState['ingredients'];
-  totalPrice: BurgerBuilderState['totalPrice'];
+  ingredients: TIngredients;
 }
