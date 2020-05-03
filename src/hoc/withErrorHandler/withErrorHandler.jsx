@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import Aux from '../Aux/Aux';
+import React, { Component, Fragment } from 'react';
 import Modal from '@burger/components/UI/Modal/Modal';
 
 const withErrorHandler = (WrappedComponent, axios) => {
@@ -12,13 +11,16 @@ const withErrorHandler = (WrappedComponent, axios) => {
     }
 
     componentDidMount() {
-      this.reqInterceptor = axios.interceptors.request.use((req) => {
-        this.setState({ error: null });
-        return req;
-      });
+      this.reqInterceptor = axios.interceptors.request.use(
+        (req) => {
+          this.setState({ error: null });
+          return req;
+        },
+        (error) => this.setState({ error })
+      );
       
       this.respInterceptor = axios.interceptors.response.use(
-        res => res,
+        (res) => res,
         (error) => this.setState({ error })
       );
     }
@@ -34,15 +36,14 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
     render() {
       return (
-        <Aux>
-          <Modal
-            modalClosed={this.errorConfirmedHandler.bind(this)}
-            show={this.state.error}
-          >
+        <Fragment>
+          <div>
+            <Modal modalClosed={this.errorConfirmedHandler.bind(this)} show={this.state.error}>
             {this.state.error ? this.state.error.message : null}
-          </Modal>
+            </Modal>
+          </div>
           <WrappedComponent {...this.props} />
-        </Aux>
+        </Fragment>
       );
     }
   };

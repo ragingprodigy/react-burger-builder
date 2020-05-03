@@ -36,6 +36,7 @@ const mapStateToProps = (state: TAppState) => ({
   orders: state.order.orders,
   ingredients: state.burderBuilder.ingredients,
   loading: state.order.loading,
+  error: state.order.error,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

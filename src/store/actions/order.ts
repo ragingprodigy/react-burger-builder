@@ -5,6 +5,7 @@ import {
   PURCHASE_INIT,
   FETCH_ORDERS_SUCCESS,
   FETCH_ORDERS_FAILED,
+  FETCH_ORDERS_START,
 } from "./actionTypes";
 import axios from "@burger/axios-orders";
 import { TOrderAction } from "@burger/interfaces/order/orderAction";
@@ -50,8 +51,12 @@ const fetchOrdersSuccess = (orders: any[]) => ({
 });
 const fetchOrdersFail = (error: any) => ({ type: FETCH_ORDERS_FAILED, error });
 
+const fetchOrdersStart = (): TOrderAction => ({ type: FETCH_ORDERS_START });
+
 export const fetchOrders = () => {
   return (dispatch: any) => {
+    dispatch(fetchOrdersStart());
+    
     axios
       .get("orders.json")
       .then((r) => {
