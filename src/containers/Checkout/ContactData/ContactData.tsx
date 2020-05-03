@@ -133,20 +133,29 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
   checkValidity(value: string, rules: FormElement["validation"]) {
     let isValid = true;
 
-    if (rules![Validations.isRequired]) {
+    if (!rules) {
+      return isValid;
+    }
+
+    if (rules[Validations.isRequired]) {
       isValid = value.trim() !== "" && isValid;
     }
 
-    if (rules![Validations.minLength]) {
-      isValid = value.trim().length >= rules![Validations.minLength] && isValid;
+    if (rules[Validations.minLength]) {
+      isValid = value.trim().length >= rules[Validations.minLength] && isValid;
     }
 
-    if (rules![Validations.maxLength]) {
-      isValid = value.trim().length <= rules![Validations.maxLength] && isValid;
+    if (rules[Validations.maxLength]) {
+      isValid = value.trim().length <= rules[Validations.maxLength] && isValid;
     }
 
-    if (rules![Validations.isNumeric]) {
+    if (rules[Validations.isNumeric]) {
       const pattern = /^\d+$/;
+      isValid = pattern.test(value.trim()) && isValid;
+    }
+
+    if (rules[Validations.isEmail]) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       isValid = pattern.test(value.trim()) && isValid;
     }
 

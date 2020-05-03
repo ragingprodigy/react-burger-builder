@@ -6,6 +6,7 @@ export interface IAuthUIState {
     email: FormElement;
     password: FormElement;
   };
+  isSignUp: boolean;
 };
 
 export type TAuthControlKey = keyof IAuthUIState['controls'];

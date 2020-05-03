@@ -12,6 +12,7 @@ type BtnProps = {
 
 const button = (props: BtnProps) => (
   <button
+    type="button"
     disabled={props.disabled}
     className={[ classes.Button, classes[props.buttonType] ].join(' ')}
     onClick={props.clicked}

@@ -20,4 +20,5 @@ export enum Validations {
   minLength = "minLength",
   maxLength = "maxLength",
   isNumeric = "isNumeric",
+  isEmail ='isEmail',
 }

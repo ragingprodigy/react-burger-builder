@@ -21,7 +21,8 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
           placeholder: "Your Email Address",
         },
         validation: {
-          isRequired: true,
+          [Validations.isRequired]: true,
+          [Validations.isEmail]: true,
         },
         touched: false,
       },
@@ -34,31 +35,41 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
           placeholder: "Your Password",
         },
         validation: {
-          isRequired: true,
-          minLength: 6,
+          [Validations.isRequired]: true,
+          [Validations.minLength]: 6,
         },
         touched: false,
       },
     },
+    isSignUp: true,
   };
 
   checkValidity(value: string, rules: FormElement["validation"]) {
     let isValid = true;
 
-    if (rules![Validations.isRequired]) {
+    if (!rules) {
+      return isValid;
+    }
+
+    if (rules[Validations.isRequired]) {
       isValid = value.trim() !== "" && isValid;
     }
 
-    if (rules![Validations.minLength]) {
+    if (rules[Validations.minLength]) {
       isValid = value.trim().length >= rules![Validations.minLength] && isValid;
     }
 
-    if (rules![Validations.maxLength]) {
-      isValid = value.trim().length <= rules![Validations.maxLength] && isValid;
+    if (rules[Validations.maxLength]) {
+      isValid = value.trim().length <= rules[Validations.maxLength] && isValid;
     }
 
-    if (rules![Validations.isNumeric]) {
+    if (rules[Validations.isNumeric]) {
       const pattern = /^\d+$/;
+      isValid = pattern.test(value.trim()) && isValid;
+    }
+
+    if (rules[Validations.isEmail]) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       isValid = pattern.test(value.trim()) && isValid;
     }
 
@@ -72,7 +83,10 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
         ...this.state.controls[controlName],
         value: event.target.value.trim(),
         touched: true,
-        isValid: this.checkValidity(event.target.value.trim(), this.state.controls[controlName].validation)
+        isValid: this.checkValidity(
+          event.target.value.trim(),
+          this.state.controls[controlName].validation
+        ),
       },
     };
 
@@ -95,7 +109,15 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
 
   loginHandler = (event: any) => {
     event.preventDefault();
-    this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
+    this.props.onAuth(
+      this.state.controls.email.value,
+      this.state.controls.password.value,
+      this.state.isSignUp
+    );
+  };
+
+  switchAuthModeHandler = () => {
+    this.setState((state) => ({ isSignUp: !state.isSignUp }));
   };
 
   render() {
@@ -126,16 +148,19 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
             buttonType="Success"
             clicked={this.loginHandler}
           >
-            LOGIN
+            {this.state.isSignUp ? "SIGN UP" : "SIGN IN"}
           </Button>
         </form>
+        <Button buttonType="Danger" clicked={this.switchAuthModeHandler}>
+          SWITCH TO {this.state.isSignUp ? "SIGN IN" : "SIGN UP"}
+        </Button>
       </div>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
-  onAuth: (email: string, password: string) => dispatch(auth(email, password)),
+  onAuth: (email: string, password: string, isSignUp: boolean) => dispatch(auth(email, password, isSignUp)),
 });
 
 export default connect(null, mapDispatchToProps)(Auth);
