@@ -16,7 +16,10 @@ const purchaseBurgerSuccess = (id: string, orderData: any): TOrderAction => {
   return {
     type: PURCHASE_BURGER_SUCCESS,
     orderId: id,
-    orderData,
+    orderData: {
+      ...orderData,
+      ingredients: (() => Object.values(orderData.ingredients) as TIngredients)()
+    },
   };
 };
 
@@ -53,19 +56,20 @@ const fetchOrdersFail = (error: any) => ({ type: FETCH_ORDERS_FAILED, error });
 
 const fetchOrdersStart = (): TOrderAction => ({ type: FETCH_ORDERS_START });
 
-export const fetchOrders = (token: string) => {
+export const fetchOrders = (token: string, userId: string) => {
   return (dispatch: any) => {
     dispatch(fetchOrdersStart());
     
     axios
-      .get(`orders.json?auth=${token}`)
+      .get(`orders.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`)
       .then((r) => {
         console.log("Orders: ", r.data);
         const orders = Object.keys(r.data).map((key) => {
           return {
             ...r.data[key],
             id: key,
-            ingredients: (() => Object.values(r.data[key].ingredients) as TIngredients)()
+            ingredients: (() =>
+              Object.values(r.data[key].ingredients) as TIngredients)(),
           } as Order;
         });
 

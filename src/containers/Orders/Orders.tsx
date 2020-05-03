@@ -14,7 +14,9 @@ export class Orders extends Component<IOrderProps> {
     if (!this.props.ingredients.length) {
       this.props.initIngredients();
     }
-    this.props.fetchOrders(this.props.token);
+
+    const { userId, token } = this.props;
+    this.props.fetchOrders(token, userId);
   }
 
   render() {
@@ -42,10 +44,12 @@ const mapStateToProps = (state: TAppState) => ({
   loading: state.order.loading,
   error: state.order.error,
   token: state.auth.token,
+  userId: state.auth.userId,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchOrders: (token: string) => dispatch(fetchOrders(token)),
+  fetchOrders: (token: string, userId: string) =>
+    dispatch(fetchOrders(token, userId)),
   initIngredients: () => dispatch(initIngredients()),
 });
 
