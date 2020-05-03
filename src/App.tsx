@@ -6,8 +6,15 @@ import { Route, Switch } from 'react-router-dom';
 import Orders from './containers/Orders/Orders';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
+import { checkAuthState } from "./store/actions";
+import { connect } from 'react-redux';
+import { IAppProps } from './interfaces/appProps';
 
-class App extends Component {
+class App extends Component<IAppProps> {
+  componentDidMount() {
+    this.props.checkAuthState();
+  }
+
   render() {
     return (
       <div>
@@ -25,4 +32,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch: any) => ({
+  checkAuthState: () => dispatch(checkAuthState()),
+});
+
+export default connect(null, mapDispatchToProps)(App);

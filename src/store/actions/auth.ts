@@ -12,9 +12,12 @@ const authSuccess = (idToken: string, userId: string): TAuthAction => ({
 
 const authFailed = (error: any): TAuthAction => ({ type: AUTH_FAILED, error });
 
-export const logout = (): TAuthAction => ({ type: AUTH_LOGOUT });
+export const logout = (): TAuthAction => {
+  localStorage.clear();
+  return { type: AUTH_LOGOUT };
+};
 
-export const checkAuthTimeout = (expires: number) => { 
+const checkAuthTimeout = (expires: number) => { 
   return (dispatch: any) => {
     setTimeout(() => dispatch(logout()), expires * 1000);
   };
@@ -31,14 +34,39 @@ export const auth = (email: string, password: string, isSignUp = true) => {
 
     Axios.post(url, payload)
       .then((r) => {
-        console.log(r);
+        const expiryDate = Date.now() + +r.data.expiresIn * 1000;
+        localStorage.setItem('token', r.data.idToken);
+        localStorage.setItem("userId", r.data.localId);
+        localStorage.setItem("expiryDate", expiryDate.toString());
         dispatch(authSuccess(r.data.idToken, r.data.localId));
         dispatch(checkAuthTimeout(+r.data.expiresIn));
       })
       .catch((e) => {
-        console.log(e);
         dispatch(authFailed(e.response.data.error));
       });
+  };
+};
+
+export const checkAuthState = () => {
+  return (dispatch: any) => {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem("userId");
+    if (!token || !userId) {
+      dispatch(logout());
+    } else {
+      const expiryTime = localStorage.getItem("expiryDate");
+      if (null === expiryTime) {
+        dispatch(logout());
+      } else {
+        if (+expiryTime < Date.now()) {
+          dispatch(logout());
+        } else {
+          dispatch(authSuccess(token, userId));
+          const timeDiff = (+expiryTime - Date.now()) / 1000;
+          dispatch(checkAuthTimeout(timeDiff));
+        }
+      }
+    }
   };
 };
 

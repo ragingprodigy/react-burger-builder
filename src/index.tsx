@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
@@ -17,13 +18,24 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
   }
 }
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = composeWithDevTools({
+  trace: true,
+  traceLimit: 25,
+});
+
+// const composeEnhancers =
+//   (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+//       trace: true,
+//       traceLimit: 25,
+//     })) ||
+//   compose;
 
 const store = createStore(
   combineReducers<TAppState>({
     order: orderReducer,
     burderBuilder: burgerBuilderReducer,
-    auth: authReducer,
+    auth: authReducer
   }),
   composeEnhancers(applyMiddleware(thunk))
 );
