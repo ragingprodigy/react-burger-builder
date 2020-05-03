@@ -15,6 +15,7 @@ export type IngredientName = ExtractActionParameters<BurgerBuilderAction, typeof
 
 export interface BurgerBuilderProps extends RouteComponentProps {
   ingredients: TIngredients;
+  error: boolean;
   onAddIngredient: (name: string) => any;
   onRemoveIngredient: (name: string) => void;
   initIngredients: () => any;

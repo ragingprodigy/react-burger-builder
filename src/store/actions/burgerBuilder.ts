@@ -1,7 +1,7 @@
 import axios from "@burger/axios-orders";
 import { TBurgerBuilderAction } from "@burger/interfaces/burderBuilder/burgerBuilderAction";
 import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
-import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS } from "./actionTypes";
+import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, FETCH_INGREDIENTS_FAILED } from "./actionTypes";
 
 export const addIngredient = (
   ingredientName: string
@@ -26,6 +26,8 @@ export const setIngredients = (
   };
 };
 
+export const fetchIngredientsFailed = (): TBurgerBuilderAction => ({ type: FETCH_INGREDIENTS_FAILED });
+
 export const initIngredients = () => {
   return (dispatch: any) => {
     axios
@@ -34,6 +36,6 @@ export const initIngredients = () => {
         const values: TIngredients = Object.values(response.data);
         dispatch(setIngredients(values));
       })
-      .catch((e) => console.log(e));
+      .catch(() => dispatch(fetchIngredientsFailed()));
   };
 };

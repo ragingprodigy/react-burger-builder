@@ -9,10 +9,7 @@ import withErrorHandler from '@burger/hoc/withErrorHandler/withErrorHandler';
 import { TBurgerBuilderState } from '@burger/interfaces/burderBuilder/burderBuilder';
 import { initIngredients } from '@burger/store/actions/burgerBuilder';
 import { addIngredient, removeIngredient } from '@burger/store/actions/index';
-// import { Ingredient } from '@burger/types/enums/burger';
 import { BurgerBuilderProps } from '@burger/types/props/burger-builder.props';
-// import { BurgerBuilderAction } from '@burger/types/states/redux/burger-builder.action';
-// import { BurgerBuilderState, BurgerIngredient } from '@burger/types/states/redux/burger-builder.state';
 import { BurgerBuilderState as UIState } from '@burger/types/states/ui/burger-builder';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -50,19 +47,17 @@ class BurgerBuilder extends Component<BurgerBuilderProps, UIState> {
 
   render() {
     let orderSummary = null;
-    let burger = <Spinner />;
+    let burger = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
+    
+    const disabledInfo: any = {};
+    this.props.ingredients.forEach(({ units, label }) => {
+      disabledInfo[label] = units === 0;
+    });
 
-    if (this.props.ingredients) {
-      const disabledInfo: any = {};
-      this.props.ingredients.forEach(({units, label}) => {
-        disabledInfo[label] = units === 0;
-      });
-
+    if (this.props.ingredients.length && !this.props.error) {
       burger = (
         <Aux>
-          <Burger
-            ingredients={this.props.ingredients}
-          />
+          <Burger ingredients={this.props.ingredients} />
           <BuildControls
             ingredientAdded={(name) => this.props.onAddIngredient(name)}
             ingredientRemoved={(name) => this.props.onRemoveIngredient(name)}
@@ -98,8 +93,8 @@ class BurgerBuilder extends Component<BurgerBuilderProps, UIState> {
   }
 }
 
-const mapStateToProps = ({ ingredients }: TBurgerBuilderState) => ({
-  ingredients,
+const mapStateToProps = ({ ingredients, error }: TBurgerBuilderState) => ({
+  ingredients, error
 });
 
 const mapDispatchToProps = (
