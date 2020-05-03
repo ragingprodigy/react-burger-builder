@@ -4,18 +4,15 @@ import Input from "@burger/components/UI/Input/Input";
 import Spinner from "@burger/components/UI/Spinner/Spinner";
 import withErrorHandler from "@burger/hoc/withErrorHandler/withErrorHandler";
 import { TAppState } from "@burger/interfaces/appState";
+import { IContactDataProps } from '@burger/interfaces/contactData/contatcDataProps';
 import { FormElement, Validations } from "@burger/interfaces/forms/forms";
 import { purchaseBurger } from "@burger/store/actions";
-import { ContactDataProps } from "@burger/types/props/contact-data";
-import {
-  ContactDataState,
-  ElementNames,
-} from "@burger/types/states/ui/contact-data";
+import { ContactDataState, ElementNames } from "@burger/types/states/ui/contact-data";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import s from "./ContactData.module.css";
 
-export class ContactData extends Component<ContactDataProps, ContactDataState> {
+export class ContactData extends Component<IContactDataProps, ContactDataState> {
   state: ContactDataState = {
     formIsValid: false,
     orderForm: {
@@ -125,7 +122,7 @@ export class ContactData extends Component<ContactDataProps, ContactDataState> {
         ingredients[label] = { label, units };
       });
 
-    const order = { ingredients, orderData };
+    const order = { ingredients, orderData, userId: this.props.userId };
     this.props.onOrderBurger(order, this.props.token);
   };
 
@@ -229,6 +226,7 @@ const mapStateToProps = ({ burderBuilder, order, auth }: TAppState) => ({
   ingredients: burderBuilder.ingredients,
   loading: order.loading,
   token: auth.token,
+  userId: auth.userId,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

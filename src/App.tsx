@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import Layout from './hoc/Layout/Layout';
-import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Checkout from './containers/Checkout/Checkout';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import Orders from './containers/Orders/Orders';
-import Auth from './containers/Auth/Auth';
-import Logout from './containers/Auth/Logout/Logout';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
+import Auth from "./containers/Auth/Auth";
+import Logout from "./containers/Auth/Logout/Logout";
+import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
+import Checkout from "./containers/Checkout/Checkout";
+import Orders from "./containers/Orders/Orders";
+import Layout from "./hoc/Layout/Layout";
+import { IAppProps } from "./interfaces/appProps";
+import { TAppState } from "./interfaces/appState";
 import { checkAuthState } from "./store/actions";
-import { connect } from 'react-redux';
-import { IAppProps } from './interfaces/appProps';
-import { TAppState } from './interfaces/appState';
 
 class App extends Component<IAppProps> {
   componentDidMount() {
@@ -39,9 +39,7 @@ class App extends Component<IAppProps> {
 
     return (
       <div>
-        <Layout>
-          {routes}
-        </Layout>
+        <Layout>{routes}</Layout>
       </div>
     );
   }
