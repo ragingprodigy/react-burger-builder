@@ -3,9 +3,14 @@ import Aux from "../Aux/Aux";
 import classes from "./Layout.module.css";
 import Toolbar from "@burger/components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "@burger/components/Navigation/SideDrawer/SideDrawer";
+import { connect } from 'react-redux';
+import { TAppState } from '@burger/interfaces/appState';
+import { ILayoutProps } from '@burger/interfaces/layout/layoutProps';
+import { ILayoutUIState } from '@burger/interfaces/layout/layoutUIState';
 
-class Layout extends Component<any, { showSideDrawer: boolean }> {
-  state = {
+
+class Layout extends Component<ILayoutProps, ILayoutUIState> {
+  state: ILayoutUIState = {
     showSideDrawer: false,
   };
 
@@ -19,8 +24,12 @@ class Layout extends Component<any, { showSideDrawer: boolean }> {
   render() {
     return (
       <Aux>
-        <Toolbar openDrawer={this.sideDrawerToggleHandler} />
+        <Toolbar
+          isAuthenticated={this.props.isAuthenticated}
+          openDrawer={this.sideDrawerToggleHandler}
+        />
         <SideDrawer
+          isAuthenticated={this.props.isAuthenticated}
           open={this.state.showSideDrawer}
           closed={this.sideDrawerClosedHandler}
         />
@@ -30,4 +39,8 @@ class Layout extends Component<any, { showSideDrawer: boolean }> {
   }
 }
 
-export default Layout;
+const mapStateToProps = (state: TAppState) => ({
+  isAuthenticated: state.auth.token !== null,
+});
+
+export default connect(mapStateToProps)(Layout);

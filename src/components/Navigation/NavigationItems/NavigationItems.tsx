@@ -1,14 +1,19 @@
-import React from 'react';
-import classes from './NavigationItems.module.css';
-import NavigationItem from './NavigationItem/NavigationItem';
+import { INavItemsProps } from "@burger/interfaces/navigationItems/navigationsItemsProps";
+import React from "react";
+import NavigationItem from "./NavigationItem/NavigationItem";
+import classes from "./NavigationItems.module.css";
 
-const navigationItems = (props: any) => (
+const navigationItems = (props: INavItemsProps) => (
   <ul className={classes.NavigationItems}>
     <NavigationItem link="/" exact>
       Burger Builder
     </NavigationItem>
-    <NavigationItem link="orders">Orders</NavigationItem>
-    <NavigationItem link="auth">Authenticate</NavigationItem>
+    {props.isAuthenticated ? (
+      <NavigationItem link="orders">Orders</NavigationItem>
+    ) : null}
+    {props.isAuthenticated ? null : (
+      <NavigationItem link="auth">Authenticate</NavigationItem>
+    )}
   </ul>
 );
 

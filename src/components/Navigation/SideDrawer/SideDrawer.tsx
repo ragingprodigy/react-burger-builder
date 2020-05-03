@@ -1,12 +1,12 @@
-import React from 'react';
-import Aux from '@burger/hoc/Aux/Aux';
-import { SideDrawerProps } from '@burger/types/props/side-drawer';
-import Logo from '@burger/components/Logo/Logo';
-import Backdrop from '@burger/components/UI/Backdrop/Backdrop';
-import NavigationItems from '../NavigationItems/NavigationItems';
-import classes from './SideDrawer.module.css';
+import Logo from "@burger/components/Logo/Logo";
+import Backdrop from "@burger/components/UI/Backdrop/Backdrop";
+import Aux from "@burger/hoc/Aux/Aux";
+import { ISideDrawerProps } from "@burger/interfaces/sideDrawer/sideDrawerProps";
+import React from "react";
+import NavigationItems from "../NavigationItems/NavigationItems";
+import classes from "./SideDrawer.module.css";
 
-const sideDrawer = (props: SideDrawerProps) => {
+const sideDrawer = (props: ISideDrawerProps) => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
   if (props.open) {
     attachedClasses = [classes.SideDrawer, classes.Open];
@@ -16,11 +16,11 @@ const sideDrawer = (props: SideDrawerProps) => {
     <Aux>
       <Backdrop clicked={props.closed} show={props.open} />
 
-      <div className={attachedClasses.join(' ')}>
+      <div className={attachedClasses.join(" ")}>
         <div className={classes.Logo}>
           <Logo />
         </div>
-        <NavigationItems />
+        <NavigationItems isAuthenticated={props.isAuthenticated} />
       </div>
     </Aux>
   );
