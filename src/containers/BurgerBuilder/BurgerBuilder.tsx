@@ -6,40 +6,39 @@ import Modal from '@burger/components/UI/Modal/Modal';
 import Spinner from '@burger/components/UI/Spinner/Spinner';
 import Aux from '@burger/hoc/Aux/Aux';
 import withErrorHandler from '@burger/hoc/withErrorHandler/withErrorHandler';
+import { TBurgerBuilderState } from '@burger/interfaces/burderBuilder/burderBuilder';
+import { initIngredients } from '@burger/store/actions/burgerBuilder';
 import { addIngredient, removeIngredient } from '@burger/store/actions/index';
-import { Ingredient } from '@burger/types/enums/burger';
+// import { Ingredient } from '@burger/types/enums/burger';
 import { BurgerBuilderProps } from '@burger/types/props/burger-builder.props';
-import { BurgerBuilderAction } from '@burger/types/states/redux/burger-builder.action';
-import { BurgerBuilderState } from '@burger/types/states/redux/burger-builder.state';
-import { BurgerBuilderState as UIState, Ingredients } from '@burger/types/states/ui/burger-builder';
+// import { BurgerBuilderAction } from '@burger/types/states/redux/burger-builder.action';
+// import { BurgerBuilderState, BurgerIngredient } from '@burger/types/states/redux/burger-builder.state';
+import { BurgerBuilderState as UIState } from '@burger/types/states/ui/burger-builder';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class BurgerBuilder extends Component<BurgerBuilderProps, UIState> {
   state = {
-    purchasing: false,
-    loading: false,
+    purchasing: false
   };
 
   componentDidMount() {
-    // axios
-    //   .get('ingredients.json')
-    //   .then((response) => {
-    //     this.setState({ ingredients: response.data });
-    //   })
-    //   .catch((e) => console.log(e));
+    this.props.initIngredients();
   }
 
   get purchaseable(): boolean {
-    const ingredients: Ingredients = this.props.ingredients;
+    let itemCount = 0;
+    this.props.ingredients.forEach(i => itemCount += i.units);
+    return itemCount > 0;
+  }
 
-    const sum = Object.keys(ingredients)
-      .map((igKey) => {
-        return ingredients[igKey as Ingredient];
-      })
-      .reduce((sum, el) => sum + el, 0);
-    
-    return sum > 0;
+  get totalPrice(): number {
+    let totalPrice = 4;
+    this.props.ingredients.forEach(({units, price}) => {
+      return totalPrice += units * price;
+    });
+
+    return totalPrice;
   }
 
   purchaseHandler = () => this.setState({ purchasing: true });
@@ -54,22 +53,20 @@ class BurgerBuilder extends Component<BurgerBuilderProps, UIState> {
     let burger = <Spinner />;
 
     if (this.props.ingredients) {
-      const disabledInfo: any = {
-        ...((this.props.ingredients as unknown) as object),
-      };
-      for (let key in disabledInfo) {
-        disabledInfo[key] = disabledInfo[key] === 0;
-      }
+      const disabledInfo: any = {};
+      this.props.ingredients.forEach(({units, label}) => {
+        disabledInfo[label] = units === 0;
+      });
 
       burger = (
         <Aux>
           <Burger
-            ingredients={(this.props.ingredients as unknown) as Ingredients}
+            ingredients={this.props.ingredients}
           />
           <BuildControls
             ingredientAdded={(name) => this.props.onAddIngredient(name)}
             ingredientRemoved={(name) => this.props.onRemoveIngredient(name)}
-            price={this.props.totalPrice}
+            price={this.totalPrice}
             purchaseable={this.purchaseable}
             ordered={this.purchaseHandler}
             disabled={disabledInfo}
@@ -80,15 +77,11 @@ class BurgerBuilder extends Component<BurgerBuilderProps, UIState> {
       orderSummary = (
         <OrderSummary
           ingredients={this.props.ingredients}
-          price={this.props.totalPrice}
+          price={this.totalPrice}
           purchaseCancelled={this.purchaseCancelHandler}
           purchaseContinued={this.purchaseContinueHandler}
         />
       );
-    }
-
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
     }
 
     return (
@@ -105,17 +98,19 @@ class BurgerBuilder extends Component<BurgerBuilderProps, UIState> {
   }
 }
 
-const mapStateToProps = ({ ingredients, totalPrice }: BurgerBuilderState) => ({
+const mapStateToProps = ({ ingredients }: TBurgerBuilderState) => ({
   ingredients,
-  totalPrice,
 });
 
 const mapDispatchToProps = (
-  dispatch: (action: BurgerBuilderAction) => void
+  dispatch: (...args:any) => void
 ) => {
   return {
-    onAddIngredient: (ingredientName: any) => dispatch(addIngredient(ingredientName)),
-    onRemoveIngredient: (ingredientName: any) => dispatch(removeIngredient(ingredientName)),
+    onAddIngredient: (ingredientName: string) =>
+      dispatch(addIngredient(ingredientName)),
+    onRemoveIngredient: (ingredientName: string) =>
+      dispatch(removeIngredient(ingredientName)),
+    initIngredients: () => dispatch(initIngredients()),
   };
 };
 

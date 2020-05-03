@@ -1,8 +1,8 @@
 import { GenericHandler } from '../callbacks';
-import { Ingredients } from '../states/ui/burger-builder';
+import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
 
 export type CheckoutSummaryProps = {
-  ingredients: Ingredients;
+  ingredients: TIngredients;
   checkoutCancelled: GenericHandler;
   checkoutContinued: GenericHandler;
 };

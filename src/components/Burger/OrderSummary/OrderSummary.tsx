@@ -5,11 +5,11 @@ import { OrderSummaryProps } from '@burger/types/props/order-summary';
 
 class OrderSummary extends Component<OrderSummaryProps> {
   render() {
-    const ingredientSummary = Object.keys(this.props.ingredients).map((igKey) => {
+    const ingredientSummary = this.props.ingredients.map((ingredient) => {
       return (
-        <li key={igKey}>
-          <span style={{ textTransform: "capitalize" }}>{igKey}</span>:{" "}
-          {this.props.ingredients[igKey]}
+        <li key={ingredient.label}>
+          <span style={{ textTransform: "capitalize" }}>{ingredient.label}</span>:{" "}
+          {ingredient.units}
         </li>
       );
     });

@@ -1,7 +1,8 @@
 import { GenericHandler } from '../callbacks';
+import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
 
 export type OrderSummaryProps = {
-  ingredients: any;
+  ingredients: TIngredients;
   purchaseCancelled: GenericHandler;
   purchaseContinued: GenericHandler;
   price: number;

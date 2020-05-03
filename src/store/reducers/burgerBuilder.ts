@@ -1,53 +1,42 @@
-import {ADD_INGREDIENT, REMOVE_INGREDIENT } from '../actions/actionTypes';
-import { combineReducers } from 'redux';
-import { BurgerBuilderState } from '@burger/types/states/redux/burger-builder.state';
-import { BurgerBuilderAction } from '@burger/types/states/redux/burger-builder.action';
+import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS } from "../actions/actionTypes";
+import { combineReducers } from "redux";
+import { TBurgerBuilderState } from "@burger/interfaces/burderBuilder/burderBuilder";
+import { TBurgerBuilderAction } from '@burger/interfaces/burderBuilder/burgerBuilderAction';
 
-const initialState: BurgerBuilderState = {
-  ingredients: {
-    salad: 0,
-    cheese: 0,
-    meat: 0,
-    bacon: 0,
-  },
-  totalPrice: 4,
+const initialState: TBurgerBuilderState = {
+  ingredients: [],
 };
 
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  meat: 1.3,
-  bacon: 0.7,
-};
-
-export default combineReducers<BurgerBuilderState, BurgerBuilderAction>({
-  ingredients: (state = initialState.ingredients, action: BurgerBuilderAction) => {
+export default combineReducers<TBurgerBuilderState, TBurgerBuilderAction>({
+  ingredients: (
+    state = initialState.ingredients,
+    action: TBurgerBuilderAction
+  ) => {
     switch (action.type) {
       case ADD_INGREDIENT:
-        return {
-          ...state,
-          [action.ingredientName]: state[action.ingredientName] + 1,
-        };
-      case REMOVE_INGREDIENT:
-        if (state[action.ingredientName] <= 0) {
-          return state;
+        let ingredients = [...state];
+        const ingredient = ingredients.find(
+          (i) => i.label === action.ingredientName
+        );
+        if (ingredient) {
+          ingredient.units += 1;
         }
 
-        return {
-          ...state,
-          [action.ingredientName]: state[action.ingredientName] - 1,
-        };
-      default: return state;
-    }
-  },
-  totalPrice: (state = initialState.totalPrice, action: BurgerBuilderAction) => {
-    switch (action.type) {
-      case ADD_INGREDIENT:
-        return state + INGREDIENT_PRICES[action.ingredientName];
+        return [...ingredients];
       case REMOVE_INGREDIENT:
-        return state - INGREDIENT_PRICES[action.ingredientName];
+        let currentIngredients = [...state];
+        const activeIngredient = currentIngredients.find(
+          (i) => i.label === action.ingredientName
+        );
+        if (activeIngredient && activeIngredient.units > 0) {
+          activeIngredient.units -= 1;
+        }
+
+        return [...currentIngredients];
+      case SET_INGREDIENTS:
+        return action.ingredients;
       default:
         return state;
     }
-  }
+  },
 });
