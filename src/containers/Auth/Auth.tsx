@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
-import Input from '@burger/components/UI/Input/Input';
+import React, { Component } from "react";
+import Input from "@burger/components/UI/Input/Input";
 import Button from "@burger/components/UI/Button/Button";
-import { IAuthUIState, TAuthControlKey } from '@burger/interfaces/auth/authUIState';
-import classes from './Auth.module.css';
-import { Validations, FormElement } from '@burger/interfaces/forms/forms';
-import { connect } from 'react-redux';
-import { auth } from '@burger/store/actions';
-import { IAuthUIProps } from '@burger/interfaces/auth/authUIProps';
+import {
+  IAuthUIState,
+  TAuthControlKey,
+} from "@burger/interfaces/auth/authUIState";
+import classes from "./Auth.module.css";
+import { Validations, FormElement } from "@burger/interfaces/forms/forms";
+import { connect } from "react-redux";
+import { auth } from "@burger/store/actions";
+import { IAuthUIProps } from "@burger/interfaces/auth/authUIProps";
+import { TAppState } from "@burger/interfaces/appState";
+import Spinner from "@burger/components/UI/Spinner/Spinner";
 
 class Auth extends Component<IAuthUIProps, IAuthUIState> {
   state: IAuthUIState = {
@@ -127,7 +132,7 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
       return { id, config: formConfig[id] };
     });
 
-    const form = formEls.map((formElement) => (
+    let form = formEls.map((formElement) => (
       <Input
         invalid={!formElement.config.isValid}
         touched={formElement.config.touched}
@@ -139,8 +144,19 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
       />
     ));
 
+    if (this.props.loading) {
+      form = [<Spinner key="spinner" />];
+    }
+
+    let errorMessage = null;
+
+    if (this.props.error) {
+      errorMessage = <p className={classes.Error}>{this.props.error.message}</p>;
+    }
+
     return (
       <div className={classes.Auth}>
+        {errorMessage}
         <form>
           {form}
           <Button
@@ -159,8 +175,14 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  onAuth: (email: string, password: string, isSignUp: boolean) => dispatch(auth(email, password, isSignUp)),
+const mapStateToProps = (state: TAppState) => ({
+  loading: state.auth.loading,
+  error: state.auth.error,
 });
 
-export default connect(null, mapDispatchToProps)(Auth);
+const mapDispatchToProps = (dispatch: any) => ({
+  onAuth: (email: string, password: string, isSignUp: boolean) =>
+    dispatch(auth(email, password, isSignUp)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
