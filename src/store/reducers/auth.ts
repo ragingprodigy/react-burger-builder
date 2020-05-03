@@ -1,16 +1,24 @@
 import { TAuthState } from '@burger/interfaces/auth/auth';
 import { TAuthAction } from '@burger/interfaces/auth/authAction';
 import { combineReducers } from 'redux';
-import { AUTH_FAILED, AUTH_START, AUTH_SUCCESS, AUTH_LOGOUT } from '../actions/actionTypes';
+import { AUTH_FAILED, AUTH_START, AUTH_SUCCESS, AUTH_LOGOUT, SET_AUTH_REDIRECT_PATH } from '../actions/actionTypes';
 
 const initialState: TAuthState = {
   token: null,
   userId: null,
   error: null,
   loading: false,
+  authRedirectPath: '/',
 };
 
 export default combineReducers<TAuthState, TAuthAction>({
+  authRedirectPath: (state = initialState.authRedirectPath, action) => {
+    if (action.type === SET_AUTH_REDIRECT_PATH) {
+      return action.path;
+    }
+    
+    return state;
+  },
   token: (state = initialState.token, action) => {
     switch (action.type) {
       case AUTH_START:

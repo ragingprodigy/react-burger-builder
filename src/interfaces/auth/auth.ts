@@ -3,4 +3,5 @@ export type TAuthState = {
   userId: string | any;
   error: any;
   loading: boolean;
+  authRedirectPath: string;
 };

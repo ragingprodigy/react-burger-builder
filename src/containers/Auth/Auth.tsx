@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import Input from "@burger/components/UI/Input/Input";
 import Button from "@burger/components/UI/Button/Button";
-import { Redirect } from 'react-router-dom';
+import Input from "@burger/components/UI/Input/Input";
+import Spinner from "@burger/components/UI/Spinner/Spinner";
+import { TAppState } from "@burger/interfaces/appState";
+import { IAuthUIProps } from "@burger/interfaces/auth/authUIProps";
 import {
   IAuthUIState,
   TAuthControlKey,
 } from "@burger/interfaces/auth/authUIState";
-import classes from "./Auth.module.css";
-import { Validations, FormElement } from "@burger/interfaces/forms/forms";
+import { FormElement, Validations } from "@burger/interfaces/forms/forms";
+import { auth, setAuthRedirectPath } from "@burger/store/actions";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { auth } from "@burger/store/actions";
-import { IAuthUIProps } from "@burger/interfaces/auth/authUIProps";
-import { TAppState } from "@burger/interfaces/appState";
-import Spinner from "@burger/components/UI/Spinner/Spinner";
+import { Redirect } from "react-router-dom";
+import classes from "./Auth.module.css";
 
 class Auth extends Component<IAuthUIProps, IAuthUIState> {
   state: IAuthUIState = {
@@ -49,6 +49,12 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
     },
     isSignUp: true,
   };
+
+  componentDidMount() {
+    if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
+      this.props.onSetAuthRedirectPath();
+    }
+  }
 
   checkValidity(value: string, rules: FormElement["validation"]) {
     let isValid = true;
@@ -151,12 +157,14 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
 
     let errorMessage = null;
     if (this.props.error) {
-      errorMessage = <p className={classes.Error}>{this.props.error.message}</p>;
+      errorMessage = (
+        <p className={classes.Error}>{this.props.error.message}</p>
+      );
     }
 
     let authRedirect = null;
     if (this.props.isAuthenticated) {
-      authRedirect = <Redirect to='orders' />;
+      authRedirect = <Redirect to={this.props.authRedirectPath} />;
     }
 
     return (
@@ -185,11 +193,14 @@ const mapStateToProps = (state: TAppState) => ({
   loading: state.auth.loading,
   error: state.auth.error,
   isAuthenticated: state.auth.token !== null,
+  buildingBurger: state.burderBuilder.buildingBurger,
+  authRedirectPath: state.auth.authRedirectPath,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   onAuth: (email: string, password: string, isSignUp: boolean) =>
     dispatch(auth(email, password, isSignUp)),
+  onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath("/")),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

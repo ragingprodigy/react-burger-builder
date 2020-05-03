@@ -6,6 +6,7 @@ import { TBurgerBuilderAction } from '@burger/interfaces/burderBuilder/burgerBui
 const initialState: TBurgerBuilderState = {
   ingredients: [],
   error: false,
+  buildingBurger: false,
 };
 
 export default combineReducers<TBurgerBuilderState, TBurgerBuilderAction>({
@@ -13,6 +14,16 @@ export default combineReducers<TBurgerBuilderState, TBurgerBuilderAction>({
     switch (action.type) {
       case SET_INGREDIENTS: return false;
       case FETCH_INGREDIENTS_FAILED: return true;
+      default: return state;
+    }
+  },
+  buildingBurger: (state = initialState.buildingBurger, action) => {
+    switch (action.type) {
+      case ADD_INGREDIENT:
+      case REMOVE_INGREDIENT:
+        return true;
+      case SET_INGREDIENTS:
+        return false;
       default: return state;
     }
   },

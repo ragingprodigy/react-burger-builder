@@ -1,4 +1,4 @@
-import { AUTH_START, AUTH_SUCCESS, AUTH_FAILED, AUTH_LOGOUT } from "./actionTypes";
+import { AUTH_START, AUTH_SUCCESS, AUTH_FAILED, AUTH_LOGOUT, SET_AUTH_REDIRECT_PATH } from "./actionTypes";
 import { TAuthAction } from "@burger/interfaces/auth/authAction";
 import Axios from "axios";
 
@@ -41,3 +41,5 @@ export const auth = (email: string, password: string, isSignUp = true) => {
       });
   };
 };
+
+export const setAuthRedirectPath = (path: string): TAuthAction => ({ type: SET_AUTH_REDIRECT_PATH, path});
