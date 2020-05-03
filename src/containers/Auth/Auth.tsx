@@ -4,8 +4,11 @@ import Button from "@burger/components/UI/Button/Button";
 import { IAuthUIState, TAuthControlKey } from '@burger/interfaces/auth/authUIState';
 import classes from './Auth.module.css';
 import { Validations, FormElement } from '@burger/interfaces/forms/forms';
+import { connect } from 'react-redux';
+import { auth } from '@burger/store/actions';
+import { IAuthUIProps } from '@burger/interfaces/auth/authUIProps';
 
-class Auth extends Component<any, IAuthUIState> {
+class Auth extends Component<IAuthUIProps, IAuthUIState> {
   state: IAuthUIState = {
     formIsValid: false,
     controls: {
@@ -92,6 +95,7 @@ class Auth extends Component<any, IAuthUIState> {
 
   loginHandler = (event: any) => {
     event.preventDefault();
+    this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
   };
 
   render() {
@@ -130,4 +134,8 @@ class Auth extends Component<any, IAuthUIState> {
   }
 }
 
-export default Auth;
+const mapDispatchToProps = (dispatch: any) => ({
+  onAuth: (email: string, password: string) => dispatch(auth(email, password)),
+});
+
+export default connect(null, mapDispatchToProps)(Auth);

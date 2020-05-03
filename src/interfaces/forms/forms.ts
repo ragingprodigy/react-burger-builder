@@ -7,7 +7,7 @@ export type InputConfig = {
 export type FormElement = {
   elementType: string;
   elementConfig?: InputConfig;
-  value: string | number;
+  value: any;
   validation?: {
     [Validations: string]: boolean | number;
   };
