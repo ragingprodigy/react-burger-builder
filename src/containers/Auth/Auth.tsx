@@ -150,17 +150,18 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
     }
 
     let errorMessage = null;
-
     if (this.props.error) {
       errorMessage = <p className={classes.Error}>{this.props.error.message}</p>;
     }
 
+    let authRedirect = null;
     if (this.props.isAuthenticated) {
-      return <Redirect to='orders' />;
+      authRedirect = <Redirect to='orders' />;
     }
 
     return (
       <div className={classes.Auth}>
+        {authRedirect}
         {errorMessage}
         <form>
           {form}
