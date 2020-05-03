@@ -7,7 +7,7 @@ import Spinner from '@burger/components/UI/Spinner/Spinner';
 import Aux from '@burger/hoc/Aux/Aux';
 import withErrorHandler from '@burger/hoc/withErrorHandler/withErrorHandler';
 import { TAppState } from '@burger/interfaces/appState';
-import { addIngredient, initIngredients, removeIngredient } from "@burger/store/actions";
+import { addIngredient, initIngredients, removeIngredient, purchaseInit } from "@burger/store/actions";
 import { BurgerBuilderProps } from '@burger/types/props/burger-builder.props';
 import { BurgerBuilderState as UIState } from '@burger/types/states/ui/burger-builder';
 import React, { Component } from 'react';
@@ -41,6 +41,7 @@ class BurgerBuilder extends Component<BurgerBuilderProps, UIState> {
   purchaseCancelHandler = () => this.setState({ purchasing: false });
 
   purchaseContinueHandler = () => {
+    this.props.onInitPurchase();
     this.props.history.push('checkout');
   };
 
@@ -108,6 +109,7 @@ const mapDispatchToProps = (
     onRemoveIngredient: (ingredientName: string) =>
       dispatch(removeIngredient(ingredientName)),
     initIngredients: () => dispatch(initIngredients()),
+    onInitPurchase: () => dispatch(purchaseInit()),
   };
 };
 

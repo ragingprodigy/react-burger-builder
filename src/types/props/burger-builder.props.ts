@@ -2,6 +2,8 @@ import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
 import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '@burger/store/actions/actionTypes';
 import { RouteComponentProps } from 'react-router-dom';
 import { BurgerBuilderAction } from '../states/redux/burger-builder.action';
+import { TOrderAction } from '@burger/interfaces/order/orderAction';
+import { TBurgerBuilderAction } from '@burger/interfaces/burderBuilder/burgerBuilderAction';
 
 type ExcludeTypeKey<K> = K extends "type" ? never : K;
 
@@ -16,7 +18,8 @@ export type IngredientName = ExtractActionParameters<BurgerBuilderAction, typeof
 export interface BurgerBuilderProps extends RouteComponentProps {
   ingredients: TIngredients;
   error: boolean;
-  onAddIngredient: (name: string) => any;
-  onRemoveIngredient: (name: string) => void;
+  onAddIngredient: (name: string) => TBurgerBuilderAction;
+  onRemoveIngredient: (name: string) => TBurgerBuilderAction;
   initIngredients: () => any;
+  onInitPurchase: () => TOrderAction;
 }

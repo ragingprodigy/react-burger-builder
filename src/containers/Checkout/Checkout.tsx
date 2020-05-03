@@ -15,8 +15,11 @@ class Checkout extends Component<CheckoutProps> {
     let summary = <Redirect to='/' />;
 
     if (this.props.ingredients.length) {
+      const purchasedRedirect = this.props.purchased ? <Redirect to='/' /> : null;
+      
       summary = (
         <div>
+          {purchasedRedirect}
           <CheckoutSummary
             checkoutCancelled={this.checkoutCancelledHandler}
             checkoutContinued={this.checkoutContinuedHandler}
@@ -35,6 +38,6 @@ class Checkout extends Component<CheckoutProps> {
   }
 }
 
-const mapStateToProps = ({burderBuilder}: TAppState) => ({ ingredients: burderBuilder.ingredients });
+const mapStateToProps = ({ burderBuilder, order }: TAppState) => ({ ingredients: burderBuilder.ingredients, purchased: order.purchased });
 
 export default connect(mapStateToProps)(Checkout);
