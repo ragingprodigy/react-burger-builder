@@ -12,7 +12,7 @@ const authSuccess = (idToken: string, userId: string): TAuthAction => ({
 
 const authFailed = (error: any): TAuthAction => ({ type: AUTH_FAILED, error });
 
-const logout = (): TAuthAction => ({ type: AUTH_LOGOUT });
+export const logout = (): TAuthAction => ({ type: AUTH_LOGOUT });
 
 export const checkAuthTimeout = (expires: number) => { 
   return (dispatch: any) => {
