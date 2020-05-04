@@ -1,5 +1,5 @@
-import { TAuthState } from '@burger/interfaces/auth/auth';
-import { TAuthAction } from '@burger/interfaces/auth/authAction';
+import { TAuthState } from '../../interfaces/auth/auth';
+import { TAuthAction } from '../../interfaces/auth/authAction';
 import { combineReducers } from 'redux';
 import { AUTH_FAILED, AUTH_START, AUTH_SUCCESS, AUTH_LOGOUT, SET_AUTH_REDIRECT_PATH } from '../actions/actionTypes';
 

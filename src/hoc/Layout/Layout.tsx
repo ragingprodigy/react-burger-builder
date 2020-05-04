@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Aux from "../Aux/Aux";
 import classes from "./Layout.module.css";
-import Toolbar from "@burger/components/Navigation/Toolbar/Toolbar";
-import SideDrawer from "@burger/components/Navigation/SideDrawer/SideDrawer";
+import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
+import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import { connect } from 'react-redux';
-import { TAppState } from '@burger/interfaces/appState';
-import { ILayoutProps } from '@burger/interfaces/layout/layoutProps';
-import { ILayoutUIState } from '@burger/interfaces/layout/layoutUIState';
+import { TAppState } from '../../interfaces/appState';
+import { ILayoutProps } from '../../interfaces/layout/layoutProps';
+import { ILayoutUIState } from '../../interfaces/layout/layoutUIState';
 
 
 class Layout extends Component<ILayoutProps, ILayoutUIState> {

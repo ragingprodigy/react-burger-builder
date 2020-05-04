@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import classes from './Modal.module.css';
-import Aux from '@burger/hoc/Aux/Aux';
+import Aux from "../../../hoc/Aux/Aux";
 import Backdrop from '../Backdrop/Backdrop';
-import { GenericHandler } from '@burger/types/callbacks';
-import { Children } from '@burger/types/overrides';
+import { GenericHandler } from "../../../types/callbacks";
+import { Children } from "../../../types/overrides";
 
 type ModalProps = { children?: Children; show: boolean; modalClosed: GenericHandler; };
 

@@ -1,6 +1,6 @@
-import axios from "@burger/axios-orders";
-import { TBurgerBuilderAction } from "@burger/interfaces/burderBuilder/burgerBuilderAction";
-import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
+import axios from "../../axios-orders";
+import { TBurgerBuilderAction } from "../../interfaces/burderBuilder/burgerBuilderAction";
+import { TIngredients } from '../../interfaces/ingredients/ingredients';
 import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, FETCH_INGREDIENTS_FAILED } from "./actionTypes";
 
 export const addIngredient = (

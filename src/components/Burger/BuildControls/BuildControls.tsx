@@ -1,5 +1,5 @@
-import { TAppState } from "@burger/interfaces/appState";
-import { IBuildControlsProps } from "@burger/interfaces/buildControls/buildControlsProps";
+import { TAppState } from "../../../interfaces/appState";
+import { IBuildControlsProps } from "../../../interfaces/buildControls/buildControlsProps";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import BuildControl from "./BuildControl/BuildControl";

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Aux from '@burger/hoc/Aux/Aux';
-import Button from "@burger/components/UI/Button/Button";
-import { OrderSummaryProps } from '@burger/types/props/order-summary';
+import Aux from "../../../hoc/Aux/Aux";
+import Button from "../../../components/UI/Button/Button";
+import { OrderSummaryProps } from "../../../types/props/order-summary";
 
 class OrderSummary extends Component<OrderSummaryProps> {
   render() {
-    const ingredientSummary = this.props.ingredients.map((ingredient) => {
+    const ingredientSummary = this.props.ingredients.map((ingredient: any) => {
       return (
         <li key={ingredient.label}>
           <span style={{ textTransform: "capitalize" }}>{ingredient.label}</span>:{" "}

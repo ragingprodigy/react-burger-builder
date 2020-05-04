@@ -1,5 +1,5 @@
 import { AUTH_START, AUTH_SUCCESS, AUTH_FAILED, AUTH_LOGOUT, SET_AUTH_REDIRECT_PATH } from "./actionTypes";
-import { TAuthAction } from "@burger/interfaces/auth/authAction";
+import { TAuthAction } from "../../interfaces/auth/authAction";
 import Axios from "axios";
 
 const authStart = (): TAuthAction => ({ type: AUTH_START });

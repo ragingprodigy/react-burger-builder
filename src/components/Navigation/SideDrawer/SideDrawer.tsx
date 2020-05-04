@@ -1,7 +1,7 @@
-import Logo from "@burger/components/Logo/Logo";
-import Backdrop from "@burger/components/UI/Backdrop/Backdrop";
-import Aux from "@burger/hoc/Aux/Aux";
-import { ISideDrawerProps } from "@burger/interfaces/sideDrawer/sideDrawerProps";
+import Logo from "../../../components/Logo/Logo";
+import Backdrop from "../../../components/UI/Backdrop/Backdrop";
+import Aux from "../../../hoc/Aux/Aux";
+import { ISideDrawerProps } from "../../../interfaces/sideDrawer/sideDrawerProps";
 import React from "react";
 import NavigationItems from "../NavigationItems/NavigationItems";
 import classes from "./SideDrawer.module.css";

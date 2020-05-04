@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './Burger.module.css';
 import BurgerIngredientComponent from './BurgerIngredient/BurgerIngredient';
-import { BurgerProps } from '@burger/types/props/burger';
-import { PassiveIngredient } from '@burger/types/enums/burger';
-import { IIngredient } from '@burger/interfaces/ingredients/ingredient';
+import { BurgerProps } from "../../types/props/burger";
+import { PassiveIngredient } from "../../types/enums/burger";
+import { IIngredient } from "../../interfaces/ingredients/ingredient";
 
 const burger = (props: BurgerProps) => {
   const ingredients = props.ingredients;
@@ -13,7 +13,7 @@ const burger = (props: BurgerProps) => {
       return [...Array(ingredient.units)]
         .map((_, i) => <BurgerIngredientComponent key={`${ingredient.label}-${i}`} type={ingredient.label} />)
     })
-    .reduce((arr, el) => {
+    .reduce((arr: [], el: any) => {
       return arr.concat(el);
     }, []);
   

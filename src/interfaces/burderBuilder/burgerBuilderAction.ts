@@ -3,7 +3,7 @@ import {
   REMOVE_INGREDIENT,
   SET_INGREDIENTS,
   FETCH_INGREDIENTS_FAILED,
-} from "@burger/store/actions/actionTypes";
+} from "../../store/actions/actionTypes";
 import { TIngredients } from "../ingredients/ingredients";
 
 export type TBurgerBuilderAction =

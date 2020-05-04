@@ -1,4 +1,4 @@
-import { FormElement } from '@burger/interfaces/forms/forms';
+import { FormElement } from '../../../interfaces/forms/forms';
 
 export type ContactDataState = {
   formIsValid: boolean;

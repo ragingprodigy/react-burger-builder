@@ -1,11 +1,11 @@
-import axios from "@burger/axios-orders";
-import Order from "@burger/components/Order/Order";
-import Spinner from "@burger/components/UI/Spinner/Spinner";
-import withErrorHandler from "@burger/hoc/withErrorHandler/withErrorHandler";
-import { TAppState } from "@burger/interfaces/appState";
-import { IOrderProps } from "@burger/interfaces/order/orderProps";
-import { fetchOrders, initIngredients } from "@burger/store/actions";
-import { Order as OrderModel } from "@burger/types/models/order";
+import axios from "../../axios-orders";
+import Order from "../../components/Order/Order";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import { TAppState } from "../../interfaces/appState";
+import { IOrderProps } from "../../interfaces/order/orderProps";
+import { fetchOrders, initIngredients } from "../../store/actions";
+import { Order as OrderModel } from "../../types/models/order";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 

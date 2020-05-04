@@ -1,5 +1,5 @@
-import Logo from "@burger/components/Logo/Logo";
-import { IToolbarProps } from "@burger/interfaces/toolbar/toolbarProps";
+import Logo from "../../../components/Logo/Logo";
+import { IToolbarProps } from "../../../interfaces/toolbar/toolbarProps";
 import React from "react";
 import NavigationItems from "../NavigationItems/NavigationItems";
 import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";

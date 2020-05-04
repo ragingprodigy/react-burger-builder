@@ -1,7 +1,7 @@
 import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, FETCH_INGREDIENTS_FAILED } from "../actions/actionTypes";
 import { combineReducers } from "redux";
-import { TBurgerBuilderState } from "@burger/interfaces/burderBuilder/burderBuilder";
-import { TBurgerBuilderAction } from '@burger/interfaces/burderBuilder/burgerBuilderAction';
+import { TBurgerBuilderState } from "../../interfaces/burderBuilder/burderBuilder";
+import { TBurgerBuilderAction } from '../../interfaces/burderBuilder/burgerBuilderAction';
 
 const initialState: TBurgerBuilderState = {
   ingredients: [],

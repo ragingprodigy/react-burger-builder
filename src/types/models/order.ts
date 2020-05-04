@@ -1,4 +1,4 @@
-import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
+import { TIngredients } from '../../interfaces/ingredients/ingredients';
 
 export interface Order {
   id: string;

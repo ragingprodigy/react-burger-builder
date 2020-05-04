@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./Input.module.css";
-import { InputProps } from "@burger/types/props/input";
+import { InputProps } from "../../../types/props/input";
 
 const input = (props: InputProps) => {
   let inputElement = null;

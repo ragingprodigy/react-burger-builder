@@ -1,5 +1,5 @@
 import { GenericHandler } from '../callbacks';
-import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
+import { TIngredients } from '../../interfaces/ingredients/ingredients';
 
 export type CheckoutSummaryProps = {
   ingredients: TIngredients;

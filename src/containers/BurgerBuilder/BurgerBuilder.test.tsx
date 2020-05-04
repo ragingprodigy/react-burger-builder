@@ -1,9 +1,9 @@
-import { IBurgerBuilderProps } from '@burger/interfaces/burderBuilder/burgerBuilderProps';
+import { IBurgerBuilderProps } from '../../interfaces/burderBuilder/burgerBuilderProps';
 import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import { BurgerBuilder } from './BurgerBuilder';
-import {BuildControls} from '@burger/components/Burger/BuildControls/BuildControls';
+import {BuildControls} from '../../components/Burger/BuildControls/BuildControls';
 
 configure({ adapter: new Adapter() });
 

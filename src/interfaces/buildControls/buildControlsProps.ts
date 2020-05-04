@@ -1,5 +1,5 @@
 import { TIngredients } from '../ingredients/ingredients';
-import { GenericHandler } from '@burger/types/callbacks';
+import { GenericHandler } from '../../types/callbacks';
 
 export interface IBuildControlsProps {
   ingredients: TIngredients;

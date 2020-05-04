@@ -7,10 +7,10 @@ import {
   FETCH_ORDERS_FAILED,
   FETCH_ORDERS_START,
 } from "./actionTypes";
-import axios from "@burger/axios-orders";
-import { TOrderAction } from "@burger/interfaces/order/orderAction";
-import { Order } from '@burger/types/models/order';
-import { TIngredients } from '@burger/interfaces/ingredients/ingredients';
+import axios from "../../axios-orders";
+import { TOrderAction } from "../../interfaces/order/orderAction";
+import { Order } from '../../types/models/order';
+import { TIngredients } from '../../interfaces/ingredients/ingredients';
 
 const purchaseBurgerSuccess = (id: string, orderData: any): TOrderAction => {
   return {

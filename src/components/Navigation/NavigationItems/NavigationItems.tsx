@@ -1,4 +1,4 @@
-import { INavItemsProps } from "@burger/interfaces/navigationItems/navigationsItemsProps";
+import { INavItemsProps } from "../../../interfaces/navigationItems/navigationsItemsProps";
 import React, { Fragment } from "react";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import classes from "./NavigationItems.module.css";

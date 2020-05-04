@@ -1,4 +1,4 @@
-import { GenericHandler } from '@burger/types/callbacks';
+import { GenericHandler } from '../../types/callbacks';
 
 export interface ILogoutProps {
   onLogout: GenericHandler;

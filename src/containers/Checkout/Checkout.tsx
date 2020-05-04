@@ -1,6 +1,6 @@
-import CheckoutSummary from '@burger/components/Order/CheckoutSummary/CheckoutSummary';
-import { TAppState } from '@burger/interfaces/appState';
-import { CheckoutProps } from '@burger/types/props/checkout.props';
+import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import { TAppState } from '../../interfaces/appState';
+import { CheckoutProps } from '../../types/props/checkout.props';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';

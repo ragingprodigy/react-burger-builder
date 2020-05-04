@@ -1,4 +1,4 @@
-import { FormElement, Validations } from '@burger/interfaces/forms/forms';
+import { FormElement, Validations } from '../interfaces/forms/forms';
 
 export const checkValidity = (value: string, rules: FormElement["validation"]) : boolean => {
     let isValid = true;

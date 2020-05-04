@@ -1,4 +1,4 @@
-import { INavItemsProps } from "@burger/interfaces/navigationItems/navigationsItemsProps";
+import { INavItemsProps } from "../../../interfaces/navigationItems/navigationsItemsProps";
 import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import React from "react";

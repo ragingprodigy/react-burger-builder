@@ -1,5 +1,5 @@
-import { TAppState } from "@burger/interfaces/appState";
-import { OrderProps } from "@burger/types/props/order";
+import { TAppState } from "../../interfaces/appState";
+import { OrderProps } from "../../types/props/order";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classes from "./Order.module.css";

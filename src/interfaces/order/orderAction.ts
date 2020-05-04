@@ -6,7 +6,7 @@ import {
   PURCHASE_BURGER_START,
   PURCHASE_BURGER_SUCCESS,
   PURCHASE_INIT,
-} from "@burger/store/actions/actionTypes";
+} from "../../store/actions/actionTypes";
 
 export type TOrderAction =
   | {

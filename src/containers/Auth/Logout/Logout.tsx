@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { logout } from '@burger/store/actions';
+import { logout } from "../../../store/actions";
 import { connect } from 'react-redux';
-import { ILogoutProps } from '@burger/interfaces/logout/logoutProps';
+import { ILogoutProps } from "../../../interfaces/logout/logoutProps";
 import { Redirect } from 'react-router-dom';
 
 class Logout extends Component<ILogoutProps> {
