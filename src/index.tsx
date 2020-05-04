@@ -26,7 +26,7 @@ const composeEnhancers =
 const store = createStore(
   combineReducers<TAppState>({
     order: orderReducer,
-    burderBuilder: burgerBuilderReducer,
+    burgerBuilder: burgerBuilderReducer,
     auth: authReducer,
   }),
   composeEnhancers(applyMiddleware(thunk))

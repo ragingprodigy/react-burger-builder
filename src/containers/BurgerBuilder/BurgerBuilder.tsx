@@ -112,7 +112,7 @@ class BurgerBuilder extends Component<IBurgerBuilderProps, UIState> {
 }
 
 const mapStateToProps = (state: TAppState) => {
-  const { ingredients, error } = state.burderBuilder;
+  const { ingredients, error } = state.burgerBuilder;
   return {
     ingredients,
     error,

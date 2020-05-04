@@ -38,6 +38,6 @@ class Checkout extends Component<CheckoutProps> {
   }
 }
 
-const mapStateToProps = ({ burderBuilder, order }: TAppState) => ({ ingredients: burderBuilder.ingredients, purchased: order.purchased });
+const mapStateToProps = ({ burgerBuilder: burderBuilder, order }: TAppState) => ({ ingredients: burderBuilder.ingredients, purchased: order.purchased });
 
 export default connect(mapStateToProps)(Checkout);

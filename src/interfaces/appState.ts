@@ -3,7 +3,7 @@ import { TOrderState } from './order/order';
 import { TAuthState } from './auth/auth';
 
 export type TAppState = {
-  burderBuilder: TBurgerBuilderState;
+  burgerBuilder: TBurgerBuilderState;
   order: TOrderState;
   auth: TAuthState,
 };

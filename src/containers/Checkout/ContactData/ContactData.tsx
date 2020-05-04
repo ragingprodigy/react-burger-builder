@@ -191,7 +191,7 @@ export class ContactData extends Component<IContactDataProps, ContactDataState> 
   }
 }
 
-const mapStateToProps = ({ burderBuilder, order, auth }: TAppState) => ({
+const mapStateToProps = ({ burgerBuilder: burderBuilder, order, auth }: TAppState) => ({
   ingredients: burderBuilder.ingredients,
   loading: order.loading,
   token: auth.token,

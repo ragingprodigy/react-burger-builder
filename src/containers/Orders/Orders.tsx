@@ -40,7 +40,7 @@ export class Orders extends Component<IOrderProps> {
 
 const mapStateToProps = (state: TAppState) => ({
   orders: state.order.orders,
-  ingredients: state.burderBuilder.ingredients,
+  ingredients: state.burgerBuilder.ingredients,
   loading: state.order.loading,
   error: state.order.error,
   token: state.auth.token,

@@ -34,7 +34,7 @@ class BuildControls extends Component<IBuildControlsProps> {
 }
 
 const mapStateToProps = (state: TAppState) => {
-  const { ingredients } = state.burderBuilder;
+  const { ingredients } = state.burgerBuilder;
   return {
     ingredients,
   };

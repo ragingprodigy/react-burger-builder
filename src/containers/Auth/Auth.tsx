@@ -144,7 +144,7 @@ const mapStateToProps = (state: TAppState) => ({
   loading: state.auth.loading,
   error: state.auth.error,
   isAuthenticated: state.auth.token !== null,
-  buildingBurger: state.burderBuilder.buildingBurger,
+  buildingBurger: state.burgerBuilder.buildingBurger,
   authRedirectPath: state.auth.authRedirectPath,
 });
 

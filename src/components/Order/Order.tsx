@@ -40,7 +40,7 @@ class Order extends Component<OrderProps> {
   }
 }
 
-const mapStateToProps = ({ burderBuilder }: TAppState) => ({
+const mapStateToProps = ({ burgerBuilder: burderBuilder }: TAppState) => ({
   coreIngs: burderBuilder.ingredients,
 });
 
