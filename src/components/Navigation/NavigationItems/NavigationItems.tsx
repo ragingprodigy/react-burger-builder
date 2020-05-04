@@ -1,5 +1,5 @@
 import { INavItemsProps } from "@burger/interfaces/navigationItems/navigationsItemsProps";
-import React from "react";
+import React, { Fragment } from "react";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import classes from "./NavigationItems.module.css";
 
@@ -9,10 +9,10 @@ const navigationItems = (props: INavItemsProps) => (
       Burger Builder
     </NavigationItem>
     {props.isAuthenticated ? (
-      <NavigationItem link="orders">Orders</NavigationItem>
-    ) : null}
-    {props.isAuthenticated ? (
-      <NavigationItem link="logout">Logout</NavigationItem>
+      <Fragment>
+        <NavigationItem link="orders">Orders</NavigationItem>
+        <NavigationItem link="logout">Logout</NavigationItem>
+      </Fragment>
     ) : (
       <NavigationItem link="auth">Authenticate</NavigationItem>
     )}

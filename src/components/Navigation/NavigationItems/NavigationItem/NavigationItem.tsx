@@ -3,15 +3,21 @@ import classes from './NavigationItem.module.css';
 import { Children } from '@burger/types/overrides';
 import { NavLink } from 'react-router-dom';
 
-type NIProps = {
+export interface INavigationItemProps {
   link: string;
   children: Children;
   exact?: boolean;
 };
 
-const navigationItem = (props: NIProps) => (
+const navigationItem = (props: INavigationItemProps) => (
   <li className={classes.NavigationItem}>
-    <NavLink to={props.link} exact={props.exact} activeClassName={classes.active}> {props.children} </NavLink>
+    <NavLink
+      to={props.link}
+      exact={props.exact}
+      activeClassName={classes.active}
+    >
+      {props.children}
+    </NavLink>
   </li>
 );
 
