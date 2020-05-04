@@ -7,8 +7,8 @@ import Layout from "./hoc/Layout/Layout";
 import { IAppProps } from "./interfaces/appProps";
 import { TAppState } from "./interfaces/appState";
 import { checkAuthState } from "./store/actions";
+import Auth from "./containers/Auth/Auth";
 
-const Auth = lazy(() => import("./containers/Auth/Auth"));
 const Checkout = lazy(() => import("./containers/Checkout/Checkout"));
 const Orders = lazy(() => import("./containers/Orders/Orders"));
 

@@ -7,6 +7,7 @@ import { TAuthAction } from '../auth/authAction';
 export interface IBurgerBuilderProps extends RouteComponentProps {
   ingredients: TIngredients;
   isAuthenticated: boolean;
+  buildingBurger: boolean;
   error: boolean;
   onAddIngredient: (name: string) => TBurgerBuilderAction;
   onRemoveIngredient: (name: string) => TBurgerBuilderAction;

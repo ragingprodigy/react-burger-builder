@@ -25,7 +25,9 @@ class BurgerBuilder extends Component<IBurgerBuilderProps, UIState> {
   };
 
   componentDidMount() {
-    this.props.initIngredients();
+    if (!this.props.ingredients.length || this.props.buildingBurger) {
+      this.props.initIngredients();
+    }
   }
 
   get purchaseable(): boolean {
@@ -111,16 +113,17 @@ class BurgerBuilder extends Component<IBurgerBuilderProps, UIState> {
   }
 }
 
-const mapStateToProps = (state: TAppState) => {
+const mapStateToProps = (state: TAppState): Partial<IBurgerBuilderProps> => {
   const { ingredients, error } = state.burgerBuilder;
   return {
     ingredients,
     error,
     isAuthenticated: state.auth.token !== null,
+    buildingBurger: state.burgerBuilder.buildingBurger,
   };
 };
 
-const mapDispatchToProps = (dispatch: (...args: any) => void) => {
+const mapDispatchToProps = (dispatch: (...args: any) => any): Partial<IBurgerBuilderProps> => {
   return {
     onAddIngredient: (ingredientName: string) =>
       dispatch(addIngredient(ingredientName)),
@@ -128,7 +131,7 @@ const mapDispatchToProps = (dispatch: (...args: any) => void) => {
       dispatch(removeIngredient(ingredientName)),
     initIngredients: () => dispatch(initIngredients()),
     onInitPurchase: () => dispatch(purchaseInit()),
-    onSetAuthRedirectPath: (path: string) => dispatch(setAuthRedirectPath(path)),
+    onSetAuthRedirectPath: (path: string) => dispatch(setAuthRedirectPath(path))
   };
 };
 
