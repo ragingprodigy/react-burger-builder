@@ -55,7 +55,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://omonayajo.com"><img src="https://avatars2.githubusercontent.com/u/1816083?v=4" width="100px;" alt=""/><br /><sub><b>Omonayajo Oladapo Adeola</b></sub></a><br /><a href="https://github.com/ragingprodigy/react-burger-builder/commits?author=ragingprodigy" title="Documentation">📖</a> <a href="https://github.com/ragingprodigy/react-burger-builder/commits?author=ragingprodigy" title="Code">💻</a></td>
+    <td align="center"><a href="http://omonayajo.com"><img src="https://avatars2.githubusercontent.com/u/1816083?v=4" width="100px;" alt=""/><br /><sub><b>Omonayajo Oladapo Adeola</b></sub></a><br /><a href="https://github.com/ragingprodigy/react-burger-builder/commits?author=ragingprodigy" title="Documentation">📖</a> <a href="https://github.com/ragingprodigy/react-burger-builder/commits?author=ragingprodigy" title="Code">💻</a> <a href="#projectManagement-ragingprodigy" title="Project Management">📆</a></td>
   </tr>
 </table>
 
