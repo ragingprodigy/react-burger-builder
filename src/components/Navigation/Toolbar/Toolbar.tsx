@@ -1,9 +1,9 @@
-import Logo from "../../../components/Logo/Logo";
-import { IToolbarProps } from "../../../interfaces/toolbar/toolbarProps";
-import React from "react";
-import NavigationItems from "../NavigationItems/NavigationItems";
-import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
-import classes from "./Toolbar.module.css";
+import Logo from '../../../components/Logo/Logo';
+import { IToolbarProps } from '../../../interfaces/toolbar/toolbarProps';
+import React from 'react';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
+import classes from './Toolbar.module.css';
 
 const toolbar = (props: IToolbarProps) => (
   <header className={classes.Toolbar}>

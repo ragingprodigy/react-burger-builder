@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import classes from './BurgerIngredient.module.css';
-import { PassiveIngredient, Ingredient } from "../../../interfaces/models/burger";
+import {
+  PassiveIngredient,
+  Ingredient,
+} from '../../../interfaces/models/burger';
 import { IBurgerIngredientProps } from '../../../interfaces/burgerIngredient/burgerIngredientProps';
 
-export default class BurgerIngredient extends Component<IBurgerIngredientProps> {
-
+export default class BurgerIngredient extends Component<
+  IBurgerIngredientProps
+> {
   render() {
     let ingredient = null;
 
@@ -38,4 +42,4 @@ export default class BurgerIngredient extends Component<IBurgerIngredientProps> 
 
     return ingredient;
   }
-};
+}

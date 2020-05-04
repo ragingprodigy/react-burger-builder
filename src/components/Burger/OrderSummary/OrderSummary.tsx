@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Aux from "../../../hoc/Aux/Aux";
-import Button from "../../../components/UI/Button/Button";
+import Aux from '../../../hoc/Aux/Aux';
+import Button from '../../../components/UI/Button/Button';
 import { IOrderSummaryProps } from '../../../interfaces/orderSummary/orderSummaryProps';
 
 class OrderSummary extends Component<IOrderSummaryProps> {
@@ -8,8 +8,10 @@ class OrderSummary extends Component<IOrderSummaryProps> {
     const ingredientSummary = this.props.ingredients.map((ingredient: any) => {
       return (
         <li key={ingredient.label}>
-          <span style={{ textTransform: "capitalize" }}>{ingredient.label}</span>:{" "}
-          {ingredient.units}
+          <span style={{ textTransform: 'capitalize' }}>
+            {ingredient.label}
+          </span>
+          : {ingredient.units}
         </li>
       );
     });

@@ -1,11 +1,11 @@
 export enum PassiveIngredient {
-  breadBottom = "bread-bottom",
-  breadTop = "bread-top",
+  breadBottom = 'bread-bottom',
+  breadTop = 'bread-top',
 }
 
 export enum Ingredient {
-  meat = "meat",
-  cheese = "cheese",
-  salad = "salad",
-  bacon = "bacon",
+  meat = 'meat',
+  cheese = 'cheese',
+  salad = 'salad',
+  bacon = 'bacon',
 }

@@ -1,5 +1,5 @@
-import React from "react";
-import s from "./Input.module.css";
+import React from 'react';
+import s from './Input.module.css';
 import { IInputProps } from '../../../interfaces/forms/input/inputProps';
 
 const input = (props: IInputProps) => {
@@ -11,34 +11,34 @@ const input = (props: IInputProps) => {
   }
 
   switch (props.elementType) {
-    case "input":
+    case 'input':
       inputElement = (
         <input
           onChange={props.changed}
-          className={inputClasses.join(" ")}
+          className={inputClasses.join(' ')}
           {...props.elementConfig}
           value={props.value}
         />
       );
       break;
-    case "textarea":
+    case 'textarea':
       inputElement = (
         <textarea
           onChange={props.changed}
-          className={inputClasses.join(" ")}
+          className={inputClasses.join(' ')}
           {...props.elementConfig}
           value={props.value}
         />
       );
       break;
-    case "select":
+    case 'select':
       inputElement = (
         <select
-          className={inputClasses.join(" ")}
+          className={inputClasses.join(' ')}
           value={props.value}
           onChange={props.changed}
         >
-          {props.elementConfig!.options?.map((option) => (
+          {props.elementConfig?.options?.map((option) => (
             <option key={option.value} value={option.value}>
               {option.displayValue}
             </option>
@@ -50,7 +50,7 @@ const input = (props: IInputProps) => {
       inputElement = (
         <input
           onChange={props.changed}
-          className={inputClasses.join(" ")}
+          className={inputClasses.join(' ')}
           {...props.elementConfig}
           value={props.value}
         />

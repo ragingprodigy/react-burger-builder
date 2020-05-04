@@ -1,19 +1,25 @@
-import axios from "../../axios-orders";
-import BuildControls from "../../components/Burger/BuildControls/BuildControls";
-import Burger from "../../components/Burger/Burger";
-import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
-import Modal from "../../components/UI/Modal/Modal";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import Aux from "../../hoc/Aux/Aux";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import { TAppState } from "../../interfaces/appState";
-import { TAuthAction } from "../../interfaces/auth/authAction";
-import { TBurgerBuilderAction } from "../../interfaces/burderBuilder/burgerBuilderAction";
-import { IBurgerBuilderProps } from "../../interfaces/burderBuilder/burgerBuilderProps";
-import { TOrderAction } from "../../interfaces/orders/orderAction";
-import { addIngredient, initIngredients, purchaseInit, removeIngredient, setAuthRedirectPath } from "../../store/actions";
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import axios from '../../axios-orders';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Burger from '../../components/Burger/Burger';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import Modal from '../../components/UI/Modal/Modal';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import Aux from '../../hoc/Aux/Aux';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import { TAppState } from '../../interfaces/appState';
+import { TAuthAction } from '../../interfaces/auth/authAction';
+import { TBurgerBuilderAction } from '../../interfaces/burderBuilder/burgerBuilderAction';
+import { IBurgerBuilderProps } from '../../interfaces/burderBuilder/burgerBuilderProps';
+import { TOrderAction } from '../../interfaces/orders/orderAction';
+import {
+  addIngredient,
+  initIngredients,
+  purchaseInit,
+  removeIngredient,
+  setAuthRedirectPath,
+} from '../../store/actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 interface UIState {
   purchasing: boolean;
@@ -62,15 +68,15 @@ export class BurgerBuilder extends Component<IBurgerBuilderProps, UIState> {
     if (this.props.isAuthenticated) {
       this.setState({ purchasing: true });
     } else {
-      this.props.onSetAuthRedirectPath("checkout");
-      this.props.history.push("auth");
+      this.props.onSetAuthRedirectPath('checkout');
+      this.props.history.push('auth');
     }
   };
   purchaseCancelHandler = () => this.setState({ purchasing: false });
 
   purchaseContinueHandler = () => {
     this.props.onInitPurchase();
-    this.props.history.push("checkout");
+    this.props.history.push('checkout');
   };
 
   render() {

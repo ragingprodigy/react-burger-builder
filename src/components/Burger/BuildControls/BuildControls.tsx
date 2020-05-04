@@ -1,9 +1,9 @@
-import { TAppState } from "../../../interfaces/appState";
-import { IBuildControlsProps } from "../../../interfaces/buildControls/buildControlsProps";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import BuildControl from "./BuildControl/BuildControl";
-import classes from "./BuildControls.module.css";
+import { TAppState } from '../../../interfaces/appState';
+import { IBuildControlsProps } from '../../../interfaces/buildControls/buildControlsProps';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import BuildControl from './BuildControl/BuildControl';
+import classes from './BuildControls.module.css';
 
 export class BuildControls extends Component<IBuildControlsProps> {
   render() {
@@ -26,7 +26,7 @@ export class BuildControls extends Component<IBuildControlsProps> {
           disabled={!this.props.purchaseable}
           className={classes.OrderButton}
         >
-          {this.props.isAuthenticated ? "ORDER NOW" : "SIGN UP TO ORDER"}
+          {this.props.isAuthenticated ? 'ORDER NOW' : 'SIGN UP TO ORDER'}
         </button>
       </div>
     );

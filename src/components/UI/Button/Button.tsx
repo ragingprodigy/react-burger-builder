@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import classes from './Button.module.css';
-import { GenericHandler } from "../../../interfaces/callbacks";
+import { GenericHandler } from '../../../interfaces/callbacks';
 
 type BtnProps = {
   clicked: GenericHandler;
@@ -13,9 +13,11 @@ const button = (props: BtnProps) => (
   <button
     type="button"
     disabled={props.disabled}
-    className={[ classes.Button, classes[props.buttonType] ].join(' ')}
+    className={[classes.Button, classes[props.buttonType]].join(' ')}
     onClick={props.clicked}
-  >{props.children}</button>
+  >
+    {props.children}
+  </button>
 );
 
 export default button;

@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-import Aux from "../Aux/Aux";
-import classes from "./Layout.module.css";
-import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
-import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import React, { Component } from 'react';
+import Aux from '../Aux/Aux';
+import classes from './Layout.module.css';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import { connect } from 'react-redux';
 import { TAppState } from '../../interfaces/appState';
 import { ILayoutProps } from '../../interfaces/layout/layoutProps';
 import { ILayoutUIState } from '../../interfaces/layout/layoutUIState';
-
 
 class Layout extends Component<ILayoutProps, ILayoutUIState> {
   state: ILayoutUIState = {
@@ -17,7 +16,7 @@ class Layout extends Component<ILayoutProps, ILayoutUIState> {
   sideDrawerClosedHandler = () => this.setState({ showSideDrawer: false });
 
   sideDrawerToggleHandler = () =>
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       showSideDrawer: !prevState.showSideDrawer,
     }));
 

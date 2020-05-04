@@ -6,4 +6,4 @@ export interface IOrderSummaryProps {
   purchaseCancelled: GenericHandler;
   purchaseContinued: GenericHandler;
   price: number;
-};
+}

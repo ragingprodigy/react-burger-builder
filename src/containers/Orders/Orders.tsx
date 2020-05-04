@@ -1,12 +1,12 @@
-import axios from "../../axios-orders";
-import Order from "../../components/Order/Order";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import { TAppState } from "../../interfaces/appState";
-import { IOrdersProps } from "../../interfaces/orders/ordersProps";
-import { fetchOrders, initIngredients } from "../../store/actions";
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import axios from '../../axios-orders';
+import Order from '../../components/Order/Order';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import { TAppState } from '../../interfaces/appState';
+import { IOrdersProps } from '../../interfaces/orders/ordersProps';
+import { fetchOrders, initIngredients } from '../../store/actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { IOrder } from '../../interfaces/models/order';
 
 export class Orders extends Component<IOrdersProps> {
@@ -24,7 +24,7 @@ export class Orders extends Component<IOrdersProps> {
       return <p>Please Sign IN</p>;
     }
 
-    let orders = this.props.ingredients.length ? (
+    const orders = this.props.ingredients.length ? (
       <div>
         {this.props.orders.map((order: IOrder) => (
           <Order key={order.id} ingredients={order.ingredients} />

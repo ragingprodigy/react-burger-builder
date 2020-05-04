@@ -4,4 +4,4 @@ export type TBurgerBuilderState = {
   ingredients: TIngredients;
   error: boolean;
   buildingBurger: boolean;
-}
+};

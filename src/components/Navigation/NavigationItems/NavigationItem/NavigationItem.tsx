@@ -6,7 +6,7 @@ export interface INavigationItemProps {
   link: string;
   children?: ReactNode;
   exact?: boolean;
-};
+}
 
 const navigationItem = (props: INavigationItemProps) => (
   <li className={classes.NavigationItem}>

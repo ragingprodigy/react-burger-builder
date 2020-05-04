@@ -1,7 +1,7 @@
-import { INavItemsProps } from "../../../interfaces/navigationItems/navigationsItemsProps";
-import React, { Fragment } from "react";
-import NavigationItem from "./NavigationItem/NavigationItem";
-import classes from "./NavigationItems.module.css";
+import { INavItemsProps } from '../../../interfaces/navigationItems/navigationsItemsProps';
+import React, { Fragment } from 'react';
+import NavigationItem from './NavigationItem/NavigationItem';
+import classes from './NavigationItems.module.css';
 
 const navigationItems = (props: INavItemsProps) => (
   <ul className={classes.NavigationItems}>

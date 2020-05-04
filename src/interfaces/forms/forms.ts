@@ -16,9 +16,9 @@ export type FormElement = {
 };
 
 export enum Validations {
-  isRequired = "isRequired",
-  minLength = "minLength",
-  maxLength = "maxLength",
-  isNumeric = "isNumeric",
-  isEmail ='isEmail',
+  isRequired = 'isRequired',
+  minLength = 'minLength',
+  maxLength = 'maxLength',
+  isNumeric = 'isNumeric',
+  isEmail = 'isEmail',
 }

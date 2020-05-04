@@ -1,6 +1,11 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, FETCH_INGREDIENTS_FAILED } from "../actions/actionTypes";
-import { combineReducers } from "redux";
-import { TBurgerBuilderState } from "../../interfaces/burderBuilder/burderBuilder";
+import {
+  ADD_INGREDIENT,
+  REMOVE_INGREDIENT,
+  SET_INGREDIENTS,
+  FETCH_INGREDIENTS_FAILED,
+} from '../actions/actionTypes';
+import { combineReducers } from 'redux';
+import { TBurgerBuilderState } from '../../interfaces/burderBuilder/burderBuilder';
 import { TBurgerBuilderAction } from '../../interfaces/burderBuilder/burgerBuilderAction';
 
 const initialState: TBurgerBuilderState = {
@@ -12,9 +17,12 @@ const initialState: TBurgerBuilderState = {
 export default combineReducers<TBurgerBuilderState, TBurgerBuilderAction>({
   error: (state = initialState.error, action: TBurgerBuilderAction) => {
     switch (action.type) {
-      case SET_INGREDIENTS: return false;
-      case FETCH_INGREDIENTS_FAILED: return true;
-      default: return state;
+      case SET_INGREDIENTS:
+        return false;
+      case FETCH_INGREDIENTS_FAILED:
+        return true;
+      default:
+        return state;
     }
   },
   buildingBurger: (state = initialState.buildingBurger, action) => {
@@ -24,7 +32,8 @@ export default combineReducers<TBurgerBuilderState, TBurgerBuilderAction>({
         return true;
       case SET_INGREDIENTS:
         return false;
-      default: return state;
+      default:
+        return state;
     }
   },
   ingredients: (
@@ -33,7 +42,7 @@ export default combineReducers<TBurgerBuilderState, TBurgerBuilderAction>({
   ) => {
     switch (action.type) {
       case ADD_INGREDIENT:
-        let ingredients = [...state];
+        const ingredients = [...state];
         const ingredient = ingredients.find(
           (i) => i.label === action.ingredientName
         );
@@ -43,7 +52,7 @@ export default combineReducers<TBurgerBuilderState, TBurgerBuilderAction>({
 
         return [...ingredients];
       case REMOVE_INGREDIENT:
-        let currentIngredients = [...state];
+        const currentIngredients = [...state];
         const activeIngredient = currentIngredients.find(
           (i) => i.label === action.ingredientName
         );

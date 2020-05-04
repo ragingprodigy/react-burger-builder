@@ -5,5 +5,5 @@ import { TAuthState } from './auth/auth';
 export type TAppState = {
   burgerBuilder: TBurgerBuilderState;
   order: TOrderState;
-  auth: TAuthState,
+  auth: TAuthState;
 };

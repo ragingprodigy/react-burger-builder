@@ -7,16 +7,18 @@ import ContactData from './ContactData/ContactData';
 import { ICheckoutProps } from '../../interfaces/checkout/checkoutProps';
 
 class Checkout extends Component<ICheckoutProps> {
-
   checkoutCancelledHandler = () => this.props.history.goBack();
-  checkoutContinuedHandler = () => this.props.history.replace('/checkout/contact-data');
+  checkoutContinuedHandler = () =>
+    this.props.history.replace('/checkout/contact-data');
 
   render() {
-    let summary = <Redirect to='/' />;
+    let summary = <Redirect to="/" />;
 
     if (this.props.ingredients.length) {
-      const purchasedRedirect = this.props.purchased ? <Redirect to='/' /> : null;
-      
+      const purchasedRedirect = this.props.purchased ? (
+        <Redirect to="/" />
+      ) : null;
+
       summary = (
         <div>
           {purchasedRedirect}
@@ -27,7 +29,7 @@ class Checkout extends Component<ICheckoutProps> {
           />
 
           <Route
-            path={this.props.match.path + "/contact-data"}
+            path={this.props.match.path + '/contact-data'}
             component={ContactData}
           />
         </div>
@@ -38,6 +40,12 @@ class Checkout extends Component<ICheckoutProps> {
   }
 }
 
-const mapStateToProps = ({ burgerBuilder: burderBuilder, order }: TAppState) => ({ ingredients: burderBuilder.ingredients, purchased: order.purchased });
+const mapStateToProps = ({
+  burgerBuilder: burderBuilder,
+  order,
+}: TAppState) => ({
+  ingredients: burderBuilder.ingredients,
+  purchased: order.purchased,
+});
 
 export default connect(mapStateToProps)(Checkout);

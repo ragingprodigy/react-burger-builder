@@ -1,6 +1,13 @@
-import { AUTH_START, AUTH_SUCCESS, AUTH_FAILED, AUTH_LOGOUT, SET_AUTH_REDIRECT_PATH } from "./actionTypes";
-import { TAuthAction } from "../../interfaces/auth/authAction";
-import Axios from "axios";
+/* eslint-disable no-undef */
+import {
+  AUTH_START,
+  AUTH_SUCCESS,
+  AUTH_FAILED,
+  AUTH_LOGOUT,
+  SET_AUTH_REDIRECT_PATH,
+} from './actionTypes';
+import { TAuthAction } from '../../interfaces/auth/authAction';
+import Axios from 'axios';
 
 const authStart = (): TAuthAction => ({ type: AUTH_START });
 
@@ -17,27 +24,27 @@ export const logout = (): TAuthAction => {
   return { type: AUTH_LOGOUT };
 };
 
-const checkAuthTimeout = (expires: number) => { 
-  return (dispatch: any) => {
+const checkAuthTimeout = (expires: number) => {
+  return (dispatch: any): any => {
     setTimeout(() => dispatch(logout()), expires * 1000);
   };
 };
 
 export const auth = (email: string, password: string, isSignUp = true) => {
-  return (dispatch: any) => {
+  return (dispatch: any): any => {
     dispatch(authStart());
     const payload = { email, password, returnSecureToken: true };
-    const API_KEY = `AIzaSyBR4qbTs4NunvTEj-AQZPei_4vgqVpYW58`;
+    const API_KEY = 'AIzaSyBR4qbTs4NunvTEj-AQZPei_4vgqVpYW58';
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:${
-      isSignUp ? "signUp" : "signInWithPassword"
+      isSignUp ? 'signUp' : 'signInWithPassword'
     }?key=${API_KEY}`;
 
     Axios.post(url, payload)
       .then((r) => {
         const expiryDate = Date.now() + +r.data.expiresIn * 1000;
         localStorage.setItem('token', r.data.idToken);
-        localStorage.setItem("userId", r.data.localId);
-        localStorage.setItem("expiryDate", expiryDate.toString());
+        localStorage.setItem('userId', r.data.localId);
+        localStorage.setItem('expiryDate', expiryDate.toString());
         dispatch(authSuccess(r.data.idToken, r.data.localId));
         dispatch(checkAuthTimeout(+r.data.expiresIn));
       })
@@ -48,13 +55,13 @@ export const auth = (email: string, password: string, isSignUp = true) => {
 };
 
 export const checkAuthState = () => {
-  return (dispatch: any) => {
+  return (dispatch: any): any => {
     const token = localStorage.getItem('token');
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem('userId');
     if (!token || !userId) {
       dispatch(logout());
     } else {
-      const expiryTime = localStorage.getItem("expiryDate");
+      const expiryTime = localStorage.getItem('expiryDate');
       if (null === expiryTime) {
         dispatch(logout());
       } else {
@@ -70,4 +77,7 @@ export const checkAuthState = () => {
   };
 };
 
-export const setAuthRedirectPath = (path: string): TAuthAction => ({ type: SET_AUTH_REDIRECT_PATH, path});
+export const setAuthRedirectPath = (path: string): TAuthAction => ({
+  type: SET_AUTH_REDIRECT_PATH,
+  path,
+});

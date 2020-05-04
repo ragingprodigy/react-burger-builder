@@ -15,5 +15,5 @@ export interface IBurgerBuilderProps {
   onSetAuthRedirectPath: (path: string) => TAuthAction;
   history: {
     push: (...args: any) => any;
-  },
+  };
 }

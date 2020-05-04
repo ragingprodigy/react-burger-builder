@@ -1,16 +1,16 @@
-import React, { Component, lazy, Suspense } from "react";
-import { connect } from "react-redux";
-import { Redirect, Route, Switch } from "react-router-dom";
-import Logout from "./containers/Auth/Logout/Logout";
-import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
-import Layout from "./hoc/Layout/Layout";
-import { IAppProps } from "./interfaces/appProps";
-import { TAppState } from "./interfaces/appState";
-import { checkAuthState } from "./store/actions";
-import Auth from "./containers/Auth/Auth";
+import React, { Component, lazy, Suspense } from 'react';
+import { connect } from 'react-redux';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import Logout from './containers/Auth/Logout/Logout';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+import Layout from './hoc/Layout/Layout';
+import { IAppProps } from './interfaces/appProps';
+import { TAppState } from './interfaces/appState';
+import { checkAuthState } from './store/actions';
+import Auth from './containers/Auth/Auth';
 
-const Checkout = lazy(() => import("./containers/Checkout/Checkout"));
-const Orders = lazy(() => import("./containers/Orders/Orders"));
+const Checkout = lazy(() => import('./containers/Checkout/Checkout'));
+const Orders = lazy(() => import('./containers/Orders/Orders'));
 
 class App extends Component<IAppProps> {
   componentDidMount() {

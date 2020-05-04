@@ -1,10 +1,10 @@
-import Logo from "../../../components/Logo/Logo";
-import Backdrop from "../../../components/UI/Backdrop/Backdrop";
-import Aux from "../../../hoc/Aux/Aux";
-import { ISideDrawerProps } from "../../../interfaces/sideDrawer/sideDrawerProps";
-import React from "react";
-import NavigationItems from "../NavigationItems/NavigationItems";
-import classes from "./SideDrawer.module.css";
+import Logo from '../../../components/Logo/Logo';
+import Backdrop from '../../../components/UI/Backdrop/Backdrop';
+import Aux from '../../../hoc/Aux/Aux';
+import { ISideDrawerProps } from '../../../interfaces/sideDrawer/sideDrawerProps';
+import React from 'react';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import classes from './SideDrawer.module.css';
 
 const sideDrawer = (props: ISideDrawerProps) => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
@@ -16,7 +16,7 @@ const sideDrawer = (props: ISideDrawerProps) => {
     <Aux>
       <Backdrop clicked={props.closed} show={props.open} />
 
-      <div className={attachedClasses.join(" ")} onClick={props.closed}>
+      <div className={attachedClasses.join(' ')} onClick={props.closed}>
         <div className={classes.Logo}>
           <Logo />
         </div>

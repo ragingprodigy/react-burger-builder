@@ -1,6 +1,6 @@
-import { TOrderState } from "../../interfaces/orders/order";
-import { TOrderAction } from "../../interfaces/orders/orderAction";
-import { combineReducers } from "redux";
+import { TOrderState } from '../../interfaces/orders/order';
+import { TOrderAction } from '../../interfaces/orders/orderAction';
+import { combineReducers } from 'redux';
 import {
   FETCH_ORDERS_FAILED,
   FETCH_ORDERS_START,
@@ -9,7 +9,7 @@ import {
   PURCHASE_BURGER_START,
   PURCHASE_BURGER_SUCCESS,
   PURCHASE_INIT,
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
 const initialState: TOrderState = {
   loading: false,
@@ -22,8 +22,7 @@ export default combineReducers<TOrderState, TOrderAction>({
   orders: (state = initialState.orders, action: TOrderAction) => {
     switch (action.type) {
       case PURCHASE_BURGER_SUCCESS:
-        const newOrder = { ...action.orderData, id: action.orderId };
-        return [...state, newOrder];
+        return [...state, { ...action.orderData, id: action.orderId }];
       case FETCH_ORDERS_SUCCESS:
         return action.orders;
       default:

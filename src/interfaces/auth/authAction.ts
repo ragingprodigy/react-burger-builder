@@ -5,7 +5,7 @@ import {
   AUTH_LOGOUT,
   SET_AUTH_REDIRECT_PATH,
   AUTH_CHECK_STATE,
-} from "../../store/actions/actionTypes";
+} from '../../store/actions/actionTypes';
 
 export type TAuthAction =
   | { type: typeof AUTH_START }

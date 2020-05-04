@@ -1,28 +1,31 @@
-import Button from "../../components/UI/Button/Button";
-import Input from "../../components/UI/Input/Input";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import { TAppState } from "../../interfaces/appState";
-import { IAuthUIProps } from "../../interfaces/auth/authUIProps";
-import { IAuthUIState, TAuthControlKey } from "../../interfaces/auth/authUIState";
-import { Validations } from "../../interfaces/forms/forms";
+import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import { TAppState } from '../../interfaces/appState';
+import { IAuthUIProps } from '../../interfaces/auth/authUIProps';
+import {
+  IAuthUIState,
+  TAuthControlKey,
+} from '../../interfaces/auth/authUIState';
+import { Validations } from '../../interfaces/forms/forms';
 import { checkValidity } from '../../shared/utility';
-import { auth, setAuthRedirectPath } from "../../store/actions";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import classes from "./Auth.module.css";
+import { auth, setAuthRedirectPath } from '../../store/actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import classes from './Auth.module.css';
 
 class Auth extends Component<IAuthUIProps, IAuthUIState> {
   state: IAuthUIState = {
     formIsValid: false,
     controls: {
       email: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "email",
-          placeholder: "Your Email Address",
+          type: 'email',
+          placeholder: 'Your Email Address',
         },
         validation: {
           [Validations.isRequired]: true,
@@ -31,12 +34,12 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
         touched: false,
       },
       password: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "password",
-          placeholder: "Your Password",
+          type: 'password',
+          placeholder: 'Your Password',
         },
         validation: {
           [Validations.isRequired]: true,
@@ -49,7 +52,7 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
   };
 
   componentDidMount() {
-    if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
+    if (!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
       this.props.onSetAuthRedirectPath();
     }
   }
@@ -125,15 +128,12 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
         {errorMessage}
         <form>
           {form}
-          <Button
-            buttonType="Success"
-            clicked={this.loginHandler}
-          >
-            {this.state.isSignUp ? "SIGN UP" : "SIGN IN"}
+          <Button buttonType="Success" clicked={this.loginHandler}>
+            {this.state.isSignUp ? 'SIGN UP' : 'SIGN IN'}
           </Button>
         </form>
         <Button buttonType="Danger" clicked={this.switchAuthModeHandler}>
-          SWITCH TO {this.state.isSignUp ? "SIGN IN" : "SIGN UP"}
+          SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}
         </Button>
       </div>
     );
@@ -151,7 +151,7 @@ const mapStateToProps = (state: TAppState) => ({
 const mapDispatchToProps = (dispatch: any) => ({
   onAuth: (email: string, password: string, isSignUp: boolean) =>
     dispatch(auth(email, password, isSignUp)),
-  onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath("/")),
+  onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

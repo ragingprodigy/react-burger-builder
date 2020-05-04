@@ -1,5 +1,5 @@
 export interface IInputProps {
-  elementType: "input" | "textarea" | string;
+  elementType: 'input' | 'textarea' | string;
   label?: string;
   value?: any;
   elementConfig?: {
@@ -11,4 +11,4 @@ export interface IInputProps {
   changed: (v: any) => void;
   invalid?: boolean;
   touched?: boolean;
-};
+}

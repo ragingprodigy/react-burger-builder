@@ -1,7 +1,13 @@
 import { TAuthState } from '../../interfaces/auth/auth';
 import { TAuthAction } from '../../interfaces/auth/authAction';
 import { combineReducers } from 'redux';
-import { AUTH_FAILED, AUTH_START, AUTH_SUCCESS, AUTH_LOGOUT, SET_AUTH_REDIRECT_PATH } from '../actions/actionTypes';
+import {
+  AUTH_FAILED,
+  AUTH_START,
+  AUTH_SUCCESS,
+  AUTH_LOGOUT,
+  SET_AUTH_REDIRECT_PATH,
+} from '../actions/actionTypes';
 
 const initialState: TAuthState = {
   token: null,
@@ -16,25 +22,31 @@ export default combineReducers<TAuthState, TAuthAction>({
     if (action.type === SET_AUTH_REDIRECT_PATH) {
       return action.path;
     }
-    
+
     return state;
   },
   token: (state = initialState.token, action) => {
     switch (action.type) {
       case AUTH_START:
       case AUTH_LOGOUT:
-      case AUTH_FAILED: return null;
-      case AUTH_SUCCESS: return action.idToken;
-      default: return state;
+      case AUTH_FAILED:
+        return null;
+      case AUTH_SUCCESS:
+        return action.idToken;
+      default:
+        return state;
     }
   },
   userId: (state = initialState.userId, action) => {
     switch (action.type) {
       case AUTH_START:
       case AUTH_LOGOUT:
-      case AUTH_FAILED: return null;
-      case AUTH_SUCCESS: return action.userId;
-      default: return state;
+      case AUTH_FAILED:
+        return null;
+      case AUTH_SUCCESS:
+        return action.userId;
+      default:
+        return state;
     }
   },
   error: (state = initialState.error, action) => {

@@ -5,4 +5,4 @@ export interface ICheckoutSummaryProps {
   ingredients: TIngredients;
   checkoutCancelled: GenericHandler;
   checkoutContinued: GenericHandler;
-};
+}

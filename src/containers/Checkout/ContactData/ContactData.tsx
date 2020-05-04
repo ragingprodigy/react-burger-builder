@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "../../../axios-orders";
-import Button from "../../../components/UI/Button/Button";
-import Input from "../../../components/UI/Input/Input";
-import Spinner from "../../../components/UI/Spinner/Spinner";
-import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
-import { TAppState } from "../../../interfaces/appState";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from '../../../axios-orders';
+import Button from '../../../components/UI/Button/Button';
+import Input from '../../../components/UI/Input/Input';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import { TAppState } from '../../../interfaces/appState';
 import {
   ElementNames,
   IContactDataUIState,
-} from "../../../interfaces/contactData/contactDataUIState";
-import { IContactDataProps } from "../../../interfaces/contactData/contatcDataProps";
-import { Validations } from "../../../interfaces/forms/forms";
-import { checkValidity } from "../../../shared/utility";
-import { purchaseBurger } from "../../../store/actions";
-import s from "./ContactData.module.css";
+} from '../../../interfaces/contactData/contactDataUIState';
+import { IContactDataProps } from '../../../interfaces/contactData/contatcDataProps';
+import { Validations } from '../../../interfaces/forms/forms';
+import { checkValidity } from '../../../shared/utility';
+import { purchaseBurger } from '../../../store/actions';
+import s from './ContactData.module.css';
 
 export class ContactData extends Component<
   IContactDataProps,
@@ -24,12 +24,12 @@ export class ContactData extends Component<
     formIsValid: false,
     orderForm: {
       name: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Your Name",
+          type: 'text',
+          placeholder: 'Your Name',
         },
         validation: {
           isRequired: true,
@@ -37,12 +37,12 @@ export class ContactData extends Component<
         touched: false,
       },
       email: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "email",
-          placeholder: "Your Email Address",
+          type: 'email',
+          placeholder: 'Your Email Address',
         },
         validation: {
           isRequired: true,
@@ -50,12 +50,12 @@ export class ContactData extends Component<
         touched: false,
       },
       street: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Street",
+          type: 'text',
+          placeholder: 'Street',
         },
         validation: {
           isRequired: true,
@@ -63,12 +63,12 @@ export class ContactData extends Component<
         touched: false,
       },
       postCode: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Your Zip Code",
+          type: 'text',
+          placeholder: 'Your Zip Code',
         },
         validation: {
           [Validations.isRequired]: true,
@@ -79,12 +79,12 @@ export class ContactData extends Component<
         touched: false,
       },
       country: {
-        value: "",
+        value: '',
         isValid: false,
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Country",
+          type: 'text',
+          placeholder: 'Country',
         },
         validation: {
           isRequired: true,
@@ -92,14 +92,14 @@ export class ContactData extends Component<
         touched: false,
       },
       deliveryMethod: {
-        value: "standard",
+        value: 'standard',
         isValid: true,
-        elementType: "select",
+        elementType: 'select',
         elementConfig: {
           options: [
-            { value: "fastest", displayValue: "Same Day" },
-            { value: "nextday", displayValue: "Next Day" },
-            { value: "standard", displayValue: "Standard Delivery" },
+            { value: 'fastest', displayValue: 'Same Day' },
+            { value: 'nextday', displayValue: 'Next Day' },
+            { value: 'standard', displayValue: 'Standard Delivery' },
           ],
         },
         validation: {
@@ -118,7 +118,7 @@ export class ContactData extends Component<
       ...this.state.orderForm,
     };
 
-    for (let formElementIdentifier in orderForm) {
+    for (const formElementIdentifier in orderForm) {
       orderData[formElementIdentifier] = orderForm[formElementIdentifier].value;
     }
 
@@ -137,12 +137,12 @@ export class ContactData extends Component<
     const orderForm: any = {
       ...this.state.orderForm,
       [inputIdentifier]: {
-        ...this.state.orderForm![inputIdentifier],
+        ...this.state.orderForm?.[inputIdentifier],
         value: event.target.value.trim(),
         touched: true,
         isValid: checkValidity(
           event.target.value.trim(),
-          this.state.orderForm![inputIdentifier].validation
+          this.state.orderForm?.[inputIdentifier].validation
         ),
       },
     };
@@ -156,7 +156,11 @@ export class ContactData extends Component<
   };
 
   render() {
-    const formConfig = this.state.orderForm!;
+    if (!this.state.orderForm) {
+      return null;
+    }
+
+    const formConfig = this.state.orderForm;
     const formEls = Object.keys(formConfig).map((key) => {
       return { id: key as ElementNames, config: formConfig[key] };
     });
