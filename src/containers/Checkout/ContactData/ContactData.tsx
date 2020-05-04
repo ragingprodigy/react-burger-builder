@@ -1,20 +1,26 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import axios from "../../../axios-orders";
 import Button from "../../../components/UI/Button/Button";
 import Input from "../../../components/UI/Input/Input";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import { TAppState } from "../../../interfaces/appState";
-import { IContactDataProps } from '../../../interfaces/contactData/contatcDataProps';
+import {
+  ElementNames,
+  IContactDataUIState,
+} from "../../../interfaces/contactData/contactDataUIState";
+import { IContactDataProps } from "../../../interfaces/contactData/contatcDataProps";
 import { Validations } from "../../../interfaces/forms/forms";
-import { checkValidity } from '../../../shared/utility';
+import { checkValidity } from "../../../shared/utility";
 import { purchaseBurger } from "../../../store/actions";
-import { ContactDataState, ElementNames } from "../../../types/states/ui/contact-data";
-import React, { Component } from "react";
-import { connect } from "react-redux";
 import s from "./ContactData.module.css";
 
-export class ContactData extends Component<IContactDataProps, ContactDataState> {
-  state: ContactDataState = {
+export class ContactData extends Component<
+  IContactDataProps,
+  IContactDataUIState
+> {
+  state: IContactDataUIState = {
     formIsValid: false,
     orderForm: {
       name: {
@@ -104,7 +110,7 @@ export class ContactData extends Component<IContactDataProps, ContactDataState> 
     },
   };
 
-  orderHandler = (event:any) => {
+  orderHandler = (event: any) => {
     event.preventDefault();
 
     const orderData: { [ElementNames: string]: any } = {};
@@ -191,7 +197,11 @@ export class ContactData extends Component<IContactDataProps, ContactDataState> 
   }
 }
 
-const mapStateToProps = ({ burgerBuilder: burderBuilder, order, auth }: TAppState) => ({
+const mapStateToProps = ({
+  burgerBuilder: burderBuilder,
+  order,
+  auth,
+}: TAppState) => ({
   ingredients: burderBuilder.ingredients,
   loading: order.loading,
   token: auth.token,
@@ -199,7 +209,8 @@ const mapStateToProps = ({ burgerBuilder: burderBuilder, order, auth }: TAppStat
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  onOrderBurger: (orderData: any, token: string) => dispatch(purchaseBurger(orderData, token)),
+  onOrderBurger: (orderData: any, token: string) =>
+    dispatch(purchaseBurger(orderData, token)),
 });
 
 export default connect(

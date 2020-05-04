@@ -5,9 +5,9 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import { TAppState } from "../../interfaces/appState";
 import { IOrderProps } from "../../interfaces/order/orderProps";
 import { fetchOrders, initIngredients } from "../../store/actions";
-import { Order as OrderModel } from "../../types/models/order";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { IOrder } from '../../interfaces/models/order';
 
 export class Orders extends Component<IOrderProps> {
   componentDidMount() {
@@ -26,7 +26,7 @@ export class Orders extends Component<IOrderProps> {
 
     let orders = this.props.ingredients.length ? (
       <div>
-        {this.props.orders.map((order: OrderModel) => (
+        {this.props.orders.map((order: IOrder) => (
           <Order key={order.id} ingredients={order.ingredients} />
         ))}
       </div>

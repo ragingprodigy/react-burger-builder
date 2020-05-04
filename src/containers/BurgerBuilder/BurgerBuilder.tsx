@@ -12,9 +12,12 @@ import { TBurgerBuilderAction } from "../../interfaces/burderBuilder/burgerBuild
 import { IBurgerBuilderProps } from "../../interfaces/burderBuilder/burgerBuilderProps";
 import { TOrderAction } from "../../interfaces/order/orderAction";
 import { addIngredient, initIngredients, purchaseInit, removeIngredient, setAuthRedirectPath } from "../../store/actions";
-import { BurgerBuilderState as UIState } from "../../types/states/ui/burger-builder";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
+interface UIState {
+  purchasing: boolean;
+}
 
 export class BurgerBuilder extends Component<IBurgerBuilderProps, UIState> {
   state = {

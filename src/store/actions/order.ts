@@ -9,8 +9,8 @@ import {
 } from "./actionTypes";
 import axios from "../../axios-orders";
 import { TOrderAction } from "../../interfaces/order/orderAction";
-import { Order } from '../../types/models/order';
 import { TIngredients } from '../../interfaces/ingredients/ingredients';
+import { IOrder } from '../../interfaces/models/order';
 
 const purchaseBurgerSuccess = (id: string, orderData: any): TOrderAction => {
   return {
@@ -69,7 +69,7 @@ export const fetchOrders = (token: string, userId: string) => {
             id: key,
             ingredients: (() =>
               Object.values(r.data[key].ingredients) as TIngredients)(),
-          } as Order;
+          } as IOrder;
         });
 
         dispatch(fetchOrdersSuccess(orders));

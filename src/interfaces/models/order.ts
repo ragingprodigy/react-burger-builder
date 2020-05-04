@@ -1,6 +1,6 @@
-import { TIngredients } from '../../interfaces/ingredients/ingredients';
+import { TIngredients } from '../ingredients/ingredients';
 
-export interface Order {
+export interface IOrder {
   id: string;
   orderData: {
     id: string;

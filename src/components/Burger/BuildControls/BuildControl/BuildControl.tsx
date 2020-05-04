@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './BuildControl.module.css';
-import { BuildControlProps } from '../../../../types/props/build-control';
+import { IBuildControlProps } from "../../../../interfaces/buildControl/buildControlProps";
 
-const buildControl = (props: BuildControlProps) => (
+const buildControl = (props: IBuildControlProps) => (
   <div className={classes.BuildControl}>
     <div className={classes.Label}>{props.label}</div>
     <button className={classes.Less} onClick={props.removed} disabled={props.disabled}>

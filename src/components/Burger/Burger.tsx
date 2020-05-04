@@ -13,7 +13,7 @@ const burger = (props: BurgerProps) => {
       return [...Array(ingredient.units)]
         .map((_, i) => <BurgerIngredientComponent key={`${ingredient.label}-${i}`} type={ingredient.label} />)
     })
-    .reduce((arr: [], el: any) => {
+    .reduce((arr, el) => {
       return arr.concat(el);
     }, []);
   

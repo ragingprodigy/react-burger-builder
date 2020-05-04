@@ -1,4 +1,4 @@
-import { GenericHandler } from 'App/types/callbacks';
+import { GenericHandler } from '../types/callbacks';
 
 export interface IAppProps {
   checkAuthState: GenericHandler;
