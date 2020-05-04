@@ -3,11 +3,9 @@ import Input from "@burger/components/UI/Input/Input";
 import Spinner from "@burger/components/UI/Spinner/Spinner";
 import { TAppState } from "@burger/interfaces/appState";
 import { IAuthUIProps } from "@burger/interfaces/auth/authUIProps";
-import {
-  IAuthUIState,
-  TAuthControlKey,
-} from "@burger/interfaces/auth/authUIState";
-import { FormElement, Validations } from "@burger/interfaces/forms/forms";
+import { IAuthUIState, TAuthControlKey } from "@burger/interfaces/auth/authUIState";
+import { Validations } from "@burger/interfaces/forms/forms";
+import { checkValidity } from '@burger/shared/utility';
 import { auth, setAuthRedirectPath } from "@burger/store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -47,45 +45,13 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
         touched: false,
       },
     },
-    isSignUp: true,
+    isSignUp: false,
   };
 
   componentDidMount() {
     if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
       this.props.onSetAuthRedirectPath();
     }
-  }
-
-  checkValidity(value: string, rules: FormElement["validation"]) {
-    let isValid = true;
-
-    if (!rules) {
-      return isValid;
-    }
-
-    if (rules[Validations.isRequired]) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    if (rules[Validations.minLength]) {
-      isValid = value.trim().length >= rules![Validations.minLength] && isValid;
-    }
-
-    if (rules[Validations.maxLength]) {
-      isValid = value.trim().length <= rules[Validations.maxLength] && isValid;
-    }
-
-    if (rules[Validations.isNumeric]) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value.trim()) && isValid;
-    }
-
-    if (rules[Validations.isEmail]) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value.trim()) && isValid;
-    }
-
-    return isValid;
   }
 
   inputChangedHandler = (event: any, controlName: TAuthControlKey) => {
@@ -95,26 +61,12 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
         ...this.state.controls[controlName],
         value: event.target.value.trim(),
         touched: true,
-        isValid: this.checkValidity(
+        isValid: checkValidity(
           event.target.value.trim(),
           this.state.controls[controlName].validation
         ),
       },
     };
-
-    const updatedFormElement = { ...updatedForm[controlName] };
-    updatedFormElement.value = event.target.value.trim();
-    updatedFormElement.touched = true;
-    updatedFormElement.isValid = this.checkValidity(
-      updatedFormElement.value,
-      updatedFormElement.validation
-    );
-    updatedForm[controlName] = updatedFormElement;
-
-    // let formIsValid = true;
-    // for (const identifier in updatedForm) {
-    //   formIsValid = updatedForm[identifier].isValid && formIsValid;
-    // }
 
     this.setState({ controls: updatedForm });
   };
@@ -174,7 +126,6 @@ class Auth extends Component<IAuthUIProps, IAuthUIState> {
         <form>
           {form}
           <Button
-            // disabled={!this.state.formIsValid}
             buttonType="Success"
             clicked={this.loginHandler}
           >

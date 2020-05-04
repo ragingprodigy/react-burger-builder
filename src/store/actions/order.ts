@@ -63,7 +63,6 @@ export const fetchOrders = (token: string, userId: string) => {
     axios
       .get(`orders.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`)
       .then((r) => {
-        console.log("Orders: ", r.data);
         const orders = Object.keys(r.data).map((key) => {
           return {
             ...r.data[key],

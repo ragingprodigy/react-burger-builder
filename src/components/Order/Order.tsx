@@ -23,16 +23,7 @@ class Order extends Component<OrderProps> {
   render() {
     const ingredientsOut = this.props.ingredients.map((ig) => {
       return (
-        <span
-          style={{
-            textTransform: "capitalize",
-            display: "inline-block",
-            margin: "0 8px",
-            border: "1px solid #CCC",
-            padding: "5px",
-          }}
-          key={ig.label}
-        >
+        <span className={classes.Label} key={ig.label}>
           {ig.label} ({ig.units})
         </span>
       );

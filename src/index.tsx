@@ -1,41 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import App from "./App";
 import "./index.css";
+import { TAppState } from "./interfaces/appState";
 import * as serviceWorker from "./serviceWorker";
+import authReducer from "./store/reducers/auth";
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 import orderReducer from "./store/reducers/order";
-import authReducer from './store/reducers/auth';
-import { TAppState } from './interfaces/appState';
 
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
   }
 }
-const composeEnhancers = composeWithDevTools({
-  trace: true,
-  traceLimit: 25,
-});
 
-// const composeEnhancers =
-//   (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-//       trace: true,
-//       traceLimit: 25,
-//     })) ||
-//   compose;
+const composeEnhancers =
+  (process.env.NODE_ENV === "development"
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : null) || compose;
 
 const store = createStore(
   combineReducers<TAppState>({
     order: orderReducer,
     burderBuilder: burgerBuilderReducer,
-    auth: authReducer
+    auth: authReducer,
   }),
   composeEnhancers(applyMiddleware(thunk))
 );

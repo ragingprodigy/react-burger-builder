@@ -73,7 +73,6 @@ export default combineReducers<TOrderState, TOrderAction>({
       case FETCH_ORDERS_SUCCESS:
         return false;
       case FETCH_ORDERS_FAILED:
-        console.log(action);
         return true;
       default:
         return state;

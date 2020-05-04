@@ -5,7 +5,8 @@ import Spinner from "@burger/components/UI/Spinner/Spinner";
 import withErrorHandler from "@burger/hoc/withErrorHandler/withErrorHandler";
 import { TAppState } from "@burger/interfaces/appState";
 import { IContactDataProps } from '@burger/interfaces/contactData/contatcDataProps';
-import { FormElement, Validations } from "@burger/interfaces/forms/forms";
+import { Validations } from "@burger/interfaces/forms/forms";
+import { checkValidity } from '@burger/shared/utility';
 import { purchaseBurger } from "@burger/store/actions";
 import { ContactDataState, ElementNames } from "@burger/types/states/ui/contact-data";
 import React, { Component } from "react";
@@ -126,58 +127,26 @@ export class ContactData extends Component<IContactDataProps, ContactDataState> 
     this.props.onOrderBurger(order, this.props.token);
   };
 
-  checkValidity(value: string, rules: FormElement["validation"]) {
-    let isValid = true;
-
-    if (!rules) {
-      return isValid;
-    }
-
-    if (rules[Validations.isRequired]) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    if (rules[Validations.minLength]) {
-      isValid = value.trim().length >= rules[Validations.minLength] && isValid;
-    }
-
-    if (rules[Validations.maxLength]) {
-      isValid = value.trim().length <= rules[Validations.maxLength] && isValid;
-    }
-
-    if (rules[Validations.isNumeric]) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value.trim()) && isValid;
-    }
-
-    if (rules[Validations.isEmail]) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value.trim()) && isValid;
-    }
-
-    return isValid;
-  }
-
   inputChangedHandler = (event: any, inputIdentifier: ElementNames) => {
-    const updatedOrderForm: { [ElementNames: string]: any } = {
+    const orderForm: any = {
       ...this.state.orderForm,
+      [inputIdentifier]: {
+        ...this.state.orderForm![inputIdentifier],
+        value: event.target.value.trim(),
+        touched: true,
+        isValid: checkValidity(
+          event.target.value.trim(),
+          this.state.orderForm![inputIdentifier].validation
+        ),
+      },
     };
 
-    const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
-    updatedFormElement.value = event.target.value.trim();
-    updatedFormElement.touched = true;
-    updatedFormElement.isValid = this.checkValidity(
-      updatedFormElement.value,
-      updatedFormElement.validation
-    );
-    updatedOrderForm[inputIdentifier] = updatedFormElement;
-
     let formIsValid = true;
-    for (const identifier in updatedOrderForm) {
-      formIsValid = updatedOrderForm[identifier].isValid && formIsValid;
+    for (const identifier in orderForm) {
+      formIsValid = orderForm[identifier].isValid && formIsValid;
     }
 
-    this.setState({ orderForm: updatedOrderForm, formIsValid });
+    this.setState({ orderForm, formIsValid });
   };
 
   render() {
