@@ -1,12 +1,12 @@
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import { TAppState } from '../../interfaces/appState';
-import { CheckoutProps } from '../../types/props/checkout.props';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import ContactData from './ContactData/ContactData';
+import { ICheckoutProps } from '../../interfaces/checkout/checkoutProps';
 
-class Checkout extends Component<CheckoutProps> {
+class Checkout extends Component<ICheckoutProps> {
 
   checkoutCancelledHandler = () => this.props.history.goBack();
   checkoutContinuedHandler = () => this.props.history.replace('/checkout/contact-data');

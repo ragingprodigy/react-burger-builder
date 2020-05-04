@@ -1,10 +1,10 @@
 import { TAppState } from "../../interfaces/appState";
-import { OrderProps } from "../../types/props/order";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classes from "./Order.module.css";
+import { IOrderProps } from '../../interfaces/order/orderProps';
 
-class Order extends Component<OrderProps> {
+class Order extends Component<IOrderProps> {
   get orderAmount(): number {
     let totalAmount = 4;
 

@@ -1,6 +1,5 @@
 import { TIngredients } from '../ingredients/ingredients';
 
-export interface IOrderProps {
+export interface IBurgerProps {
   ingredients: TIngredients;
-  coreIngs: TIngredients;
 }

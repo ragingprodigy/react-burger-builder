@@ -8,7 +8,7 @@ import {
   FETCH_ORDERS_START,
 } from "./actionTypes";
 import axios from "../../axios-orders";
-import { TOrderAction } from "../../interfaces/order/orderAction";
+import { TOrderAction } from "../../interfaces/orders/orderAction";
 import { TIngredients } from '../../interfaces/ingredients/ingredients';
 import { IOrder } from '../../interfaces/models/order';
 

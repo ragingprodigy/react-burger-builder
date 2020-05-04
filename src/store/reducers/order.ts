@@ -1,5 +1,5 @@
-import { TOrderState } from "../../interfaces/order/order";
-import { TOrderAction } from "../../interfaces/order/orderAction";
+import { TOrderState } from "../../interfaces/orders/order";
+import { TOrderAction } from "../../interfaces/orders/orderAction";
 import { combineReducers } from "redux";
 import {
   FETCH_ORDERS_FAILED,

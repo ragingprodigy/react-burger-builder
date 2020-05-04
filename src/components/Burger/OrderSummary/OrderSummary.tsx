@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Aux from "../../../hoc/Aux/Aux";
 import Button from "../../../components/UI/Button/Button";
-import { OrderSummaryProps } from "../../../types/props/order-summary";
+import { IOrderSummaryProps } from '../../../interfaces/orderSummary/orderSummaryProps';
 
-class OrderSummary extends Component<OrderSummaryProps> {
+class OrderSummary extends Component<IOrderSummaryProps> {
   render() {
     const ingredientSummary = this.props.ingredients.map((ingredient: any) => {
       return (

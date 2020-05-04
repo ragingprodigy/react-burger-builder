@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import classes from './BurgerIngredient.module.css';
-import { BurgerIngredientProps } from "../../../types/props/burger";
-import { PassiveIngredient, Ingredient } from "../../../types/enums/burger";
+import { PassiveIngredient, Ingredient } from "../../../interfaces/models/burger";
+import { IBurgerIngredientProps } from '../../../interfaces/burgerIngredient/burgerIngredientProps';
 
-export default class BurgerIngredient extends Component<BurgerIngredientProps> {
+export default class BurgerIngredient extends Component<IBurgerIngredientProps> {
 
   render() {
     let ingredient = null;

@@ -1,6 +1,6 @@
 import { TIngredients } from '../ingredients/ingredients';
 import { TBurgerBuilderAction } from './burgerBuilderAction';
-import { TOrderAction } from '../order/orderAction';
+import { TOrderAction } from '../orders/orderAction';
 import { TAuthAction } from '../auth/authAction';
 
 export interface IBurgerBuilderProps {

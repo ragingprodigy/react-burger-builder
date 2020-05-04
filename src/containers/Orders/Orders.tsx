@@ -3,13 +3,13 @@ import Order from "../../components/Order/Order";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import { TAppState } from "../../interfaces/appState";
-import { IOrderProps } from "../../interfaces/order/orderProps";
+import { IOrdersProps } from "../../interfaces/orders/ordersProps";
 import { fetchOrders, initIngredients } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { IOrder } from '../../interfaces/models/order';
 
-export class Orders extends Component<IOrderProps> {
+export class Orders extends Component<IOrdersProps> {
   componentDidMount() {
     if (!this.props.ingredients.length) {
       this.props.initIngredients();

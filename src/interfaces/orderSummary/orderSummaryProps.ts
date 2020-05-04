@@ -1,7 +1,7 @@
+import { TIngredients } from '../ingredients/ingredients';
 import { GenericHandler } from '../callbacks';
-import { TIngredients } from '../../interfaces/ingredients/ingredients';
 
-export type OrderSummaryProps = {
+export interface IOrderSummaryProps {
   ingredients: TIngredients;
   purchaseCancelled: GenericHandler;
   purchaseContinued: GenericHandler;

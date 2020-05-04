@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./Input.module.css";
-import { InputProps } from "../../../types/props/input";
+import { IInputProps } from '../../../interfaces/forms/input/inputProps';
 
-const input = (props: InputProps) => {
+const input = (props: IInputProps) => {
   let inputElement = null;
   const inputClasses = [s.InputElement];
 

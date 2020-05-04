@@ -1,11 +1,11 @@
 import React from 'react';
 import classes from './Burger.module.css';
 import BurgerIngredientComponent from './BurgerIngredient/BurgerIngredient';
-import { BurgerProps } from "../../types/props/burger";
-import { PassiveIngredient } from "../../types/enums/burger";
+import { PassiveIngredient } from "../../interfaces/models/burger";
 import { IIngredient } from "../../interfaces/ingredients/ingredient";
+import { IBurgerProps } from '../../interfaces/burger/burgerProps';
 
-const burger = (props: BurgerProps) => {
+const burger = (props: IBurgerProps) => {
   const ingredients = props.ingredients;
 
   let transformedIngredients = ingredients

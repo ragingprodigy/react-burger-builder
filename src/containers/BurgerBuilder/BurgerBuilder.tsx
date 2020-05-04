@@ -10,7 +10,7 @@ import { TAppState } from "../../interfaces/appState";
 import { TAuthAction } from "../../interfaces/auth/authAction";
 import { TBurgerBuilderAction } from "../../interfaces/burderBuilder/burgerBuilderAction";
 import { IBurgerBuilderProps } from "../../interfaces/burderBuilder/burgerBuilderProps";
-import { TOrderAction } from "../../interfaces/order/orderAction";
+import { TOrderAction } from "../../interfaces/orders/orderAction";
 import { addIngredient, initIngredients, purchaseInit, removeIngredient, setAuthRedirectPath } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";

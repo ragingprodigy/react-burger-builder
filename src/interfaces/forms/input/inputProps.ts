@@ -1,4 +1,4 @@
-export type InputProps = {
+export interface IInputProps {
   elementType: "input" | "textarea" | string;
   label?: string;
   value?: any;

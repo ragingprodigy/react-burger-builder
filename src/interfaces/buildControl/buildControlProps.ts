@@ -1,4 +1,4 @@
-import { GenericHandler } from '../../types/callbacks';
+import { GenericHandler } from '../callbacks';
 
 export interface IBuildControlProps {
   label: string;

@@ -1,5 +1,5 @@
 import { TIngredients } from '../ingredients/ingredients';
-import { GenericHandler } from '../../types/callbacks';
+import { GenericHandler } from '../callbacks';
 
 export interface IBuildControlsProps {
   ingredients: TIngredients;

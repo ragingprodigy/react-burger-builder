@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import classes from './Button.module.css';
-import { GenericHandler } from "../../../types/callbacks";
-import { Children } from "../../../types/overrides";
+import { GenericHandler } from "../../../interfaces/callbacks";
 
 type BtnProps = {
   clicked: GenericHandler;
-  children: Children;
+  children?: ReactNode;
   disabled?: boolean;
   buttonType: 'Success' | 'Danger';
 };

@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
-import classes from './Modal.module.css';
+import React, { Component, ReactNode } from "react";
+import classes from "./Modal.module.css";
 import Aux from "../../../hoc/Aux/Aux";
-import Backdrop from '../Backdrop/Backdrop';
-import { GenericHandler } from "../../../types/callbacks";
-import { Children } from "../../../types/overrides";
+import Backdrop from "../Backdrop/Backdrop";
+import { GenericHandler } from "../../../interfaces/callbacks";
 
-type ModalProps = { children?: Children; show: boolean; modalClosed: GenericHandler; };
+interface ModalProps {
+  show: boolean;
+  modalClosed: GenericHandler;
+  children?: ReactNode;
+}
 
 class Modal extends Component<ModalProps> {
   shouldComponentUpdate(nextProps: ModalProps, nextState: any) {
-    return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
+    return (
+      nextProps.show !== this.props.show ||
+      nextProps.children !== this.props.children
+    );
   }
 
   render() {

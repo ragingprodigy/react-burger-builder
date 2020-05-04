@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import classes from './NavigationItem.module.css';
-import { Children } from "../../../../types/overrides";
 import { NavLink } from 'react-router-dom';
 
 export interface INavigationItemProps {
   link: string;
-  children: Children;
+  children?: ReactNode;
   exact?: boolean;
 };
 
