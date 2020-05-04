@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import {
   AUTH_START,
   AUTH_SUCCESS,
@@ -8,6 +7,7 @@ import {
 } from './actionTypes';
 import { TAuthAction } from '../../interfaces/auth/authAction';
 import Axios from 'axios';
+import { TActionDispatcher, TAsyncAction } from '../../interfaces/callbacks';
 
 const authStart = (): TAuthAction => ({ type: AUTH_START });
 
@@ -24,14 +24,14 @@ export const logout = (): TAuthAction => {
   return { type: AUTH_LOGOUT };
 };
 
-const checkAuthTimeout = (expires: number) => {
-  return (dispatch: any): any => {
+const checkAuthTimeout = (expires: number): TAsyncAction<TAuthAction> => {
+  return (dispatch: TActionDispatcher<TAuthAction>): any => {
     setTimeout(() => dispatch(logout()), expires * 1000);
   };
 };
 
 export const auth = (email: string, password: string, isSignUp = true) => {
-  return (dispatch: any): any => {
+  return (dispatch: TAsyncAction<TAuthAction>): any => {
     dispatch(authStart());
     const payload = { email, password, returnSecureToken: true };
     const API_KEY = 'AIzaSyBR4qbTs4NunvTEj-AQZPei_4vgqVpYW58';

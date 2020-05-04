@@ -1,7 +1,7 @@
-import { GenericHandler } from '../callbacks';
+import { TEventHandler } from '../callbacks';
 
 export interface ISideDrawerProps {
-  closed: GenericHandler;
+  closed: TEventHandler;
   open: boolean;
   isAuthenticated: boolean;
 }

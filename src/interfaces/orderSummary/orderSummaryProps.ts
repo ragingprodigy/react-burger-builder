@@ -1,9 +1,9 @@
 import { TIngredients } from '../ingredients/ingredients';
-import { GenericHandler } from '../callbacks';
+import { TEventHandler } from '../callbacks';
 
 export interface IOrderSummaryProps {
   ingredients: TIngredients;
-  purchaseCancelled: GenericHandler;
-  purchaseContinued: GenericHandler;
+  purchaseCancelled: TEventHandler;
+  purchaseContinued: TEventHandler;
   price: number;
 }

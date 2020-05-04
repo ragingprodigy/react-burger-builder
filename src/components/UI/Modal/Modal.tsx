@@ -2,11 +2,11 @@ import React, { Component, ReactNode } from 'react';
 import classes from './Modal.module.css';
 import Aux from '../../../hoc/Aux/Aux';
 import Backdrop from '../Backdrop/Backdrop';
-import { GenericHandler } from '../../../interfaces/callbacks';
+import { TEventHandler } from '../../../interfaces/callbacks';
 
 interface ModalProps {
   show: boolean;
-  modalClosed: GenericHandler;
+  modalClosed: TEventHandler;
   children?: ReactNode;
 }
 

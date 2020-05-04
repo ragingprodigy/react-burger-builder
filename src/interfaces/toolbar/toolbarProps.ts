@@ -1,6 +1,6 @@
-import { GenericHandler } from '../callbacks';
+import { TEventHandler } from '../callbacks';
 
 export interface IToolbarProps {
-  openDrawer: GenericHandler;
+  openDrawer: TEventHandler;
   isAuthenticated: boolean;
 }

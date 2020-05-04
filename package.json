@@ -49,7 +49,9 @@
     "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "eslint ./src --ext .ts,.tsx --fix",
     "prettier": "prettier --write src/**/*.{ts,tsx}",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "eslintConfig": {
     "extends": "react-app"

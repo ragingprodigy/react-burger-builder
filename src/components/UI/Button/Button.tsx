@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import classes from './Button.module.css';
-import { GenericHandler } from '../../../interfaces/callbacks';
+import { TEventHandler } from '../../../interfaces/callbacks';
 
 type BtnProps = {
-  clicked: GenericHandler;
+  clicked: TEventHandler;
   children?: ReactNode;
   disabled?: boolean;
   buttonType: 'Success' | 'Danger';

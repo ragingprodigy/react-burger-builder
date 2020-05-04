@@ -1,5 +1,5 @@
-import { GenericHandler } from '../callbacks';
+import { TEventHandler } from '../callbacks';
 
 export interface ILogoutProps {
-  onLogout: GenericHandler;
+  onLogout: TEventHandler;
 }

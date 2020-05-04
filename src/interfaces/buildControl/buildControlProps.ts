@@ -1,8 +1,8 @@
-import { GenericHandler } from '../callbacks';
+import { TEventHandler } from '../callbacks';
 
 export interface IBuildControlProps {
   label: string;
-  added: GenericHandler;
-  removed: GenericHandler;
+  added: TEventHandler;
+  removed: TEventHandler;
   disabled: boolean;
 }

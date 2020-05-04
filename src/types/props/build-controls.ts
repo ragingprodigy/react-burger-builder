@@ -1,7 +1,7 @@
-import { TIngredients } from '../ingredients/ingredients';
-import { TEventHandler } from '../callbacks';
+import { TEventHandler } from '../../interfaces/callbacks';
+import { TIngredients } from '../../interfaces/ingredients/ingredients';
 
-export interface IBuildControlsProps {
+export type BuildControlsProps = {
   ingredients: TIngredients;
   ingredientAdded: (type: string) => void;
   ingredientRemoved: (type: string) => void;
@@ -9,5 +9,4 @@ export interface IBuildControlsProps {
   price: number;
   purchaseable: boolean;
   ordered: TEventHandler;
-  isAuthenticated: boolean;
-}
+};

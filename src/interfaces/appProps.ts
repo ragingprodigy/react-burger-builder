@@ -1,6 +1,6 @@
-import { GenericHandler } from './callbacks';
+import { TEventHandler } from './callbacks';
 
 export interface IAppProps {
-  checkAuthState: GenericHandler;
+  checkAuthState: TEventHandler;
   isAuthenticated: boolean;
 }
