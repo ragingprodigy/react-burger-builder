@@ -1,10 +1,9 @@
 import { TIngredients } from '../ingredients/ingredients';
 import { TBurgerBuilderAction } from './burgerBuilderAction';
 import { TOrderAction } from '../order/orderAction';
-import { RouteComponentProps } from 'react-router-dom';
 import { TAuthAction } from '../auth/authAction';
 
-export interface IBurgerBuilderProps extends RouteComponentProps {
+export interface IBurgerBuilderProps {
   ingredients: TIngredients;
   isAuthenticated: boolean;
   buildingBurger: boolean;
@@ -14,4 +13,7 @@ export interface IBurgerBuilderProps extends RouteComponentProps {
   initIngredients: () => any;
   onInitPurchase: () => TOrderAction;
   onSetAuthRedirectPath: (path: string) => TAuthAction;
+  history: {
+    push: (...args: any) => any;
+  },
 }

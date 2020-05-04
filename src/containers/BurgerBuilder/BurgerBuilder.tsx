@@ -1,4 +1,4 @@
-import axios from "@burger/axios-orders";
+import axios from "../../axios-orders";
 import BuildControls from "@burger/components/Burger/BuildControls/BuildControls";
 import Burger from "@burger/components/Burger/Burger";
 import OrderSummary from "@burger/components/Burger/OrderSummary/OrderSummary";
@@ -7,21 +7,31 @@ import Spinner from "@burger/components/UI/Spinner/Spinner";
 import Aux from "@burger/hoc/Aux/Aux";
 import withErrorHandler from "@burger/hoc/withErrorHandler/withErrorHandler";
 import { TAppState } from "@burger/interfaces/appState";
+import { TAuthAction } from "@burger/interfaces/auth/authAction";
+import { TBurgerBuilderAction } from "@burger/interfaces/burderBuilder/burgerBuilderAction";
 import { IBurgerBuilderProps } from "@burger/interfaces/burderBuilder/burgerBuilderProps";
-import {
-  addIngredient,
-  initIngredients,
-  purchaseInit,
-  removeIngredient,
-  setAuthRedirectPath,
-} from "@burger/store/actions";
+import { TOrderAction } from "@burger/interfaces/order/orderAction";
+import { addIngredient, initIngredients, purchaseInit, removeIngredient, setAuthRedirectPath } from "@burger/store/actions";
 import { BurgerBuilderState as UIState } from "@burger/types/states/ui/burger-builder";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class BurgerBuilder extends Component<IBurgerBuilderProps, UIState> {
+export class BurgerBuilder extends Component<IBurgerBuilderProps, UIState> {
   state = {
     purchasing: false,
+  };
+
+  static defaultProps: IBurgerBuilderProps = {
+    ingredients: [],
+    isAuthenticated: false,
+    buildingBurger: false,
+    error: false,
+    initIngredients: () => null,
+    onAddIngredient: () => ({} as TBurgerBuilderAction),
+    onRemoveIngredient: () => ({} as TBurgerBuilderAction),
+    onInitPurchase: () => ({} as TOrderAction),
+    onSetAuthRedirectPath: () => ({} as TAuthAction),
+    history: { push: () => null },
   };
 
   componentDidMount() {
@@ -49,8 +59,8 @@ class BurgerBuilder extends Component<IBurgerBuilderProps, UIState> {
     if (this.props.isAuthenticated) {
       this.setState({ purchasing: true });
     } else {
-      this.props.onSetAuthRedirectPath('checkout');
-      this.props.history.push('auth');
+      this.props.onSetAuthRedirectPath("checkout");
+      this.props.history.push("auth");
     }
   };
   purchaseCancelHandler = () => this.setState({ purchasing: false });
@@ -123,7 +133,9 @@ const mapStateToProps = (state: TAppState): Partial<IBurgerBuilderProps> => {
   };
 };
 
-const mapDispatchToProps = (dispatch: (...args: any) => any): Partial<IBurgerBuilderProps> => {
+const mapDispatchToProps = (
+  dispatch: (...args: any) => any
+): Partial<IBurgerBuilderProps> => {
   return {
     onAddIngredient: (ingredientName: string) =>
       dispatch(addIngredient(ingredientName)),
@@ -131,7 +143,8 @@ const mapDispatchToProps = (dispatch: (...args: any) => any): Partial<IBurgerBui
       dispatch(removeIngredient(ingredientName)),
     initIngredients: () => dispatch(initIngredients()),
     onInitPurchase: () => dispatch(purchaseInit()),
-    onSetAuthRedirectPath: (path: string) => dispatch(setAuthRedirectPath(path))
+    onSetAuthRedirectPath: (path: string) =>
+      dispatch(setAuthRedirectPath(path)),
   };
 };
 

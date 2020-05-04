@@ -2,9 +2,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@burger": [
-        "src"
-      ],
       "@burger/*": [
         "src/*"
       ],

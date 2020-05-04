@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import BuildControl from "./BuildControl/BuildControl";
 import classes from "./BuildControls.module.css";
 
-class BuildControls extends Component<IBuildControlsProps> {
+export class BuildControls extends Component<IBuildControlsProps> {
   render() {
     return (
       <div className={classes.BuildControls}>
