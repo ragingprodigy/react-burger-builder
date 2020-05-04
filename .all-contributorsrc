@@ -1,0 +1,24 @@
+{
+  "projectName": "react-burger-builder",
+  "projectOwner": "ragingprodigy",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "ragingprodigy",
+      "name": "Omonayajo Oladapo Adeola",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1816083?v=4",
+      "profile": "http://omonayajo.com",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
