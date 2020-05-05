@@ -14,7 +14,10 @@ describe('<BurgerBuilder />', () => {
     wrapper = shallow(<BurgerBuilder />);
   });
 
-  xit('should render <BuildControls /> when ingredients are received', () => {
+  it('should render <BuildControls /> when ingredients are received', () => {
+    wrapper.setProps({
+      ingredients: [{ label: 'salad', units: 0, price: 0.45 }],
+    });
     expect(wrapper.find(BuildControls)).toHaveLength(1);
   });
 });
